@@ -1,0 +1,9 @@
+
+.navigation ul li a .icon{
+    position: relative;
+    bottom: 15px;
+}
+.navigation ul li a .title{
+    position: relative;
+    right: 15px;
+}

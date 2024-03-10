@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+  <link rel="stylesheet" href="{% static  'css/style.css '%}">
+  <link rel="stylesheet" href="{% static  'css/pilotage.css '%}">
+
+  <title>Document</title>
+</head>
+
+
+<body>
+  <!-- =============== Navigation ================ -->
+  <div class="container">
+    <div class="navigation">
+      <ul>
+        <li>
+          <a href="#">
+            <span style="font-size: 22px;margin-left: 20px;" class="title">GTB</span>
+          </a>
+        </li>
+
+        <li>
+          <a id="dashboard" href="/dashboard">
+            <span class="icon">
+              <ion-icon name="home-outline"></ion-icon>
+            </span>
+            <span class="title">Dashboard</span>
+          </a>
+        </li>
+
+        <li>
+          <a id="pilotage" href="/pilotage">
+            <span class="icon">
+              <ion-icon name="flash-outline"></ion-icon>
+            </span>
+            <span class="title">Pilotage</span>
+          </a>
+        </li>
+
+        <li>
+          <a id="configurationgtb" href="/configurationgtb">
+            <span class="icon">
+              <ion-icon name="settings-outline"></ion-icon>
+            </span>
+            <span class="title">Configuration GTB</span>
+          </a>
+        </li>
+
+        <li>
+          <a id="visualisation" href="/visualisation">
+            <span class="icon">
+              <ion-icon name="analytics-outline"> </ion-icon>
+            </span>
+            <span class="title">Visualisation</span>
+          </a>
+        </li>
+        <li>
+          <a id="Planification" href="/planification">
+            <span class="icon">
+              <ion-icon name="code-working-outline"></ion-icon>
+            </span>
+            <span class="title">Planification Automatique</span>
+          </a>
+        </li>
+    </div>
+
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+
+
+        <div class="user">
+          <img src="assets/imgs/customer01.jpg" alt="">
+        </div>
+      </div>
+
+      <!-- ======================= pilotage here ================== -->
+
+
+      <div class="container-uu">
+        <h1>Pilotage</h1>
+        <div id="leftNodes">
+          <div class="node">
+
+
+            <table>
+              <tr>
+                <td rowspan="2">Noeud1</td>
+                <td>Lampe 1</td>
+                <td><button onclick="turnOn(1)" class="on">ON</button></td>
+                <td><button onclick="turnOff(1)" class="off">OFF</button></td>
+                <td id="state1">
+                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                </td>
+              </tr>
+              <tr>
+                <td>Lampe 2</td>
+                <td><button onclick="turnOn(2)" class="on">ON</button></td>
+                <td><button onclick="turnOff(2)" class="off">OFF</button></td>
+                <td id="state2">
+                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="node">
+            <table>
+              <tr>
+                <td rowspan="2">Noeud 2</td>
+                <td>Lampe 3</td>
+                <td><button onclick="turnOn(3)" class="on">ON</button></td>
+                <td><button onclick="turnOff(3)" class="off">OFF</button></td>
+                <td id="state3">
+                  <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                </td>
+              </tr>
+              <tr>
+                <td>Lampe 4</td>
+                <td><button onclick="turnOn(4)" class="on">ON</button></td>
+                <td><button onclick="turnOff(4)" class="off">OFF</button></td>
+                <td id="state4">
+                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="node">
+            <table>
+              <tr>
+                <td rowspan="2">Noeud 3</td>
+                <td>Lampe 5</td>
+                <td><button onclick="turnOn(5)" class="on">ON</button></td>
+                <td><button onclick="turnOff(5)" class="off">OFF</button></td>
+                <td id="state5">
+                  <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                </td>
+              </tr>
+              <tr>
+                <td>Lampe 6</td>
+                <td><button onclick="turnOn(6)" class="on">ON</button></td>
+                <td><button onclick="turnOff(6)" class="off">OFF</button></td>
+                <td id="state6">
+                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                </td>
+              </tr>
+            </table>
+          </div>
+
+
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  </div>
+
+  <!-- =========== Scripts =========  -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- ====== ionicons ======= -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+
+</html>

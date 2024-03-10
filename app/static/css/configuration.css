@@ -1,0 +1,285 @@
+
+
+.container-confg .header h1{
+    padding: 10px 0;
+}
+
+.header {
+    text-align: center;
+    margin: -50px 0 70px 0;
+}
+
+
+
+
+h1 {
+  color: #2c3e50;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #2a2185;
+  color: #fff;
+}
+
+.content .button {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.content .button.mod {
+  background-color: #bfcc2e;
+}
+
+.content .button.supp {
+  background-color: #e74c3c;
+}
+
+.content .button.ajout {
+  background-color: #27ae60;
+  position: absolute;
+  right: 35px;
+  margin-top: -50px;
+  padding: 8px 40px;
+
+}
+
+
+
+.button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#refreshButton, #logoutButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+}
+
+#refreshButton {
+  background-color: #27ae60;
+}
+
+#logoutButton {
+  background-color: #c0392b;
+  margin-left: 10px;
+}
+
+#stateContainer {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #3498db;
+}
+.container-confg{
+    margin-top: 30px;
+    padding: 0 35px;
+}
+
+.popup{
+    /* background-color: gray; */
+    width: 850px;
+    height: 500px;
+    position: absolute;
+    left: 60%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+}
+
+
+.popup form{
+    /* background-color: red; */
+    padding: 30px 100px;
+    border: 1px solid;
+    border-radius: 20px;
+    box-shadow: 10px 10px 120px #bab4f6;
+    width: 600px;
+}
+
+.popup form .row{
+    margin: 15px 0;
+}
+
+.popup form .row label{
+    width: 130px;
+    display: inline-block;
+
+}
+
+.popup form .row input{
+    outline: none;
+    height: 30px;
+    width: 300px;
+    padding: 4px 5px;
+    border: 1px solid;
+    border-radius: 12px;
+    text-align: center;
+}
+.popup form .row div{
+margin-bottom: 10px;
+
+}
+
+
+.popup form .btns{
+    margin: 45px 0;
+}
+.popup form .btns input{
+    width: 140px;
+    background-color: #e74c3c;
+    color: #fff;
+}
+.popup form .btns input:last-child{
+    width: 140px;
+    margin-left: 20px;
+    background-color: #27ae60;
+}
+
+
+
+
+
+
+ .content a {
+    cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #2a2185;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: -45px;
+  margin-bottom: 30px;
+  margin-left: 650px;
+  letter-spacing: 4px
+}
+
+ .content a:hover {
+  background: #2a2185;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #2a2185,
+              0 0 25px #2a2185,
+              0 0 50px #2a2185,
+              0 0 100px #2a2185;
+}
+
+.content a span {
+  position: absolute;
+  display: block;
+}
+
+.content a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2a2185);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
+
+  .content a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #2a2185);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
+  }
+}
+
+.content a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #2a2185);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+.content a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #2a2185);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+
+
+
+.lampinput{
+    width: 100px !important;
+    margin: 10px 0 0 125px;
+}
+
+        
+.navigation ul li a .icon{
+    position: relative;
+    bottom: 15px;
+}
+.navigation ul li a .title{
+    position: relative;
+    right: 15px;
+}

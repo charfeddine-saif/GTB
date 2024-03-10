@@ -1,0 +1,82 @@
+h1 {
+  color: #2c3e50;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #2a2185;
+  color: #fff;
+}
+
+td button {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+}
+
+td button.on {
+  background-color: #2ecc71;
+}
+
+td button.off {
+  background-color: #e74c3c;
+}
+
+.button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#refreshButton,
+#logoutButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+}
+
+#refreshButton {
+  background-color: #27ae60;
+}
+
+#logoutButton {
+  background-color: #c0392b;
+  margin-left: 10px;
+}
+
+#stateContainer {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #3498db;
+}
+.container-uu {
+  margin-top: 30px;
+  padding: 0 35px;
+}
+
+.navigation ul li a .icon{
+    position: relative;
+    bottom: 15px;
+}
+.navigation ul li a .title{
+    position: relative;
+    right: 15px;
+}
