@@ -10,11 +10,60 @@
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
   <link rel="stylesheet" href="{% static  'css/pilotage.css '%}">
 
-  <title>Document</title>
+  <title>Gestion Technique des Batiments</title>
 </head>
 
 
 <body>
+  
+<style>
+  
+
+
+  .hi {
+      margin-right:   30px;
+  }
+  
+  .chart {
+      margin-right:   0px; 
+  }
+    .top-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(51, 51, 51);
+  }
+  
+  .top-bar li {
+    float: left;
+  }
+  
+  .top-bar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .top-bar li a:hover {
+    background-color: #4a1857;
+  }
+  
+  
+  .chart {
+  
+  
+  
+  }
+
+.container-uu table td{
+  border: none;
+}
+
+  </style>
+  
   <!-- =============== Navigation ================ -->
   <div class="container">
     <div class="navigation">
@@ -88,12 +137,12 @@
       <div class="container-uu">
         <h1>Pilotage</h1>
         <div id="leftNodes">
-          <div class="node">
+          <div style="display: flex; justify-content: space-between; height: 150px; align-items: center; margin-bottom: 60px;" class="node">
 
 
-            <table>
-              <tr>
-                <td rowspan="2">Noeud1</td>
+            <table style="width: 00px; height: 150px;">
+              <tr style="border: none;">
+                <td style="background-color: gray; border: 0; color: white;" rowspan="2">Noeud1</td>
                 <td>Lampe 1</td>
                 <td><button onclick="turnOn(1)" class="on">ON</button></td>
                 <td><button onclick="turnOff(1)" class="off">OFF</button></td>
@@ -110,62 +159,122 @@
                 </td>
               </tr>
             </table>
+
+            <div>
+             
+              <div class="date">
+  <div style="display: flex; justify-content: space-between;" class="btns">
+   
+  </div> 
+  
+              </div>
+              <div style="display: flex; justify-content: center; align-items: center;" class="chart">
+                <div style="width: 400px; height: 250px; margin: 70px 0 0 0;">
+                  <canvas id="myChart1" ></canvas>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          <div class="node">
-            <table>
-              <tr>
-                <td rowspan="2">Noeud 2</td>
-                <td>Lampe 3</td>
-                <td><button onclick="turnOn(3)" class="on">ON</button></td>
-                <td><button onclick="turnOff(3)" class="off">OFF</button></td>
-                <td id="state3">
-                  <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="leteint3">
-                </td>
-              </tr>
-              <tr>
-                <td>Lampe 4</td>
-                <td><button onclick="turnOn(4)" class="on">ON</button></td>
-                <td><button onclick="turnOff(4)" class="off">OFF</button></td>
-                <td id="state4">
+          <div style="display: flex; justify-content: space-between; height: 150px; align-items: center; margin-bottom: 60px;" class="node">
+
+
+            <table style="width: 400px; height: 150px;">
+              <tr style="border: none;">
+                <td style="background-color: gray; border: 0; color: white;" rowspan="2">Noeud1</td>
+                <td>Lampe 1</td>
+                <td><button onclick="turnOn(1)" class="on">ON</button></td>
+                <td><button onclick="turnOff(1)" class="off">OFF</button></td>
+                <td id="state1">
                   <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
-
-                </td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="node">
-            <table>
-              <tr>
-                <td rowspan="2">Noeud 3</td>
-                <td>Lampe 5</td>
-                <td><button onclick="turnOn(5)" class="on">ON</button></td>
-                <td><button onclick="turnOff(5)" class="off">OFF</button></td>
-                <td id="state5">
-                  <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="leteint3">
                 </td>
               </tr>
               <tr>
-                <td>Lampe 6</td>
-                <td><button onclick="turnOn(6)" class="on">ON</button></td>
-                <td><button onclick="turnOff(6)" class="off">OFF</button></td>
-                <td id="state6">
+                <td>Lampe 2</td>
+                <td><button onclick="turnOn(2)" class="on">ON</button></td>
+                <td><button onclick="turnOff(2)" class="off">OFF</button></td>
+                <td id="state2">
                   <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
                 </td>
               </tr>
             </table>
+
+            <div>
+             
+              <div class="date">
+  <div style="display: flex; justify-content: space-between;" class="btns">
+   
+  </div> 
+  
+              </div>
+              <div style="display: flex; justify-content: center; align-items: center;" class="chart">
+                <div style="width: 400px; height: 250px; margin: 70px 0 0 0;">
+                  <canvas id="myChart2" ></canvas>
+                </div>
+              </div>
+            </div>
+
           </div>
 
+          <div style="display: flex; justify-content: space-between; height: 150px; align-items: center; margin-bottom: 80px;" class="node">
 
-          </table>
+
+            <table style="width: 400px; height: 150px;">
+              <tr style="border: none;">
+                <td style="background-color: gray; border: 0; color: white;" rowspan="2">Noeud1</td>
+                <td>Lampe 1</td>
+                <td><button onclick="turnOn(1)" class="on">ON</button></td>
+                <td><button onclick="turnOff(1)" class="off">OFF</button></td>
+                <td id="state1">
+                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                </td>
+              </tr>
+              <tr>
+                <td>Lampe 2</td>
+                <td><button onclick="turnOn(2)" class="on">ON</button></td>
+                <td><button onclick="turnOff(2)" class="off">OFF</button></td>
+                <td id="state2">
+                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                </td>
+              </tr>
+            </table>
+
+            <div>
+             
+              <div class="date">
+  <div style="display: flex; justify-content: space-between;" class="btns">
+   
+  </div> 
+  
+              </div>
+              <div style="display: flex; justify-content: center; align-items: center;" class="chart">
+                <div style="width: 400px; height: 250px; margin: 70px 0 0 0;">
+                  <canvas id="myChart3" ></canvas>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
+        <h2 style="text-align: center">jshjsahj</h2>
+        <div style="display: flex; justify-content: center; align-items: center;" class="chart">
+          <div style="width: 400px; height: 250px; margin: 70px 0 0 0;">
+            <canvas id="myChart4" ></canvas>
+          </div>
+        </div>
+
+  
+          
+
+
+      </div>
+    </div>
+
       </div>
 
     </div>
-
-  </div>
-  </div>
 
   <!-- =========== Scripts =========  -->
   <script src="assets/js/main.js"></script>
@@ -175,6 +284,13 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+  <script type="module" src="{% static  'js/1.js' %}"></script>
 </body>
 
 </html>

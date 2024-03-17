@@ -3,6 +3,15 @@ const dummyData = {
     datasets: [{
         label: 'Dummy Data',
         data: [10, 20, 15, 25, 18],
+        animations: {
+      tension: {
+        duration: 1000,
+        easing: 'linear',
+        from: 1,
+        to: 0,
+        loop: true
+      }
+    },
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1

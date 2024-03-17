@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+
+
 # Create your views here.
 from django.http import HttpResponse
 
@@ -25,6 +27,8 @@ def configurationgtb(request):
     return render(request, 'app/configurationgtb.html')
 
 def visualisation(request):
+    
+    
     return render(request, 'app/visualisation.html')
 
 def planification(request):

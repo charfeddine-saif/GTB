@@ -120,11 +120,12 @@ body {
 /* ===================== Main ===================== */
 .main {
   position: absolute;
-  width: calc(100% - 300px);
+  width: calc(60% - 300px);
   left: 300px;
   min-height: 100vh;
   background: var(--white);
   transition: 0.5s;
+  overflow: hidden;
 }
 .main.active {
   width: calc(100% - 80px);
@@ -472,7 +473,3 @@ body {
 
 
 /*******************CSS FOR PILOTAGE TABLE********************/
-
-
-
-
