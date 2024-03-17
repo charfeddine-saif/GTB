@@ -120,7 +120,7 @@ body {
 /* ===================== Main ===================== */
 .main {
   position: absolute;
-  width: calc(60% - 300px);
+  width: 1050px;
   left: 300px;
   min-height: 100vh;
   background: var(--white);
