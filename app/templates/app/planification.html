@@ -26,7 +26,7 @@
         <ul>
             <li>
                 <a href="#">
-                    <span style="font-size: 22px;margin-left: 20px;" class="title">GTB</span>
+                    <span style="font-size: 72px;margin-left: 20px;" class="title">G T B</span>
                 </a>
             </li>
 
@@ -78,7 +78,7 @@
     <div class="main">
           <div class="topbar">
               <div class="toggle">
-                  <ion-icon name="menu-outline"></ion-icon>
+                  
               </div>
 
             
@@ -86,41 +86,98 @@
                   <img src="assets/imgs/customer01.jpg" alt="">
               </div>
           </div>
-
-        
-          
-<div class="scheduler-container" aria-label="Lamp Scheduler">
-    <div class="scheduler-row">
-      <label for="lamp-selector">Sélectionnez la lampe :</label>
-      <select id="lamp-selector">
-        <option value="lamp1">Lamp 1</option>
-        <option value="lamp2">Lamp 2</option>
-        <option value="lamp3">Lamp 3</option>
-        <option value="lamp4">Lamp 4</option>
-        <option value="lamp5">Lamp 5</option>
-        <option value="lamp6">Lamp 6</option> 
-      </select>
-    </div>
     
-    <div class="scheduler-row">
-      <label for="time-on">Time On:</label>
-      <input type="datetime-local" id="time-on">
-    </div>
-    <div class="scheduler-row">
-      <label for="time-off">Time Off:</label>
-      <input type="datetime-local" id="time-off">
-    </div>
-    <div class="scheduler-row">
-      <button onclick="applySchedule()">Apply</button>
-      <button onclick="saveSchedule()">Save</button>
-    </div>
-  </div>
+
+          <!DOCTYPE html>
+
+<style>
  
-        </div>
+  
+  .scheduler-container {
+    max-width: 900px;
+    height: 400px;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 58px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .scheduler-row {
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  select, input[type=datetime-local] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+  }
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1628c5;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 40px;
+    max-width: 1000px;
+    height: 40px;
+  }
+  button:hover {
+    background-color: #2737c9;
+  }
+</style>
+</head>
 
-      </div>
+<h1    style="text-align: center;  margin-bottom: 20px; color: rgb(5, 0, 3); font-size: 44px;">  Planification Automatique</h1>
+
+
+<div class="scheduler-container" aria-label="Lamp Scheduler">
+  <div class="scheduler-row">
+    <label for="lamp-selector">Sélectionnez la lampe :</label>
+    <select id="lamp-selector">
+      <option value="lamp1">Lamp 1</option>
+      <option value="lamp2">Lamp 2</option>
+      <option value="lamp3">Lamp 3</option>
+      <option value="lamp4">Lamp 4</option>
+      <option value="lamp5">Lamp 5</option>
+      <option value="lamp6">Lamp 6</option>
+    </select>
   </div>
 
+  <div class="scheduler-row">
+    <label for="time-on">Time On:</label>
+    <input type="datetime-local" id="time-on">
+  </div>
+  <div class="scheduler-row">
+    <label for="time-off">Time Off:</label>
+    <input type="datetime-local" id="time-off">
+  </div>
+  <div class="scheduler-row">
+    <button onclick="applySchedule()">Appliquer</button>
+    <button onclick="saveSchedule()">Sauvegarder</button>
+  </div>
+</div>
+<script>
+// JavaScript functions for applySchedule and saveSchedule can be defined here
+function applySchedule() {
+  // Implementation for applying the schedule
+}
+
+function saveSchedule() {
+  // Implementation for saving the schedule
+}
+</script>
+
+</html>
+        
+    
   <script type="module" src="{% static  'js/planification.js' %}"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
