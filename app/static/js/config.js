@@ -37,11 +37,26 @@ document.getElementById("ajoutbtn").addEventListener( "click", function(){
 
  document.getElementById("addbtn").addEventListener( "click", function(){
 
-    var rowDiv = document.getElementById('row');
+   var rowDiv = document.getElementById('row');
 
-        var inputElement = document.createElement('input');
-        inputElement.setAttribute('type', 'text');
-        inputElement.classList.add('lampinput');
-        rowDiv.appendChild(inputElement);
+   var inputElement1 = document.createElement('input');
+   var inputElement2 = document.createElement('input');
+   inputElement1.setAttribute('type', 'text');
+   inputElement1.setAttribute('placeholder', 'name');
+   inputElement2.setAttribute('placeholder', 'puissance');
+   inputElement2.setAttribute('type', 'text');
+   inputElement1.classList.add('new-input');
+   inputElement2.classList.add('new-input');
+   inputElement2.style.width = "50px";
+   inputElement1.style.width = "120px";
+   inputElement1.style.marginLeft = "60px";
+   inputElement2.style.marginLeft = "5px";
+
+
+   
+   rowDiv.appendChild(inputElement1);
+   rowDiv.appendChild(inputElement2);
+
+
  }
  )

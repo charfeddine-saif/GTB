@@ -1,40 +1,61 @@
+#Importation des bibliothèques et des fichiers 
+# django.shortcuts est utilisé pour communiquer avec le framework Django.
+# pandas est utilisé pour manipuler les données sous forme de tableaux.
+#.utils fait référence à un fichier local contenant des fonctions d’aide.
+
 from django.shortcuts import render
 import pandas as pd
+from .utils import get_lampes_by_noeud_name, get_nodes_with_lampes
 
-# Read the Excel file
-df = pd.read_excel('data.xlsx', sheet_name='noeud 1')
+file = pd.ExcelFile('data.xlsx')
+
+# Get the names of the sheets
+data=[]
+sheet_names = file.sheet_names
 puiss_1 = 15
 puiss_2 = 12
+sheet_names_arr = []
+for name in sheet_names:
+    df = pd.read_excel('data.xlsx', sheet_name=name)
+    lampes = get_lampes_by_noeud_name(name)
+    print("////",name)
+    print("lampes: ",lampes[0].name)
+    first_row_values = df.columns.tolist()[1:]
+    print("first_row_values",first_row_values)
+    # ne7sEB 9adech men  ON 
+
+    sums= [0] * len(first_row_values)
+    avgs= [0] * len(first_row_values)
+    avg_arr =[]
+    for i, row in df.iterrows():
+        for index, val in enumerate(first_row_values):
+            if(row[val]=="ON"):
+                sums[index]+=1
+        if (i +1) % 6 ==0:
+            for x in range(len(sums)):
+                avgs[x]=round(sums[x]/6 * lampes[x].puissance, 2)  
+                
+            sums= [0] * len(first_row_values)
+            avg_arr.append(avgs)
+    data.append(avg_arr)
+            
 
 
-# ne7sEB 9adech men  ON 
-avg_1=[]
-avg_2=[]
-sum_1 = 0
-sum_2 = 0
-for index, row in df.iterrows():
-    print("..",row["lampe1"])
-    if(row["lampe1"]=="ON"):
-        sum_1+=1
-    if(row["lampe2"]=="ON"):
-        sum_2+=1
-    if (index +1) % 6 ==0:
-        avg_1.append(sum_1 * puiss_1 /6)
-        avg_2.append(sum_2 * puiss_1 /6)
-        sum_1 = 0
-        sum_2 = 0
-        
-print("avg 1 :",avg_1)
-print("avg 2: ",avg_2)
-# Group by hour
+    # data.append((avg_1,avg_2))    
+    
+
+print("data: ",data)
+print("data 1: ",data[0])
+print("data 2: ",data[1])
+print("data 3: ",data[2])
+
+
+# # Group by hour
 
 # Print average power consumption for each hour
 # for hour, avg_power in average_power_per_hour.items():
 #     print(f"Hour {hour}: Average Power Consumption = {avg_power}")
 
-
-# Create your views here.
-from django.http import HttpResponse
 
 
 def home(request):
@@ -55,7 +76,8 @@ def dashboard(request):
 
 
 def configurationgtb(request):
-    return render(request, 'app/configurationgtb.html')
+    nodes = get_nodes_with_lampes()
+    return render(request, 'app/configurationgtb.html', { "nodes": nodes})
 
 def visualisation(request):
     
