@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
-  <link rel="stylesheet" href="{% static  'css/configuration.css '%}">
+  <link rel="stylesheet" href="{% static  'css/1.css '%}">
 
   <title>Gestion Technique des Batiments</title>
 </head>
@@ -98,8 +98,12 @@
       <table id="my-table">
         {% for node in nodes %}
 <tr>
-    <td id="my-node-name" style="background-color: gray; color: white; border-bottom: 10px solid #fff; padding: 0 20px;">{{node.noeud_name}}</td>
+    <form id="deleteForm" method="post" action="{% url 'delete_node' %}">
+
+    <td name="my-node-name" style="background-color: gray; color: white; border-bottom: 10px solid #fff; padding: 0 20px;">{{node.noeud_name}}</td>
     <td style="padding: 0 20px; border-bottom: 10px solid #fff;">
+    <input type="hidden" name="td_value" class="td_value" value="{{ node.noeud_name }}">
+
         
         <div class="lampes">
             {% for lampe in node.lampes %}
@@ -112,14 +116,12 @@
         </div>
     </td>
     <td style="width: 300px;" class="action-buttons">
-        <form id="deleteForm" method="post" action="{% url 'delete_node' %}">
             {% csrf_token %}
-            <input type="button" class="mod button" value="Modifier" onclick="openForm(this)"/>
-            <input type="hidden" id="deleteNodeInput" name="node_name" value="anyvalue" />
+            <input type="button" class="mod button" onclick="openForm(this)" value="Modifier" />
             <input type="submit" class="supp button" value="Supprimer" />
-        </form>
+        
     </td>
-
+</form>
 </tr>
 {% endfor %}
 
@@ -142,8 +144,8 @@
                     </div >
                     <div id="row">
 
-                        <input style="width: 120px; margin-left: 60px;" type="text" name="lampe" id="lampe1" placeholder="name"/>
-                        <input style="width: 50px;" type="text" name="puissance" id="puissance1" placeholder="puissance" />
+                        <input style="width: 120px; margin-left: 60px;" type="text" name="lampe" id="lampe" placeholder="name"/>
+                        <input style="width: 50px;" type="text" name="puissance" id="puissance" placeholder="puissance" />
                         <input  style="width: 40px;"  value="+" type="button" name="" id="addbtn"/>
                         
                     </div>
@@ -155,21 +157,21 @@
             </form>
         </div>
 
-        <div style="display: none;" class="popup2">
-            <form method="POST">
+        <div style="display: none;" id="popup1" class="popup" >
+            <form method="post" action="{% url 'edit' %}">
                 {% csrf_token %}
                 <div class="row">
         
                     <div>
                     <label for="nom_noeud">Nom Noeud :</label>
                     </div>
-                    <input type="text" name="nom_noeud" id="nom_noeud"/>
+                    <input type="text" name="nom_noeud" id="nom_noeud_2"/>
                 </div>
                 <div class="row">
                     <div>
                         <label for="lampes">Lampes :</label>
-                    </div >
-                    <div id="row">
+                    </div>
+                    <div id="row2">
 
                         <input style="width: 120px; margin-left: 60px;" type="text" name="lampe" id="lampe1" placeholder="name"/>
                         <input style="width: 50px;" type="text" name="puissance" id="puissance1" placeholder="puissance" />
@@ -178,7 +180,7 @@
                     </div>
                     <div class="btns">
                         <input type="reset" id="annulerbtn" class="button" value="Annuler" />
-                        <input type="submit" id="mybtn" class="button" value="Modifier" />
+                        <input type="submit" id="editbtn" class="editbtn" value="Modifier" />
                     </div>
                 </div>
             </form>
@@ -211,13 +213,16 @@ border: none;
 
 <script>
     
-
  function openForm(button) {
-   var row = button.parentNode.parentNode; // Get the parent row
+   var row = button.parentNode.parentNode.parentElement; // Get the parent row
    var nom_noeud = row.cells[0].innerText; // Get the value of the first cell
    var lampes_info = row.cells[1].querySelectorAll('.lampes span'); // Get lampes info
    var puissances = [];
-   var rowDiv = document.getElementById('row');
+   var rowDiv = document.getElementById('row2');
+   console.log("row",row.cells);
+   console.log("row",row);
+   console.log("lampes",lampes_info);
+   console.log("nom_noeud",nom_noeud);
 
    lampes_info.forEach(function(lampe,i) {
        if(i==0){
@@ -246,7 +251,7 @@ border: none;
            inputElement2.setAttribute('type', 'text');
            inputElement2.setAttribute('name', 'puissance');
            inputElement2.classList.add('new-input');   
-           inputElement2.style.width = "90px";
+           inputElement2.style.width = "50px";
            inputElement2.style.marginLeft = "5px";
 
 
@@ -257,12 +262,16 @@ border: none;
        // document.getElementsByClassName("new-input")[i] = lampe.innerText;
        // console.log("i",lampe.innerText);
    });
-   var modal = document.querySelector('.popup');
+   var modal = document.querySelector('#popup1');
    modal.style.display = 'block';
    document.getElementById('my-table').style.display = "none"
-   document.getElementById('nom_noeud').value = nom_noeud;
+   document.getElementById('nom_noeud_2').value = nom_noeud;
    document.getElementById('puissance').value = puissances.join(', ');
 }
+
+
+
+    
 
    </script>
 
@@ -272,7 +281,7 @@ border: none;
   <script src="assets/js/main.js"></script>
 
   <!-- ====== ionicons ======= -->
-  <script type="module" src="{% static  'js/configuration.js' %}"></script>
+  <script type="module" src="{% static  'js/Configuration.js' %}"></script>
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -280,4 +289,5 @@ border: none;
 
 </body>
 </html>
+
 

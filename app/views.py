@@ -7,7 +7,7 @@ from django.shortcuts import render
 import pandas as pd
 from .utils import get_lampes_by_noeud_name, get_nodes_with_lampes
 from .models import Lampe, Noeud
-from django.shortcuts import redirect
+from django.shortcuts import redirect,get_object_or_404
 
 
 file = pd.ExcelFile('data.xlsx')
@@ -22,6 +22,7 @@ for name in sheet_names:
     df = pd.read_excel('data.xlsx', sheet_name=name)
     lampes = get_lampes_by_noeud_name(name)
     first_row_values = df.columns.tolist()[1:]
+    print("lampes-----",lampes)
     # ne7sEB 9adech men  ON 
 
     sums= [0] * len(first_row_values)
@@ -34,7 +35,8 @@ for name in sheet_names:
         if (i +1) % 6 ==0:
             for x in range(len(sums)):
                 if lampes is not None:
-                    avgs[x]=round(sums[x]/6 * lampes[x].puissance, 2)  
+                    pass
+                    # avgs[x]=round(sums[x]/6 * lampes[x].puissance, 2)
                                     
             sums= [0] * len(first_row_values)
             avg_arr.append(avgs)
@@ -95,11 +97,32 @@ def configurationgtb(request):
     nodes = get_nodes_with_lampes()
     return render(request, 'app/configurationgtb.html', { "nodes": nodes})
 
+def edit_node(request):
+    if request.method == 'POST':
+        node_name = request.POST.get('nom_noeud')
+        new_lampes_names = request.POST.getlist('lampe')
+        new_puissances = request.POST.getlist('puissance')
+        lampes = get_lampes_by_noeud_name(node_name)
+        
+        noeud = Noeud.objects.get(name=node_name)
+
+        for i in range(len(new_lampes_names)):
+            lampe = Lampe.objects.get(name=lampes[i].name, noeud=noeud)
+            lampe.name = new_lampes_names[i]
+            lampe.puissance = new_puissances[i]
+            lampe.save()
+            
+
+        
+       
+        
+    return redirect('configurationgtb')
 
 
 def delete_node(request):
     if request.method == 'POST':
-        node_name = request.POST.get('node_name')
+        node_name = request.POST.get('td_value')
+        print("delete ", node_name)
         if node_name:
             Noeud.objects.filter(name=node_name).delete()
     return redirect('configurationgtb')
