@@ -10,6 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
   <link rel="stylesheet" href="{% static  'css/planification.css '%}">
+  <link rel="stylesheet" href="{% static  'css/visualisation.css '%}">
 
   <title>Gestion Technique des Batiments</title>
 </head> 
@@ -83,49 +84,43 @@
 
 
 
-          <h1    style="text-align: center;  margin-bottom: 20px; color: rgb(5, 0, 3); font-size: 44px;">  Visualisation Courbe</h1>
+          <h1 class="v" >  Visualisation Courbe</h1>
 
          
+<div class="rows">
+  
+  <div  class="row">
+    <h1>noeud 1</h1>
+    <div class="t" class="graphs">
+      <div class="graph">
+        <h1  style="text-align:  center;  padding-left: 65px;  margin-bottom: -30px; color:#D4D3DC;"> lampe 1 </h1>
+        <div style="width: 500px; height: 200px; margin: 30px 0;">
+          <canvas id="myChart1" ></canvas>
+        </div> 
+      </div>
+      <div class="graph">
+        <h1  style="text-align:  center;  padding-left: 65px;  margin-bottom: -30px; color:#D4D3DC;"> lampe 2 </h1>
+        <div style="width: 500px; height: 200px; margin: 30px 0;">
+          <canvas id="myChart2" ></canvas>
+        </div> 
+      </div>
+      
+      <div class="graph">
+        <h1  style="text-align:  center;  padding-left: 65px;  margin-bottom: -30px; color:#D4D3DC;"> lampe 3</h1>
+        <div style="width: 500px; height: 200px; margin: 30px 0;">
+          <canvas id="myChart3" ></canvas>
+        </div> 
+      </div>
+    </div>
+  </div>
+
+
+</div>
 
           
-          <h1  style="text-align:  left;  padding-left: 65px;  margin-bottom: -30px; color:#D4D3DC;"> Courbe de nœud 1 </h1>
-         <div style="display: flex;
-          justify-content: space-around; flex-wrap: wrap;" class="content-container" id="content-container"> 
-
-
-
-
-
-
-            <div style="width: 500px; height: 200px; margin: 30px 0;">
-              <canvas id="myChart1" ></canvas>
-            </div> 
-            
-            
-          <div style="width: 500px; height: 200px; margin: 30px 0; text-align:  center;  font-weight: bold;  font-size: 1.9em;  padding-left: 65px;   margin-bottom: -30px; color:#D4D3DC;"> Courbe de nœud 2
-            <canvas id="myChart2" ></canvas>
-          </div>
-
-
-
-          <div style="width: 500px; height: 200px; margin: 30px 0;  text-align: center;  
-            font-weight: bold;  font-size: 1.9em;  padding-left: 105px;   margin-bottom: -30px; color:#D4D3DC;"> Courbe de nœud 3
-            <canvas id="myChart2" ></canvas>
-            <canvas id="myChart3" ></canvas>
-          </div>  
-          
-
-           
-           <div style="width: 500px; height: 200px; margin: 30px 0;">
-            <canvas id="myChart5" ></canvas>
-          </div> 
-          <div style="width: 500px; height: 200px; margin: 30px 0;">
-            <canvas id="myChart6" ></canvas>
-          </div>  
+        
 
          
-
-          <div>
             <div class="top-bar">
               <ul>
                 <li><a class="active" href="#année">par année</a></li>

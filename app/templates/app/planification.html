@@ -88,8 +88,6 @@
           </div>
     
 
-          <!DOCTYPE html>
-
 <style>
  
   
@@ -133,12 +131,107 @@
     background-color: #2737c9;
   }
 </style>
-</head>
 
+
+<style>
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+  }
+  table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  th, td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #dddddd;
+  }
+  th {
+      background-color: #f2f2f2;
+  }
+  tr:nth-child(even) {
+      background-color: #f2f2f2;
+  }
+  tr:last-child td {
+      border-bottom: none;
+  }
+  .action-buttons {
+      display: flex;
+      justify-content: space-around;
+  }
+  .modifier-button, .annuler-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  
 <h1    style="text-align: center;  margin-bottom: 20px; color: rgb(5, 0, 3); font-size: 44px;">  Planification Automatique</h1>
 
+<div class="content">
+  <a>
+      <button style="float: right; margin-bottom: 50px;" id="add_cmd_btn"> Ajouter une commande</button>
+     
+  </a>
+<table  id="table">
+  <tr>
+      <th>heure</th>
+      <th>commande</th>
+      <th>lampe</th>
+      <th>actions</th>
+  </tr>
+  <tr>
+      <td>8:00</td>
+      <td>Marche</td>
+      <td>Lampe 1</td>
+      <td class="action-buttons">
+          <button class="modifier-button">Modifier</button>
+          <button class="annuler-button">Annuler</button>
+      </td>
+  </tr>
+  <tr>
+      <td>12:30</td>
+      <td>Marche</td>
+      <td>Lampe 2</td>
+      <td class="action-buttons">
+          <button class="modifier-button">Modifier</button>
+          <button class="annuler-button">Annuler</button>
+      </td>
+  </tr>
+  <tr>
+      <td>18:45</td>
+      <td>arrêt</td>
+      <td>Lampe 3</td>
+      <td class="action-buttons">
+          <button class="modifier-button">Modifier</button>
+          <button class="annuler-button">Annuler</button>
+      </td>
+  </tr>
+  <tr>
+      <td>21:15</td>
+      <td>arrêt</td>
+      <td>Lampe 4</td>
+      <td class="action-buttons">
+          <button class="modifier-button">Modifier</button>
+          <button class="annuler-button">Annuler</button>
+      </td>
+  </tr>
+</table>
 
-<div class="scheduler-container" aria-label="Lamp Scheduler">
+     
+  
+<button style="position: relative; left: 800px; margin-bottom: 40px; display: none" id="aff_liste_btn">afficher la liste</button>
+<div style="display: none;" id="scheduler-container" class="scheduler-container" aria-label="Lamp Scheduler">
   <div class="scheduler-row">
     <label for="lamp-selector">Sélectionnez la lampe :</label>
     <select id="lamp-selector">
@@ -163,19 +256,34 @@
     <button onclick="applySchedule()">Appliquer</button>
     <button onclick="saveSchedule()">Sauvegarder</button>
   </div>
+
+
 </div>
+</div>
+
+
+
 <script>
-// JavaScript functions for applySchedule and saveSchedule can be defined here
-function applySchedule() {
-  // Implementation for applying the schedule
-}
 
-function saveSchedule() {
-  // Implementation for saving the schedule
-}
+var addCmdBtn = document.getElementById("add_cmd_btn");
+var affListeBtn = document.getElementById("aff_liste_btn");
+var scheduler_container = document.getElementById("scheduler-container");
+var table = document.getElementById("table");
+
+addCmdBtn.addEventListener( "click", () => {
+    table.style.display = "none";
+    scheduler_container.style.display = "";
+    addCmdBtn.style.display = "none";
+    affListeBtn.style.display = "";
+  })
+  affListeBtn.addEventListener( "click", () => {
+    table.style.display = "";
+    scheduler_container.style.display = "none";
+    addCmdBtn.style.display = "";
+    affListeBtn.style.display = "none";
+})
+
 </script>
-
-</html>
         
     
   <script type="module" src="{% static  'js/planification.js' %}"></script>

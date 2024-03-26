@@ -16,3 +16,5 @@ class Lampe(models.Model):
 
 
 
+
+

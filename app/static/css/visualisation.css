@@ -11,3 +11,23 @@
 .container{
     background-color: rgb(43, 122, 122);
 }
+.v{
+text-align: center; 
+ margin-bottom: 20px;
+  color: rgb(5, 0, 3); 
+  font-size: 44px;
+}
+.graphs{
+display: flex; 
+justify-content: space-around;
+ flex-wrap: wrap;
+
+
+}
+.t{
+
+
+display: flex;
+justify-content: space-around;
+      flex-wrap: wrap;
+}
