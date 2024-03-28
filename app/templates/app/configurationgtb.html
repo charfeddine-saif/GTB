@@ -2,224 +2,250 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-  <link rel="stylesheet" href="{% static  'css/style.css '%}">
-  <link rel="stylesheet" href="{% static  'css/1.css '%}">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script
+            src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+        <link rel="stylesheet" href="{% static 'css/style.css '%}">
+        <link rel="stylesheet" href="{% static 'css/2.css '%}">
 
-  <title>Gestion Technique des Batiments</title>
-</head>
-<body>
+        <title>Gestion Technique des Batiments</title>
+    </head>
+    <body>
 
 
-  <!-- =============== Navigation ================ -->
-  <div class="container">
-    <div class="navigation">
-      <ul>
-          <li>
-              <a href="#">
-                  <span style="font-size: 72px;margin-left: 20px;" class="title">G T B</span>
-              </a>
-          </li>
+        <!-- =============== Navigation ================ -->
+        <div class="container">
+            <div class="navigation">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span style="font-size: 72px;margin-left: 20px;"
+                                class="title">G T B</span>
+                        </a>
+                    </li>
 
-          <li>
-              <a id="dashboard" href="/dashboard">
-                  <span class="icon">
-                      <ion-icon name="home-outline"></ion-icon>
-                  </span>
-                  <span class="title">Dashboard</span>
-              </a>
-          </li>
+                    <li>
+                        <a id="dashboard" href="/dashboard">
+                            <span class="icon">
+                                <ion-icon name="home-outline"></ion-icon>
+                            </span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
 
-          <li>
-              <a id="pilotage" href="/pilotage">
-                  <span class="icon">
-                      <ion-icon name="flash-outline"></ion-icon>
-                  </span>
-                  <span class="title">Pilotage</span>
-              </a>
-          </li>
+                    <li>
+                        <a id="pilotage" href="/pilotage">
+                            <span class="icon">
+                                <ion-icon name="flash-outline"></ion-icon>
+                            </span>
+                            <span class="title">Pilotage</span>
+                        </a>
+                    </li>
 
-          <li>
-              <a id="configurationgtb" href="/configurationgtb">
-                  <span class="icon">
-                      <ion-icon name="settings-outline"></ion-icon>
-                  </span>
-                  <span class="title">Configuration GTB</span>
-              </a>
-          </li>
+                    <li>
+                        <a id="configurationgtb" href="/configurationgtb">
+                            <span class="icon">
+                                <ion-icon name="settings-outline"></ion-icon>
+                            </span>
+                            <span class="title">Configuration GTB</span>
+                        </a>
+                    </li>
 
-          <li>
-              <a id="visualisation" href="/visualisation">
-                  <span class="icon">
-                      <ion-icon name="analytics-outline"> </ion-icon>
-                  </span>
-                  <span class="title">Visualisation</span>
-              </a>
-          </li>
-          <li>
-            <a id="Planification" href="/planification">
-                <span class="icon">
-                    <ion-icon  name="code-working-outline"></ion-icon>
-                </span>
-                <span class="title">Planification Automatique</span>
-            </a>
-        </li>
-      </div>
+                    <li>
+                        <a id="visualisation" href="/visualisation">
+                            <span class="icon">
+                                <ion-icon name="analytics-outline"> </ion-icon>
+                            </span>
+                            <span class="title">Visualisation</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="Planification" href="/planification">
+                            <span class="icon">
+                                <ion-icon name="code-working-outline"></ion-icon>
+                            </span>
+                            <span class="title">Planification Automatique</span>
+                        </a>
+                    </li>
+                </div>
 
-    <div style="width: 1050px;" class="main">
-          <div class="topbar">
-              <div class="toggle">
-                  
-              </div>
+                <div style="width: 1050px;" class="main">
+                    <div class="topbar">
+                        <div class="toggle">
 
-            
-              
-          </div>
+                        </div>
 
-        
 
-<div class="container-confg">
-  <div class="header">
-      <h1  style="text-align: center;  margin-bottom: 20px; color: rgb(5, 0, 3); font-size: 44px;">Configuration G T B</h1>
-  </div>
-  <div class="content">
-      <a>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <small id="ajoutbtn"> Ajouter un Noeud</small>
-         
-      </a>
-      <table id="my-table">
-        {% for node in nodes %}
-<tr>
-    <form id="deleteForm" method="post" action="{% url 'delete_node' %}">
 
-    <td name="my-node-name" style="background-color: gray; color: white; border-bottom: 10px solid #fff; padding: 0 20px;">{{node.noeud_name}}</td>
-    <td style="padding: 0 20px; border-bottom: 10px solid #fff;">
-    <input type="hidden" name="td_value" class="td_value" value="{{ node.noeud_name }}">
+                    </div>
 
-        
-        <div class="lampes">
-            {% for lampe in node.lampes %}
-            <div style="background-color: rgb(215, 211, 211); margin: 5px 0; height: 40px; line-height: 40px; display: flex; justify-content: space-around; color: rgb(79, 76, 76);">
-                <span>{{lampe.name}}</span>
-                <span>{{lampe.puissance}} w</span>
+
+
+                    <div class="container-confg">
+                        <div class="header">
+                            <h1 class="conf">Configuration G T B</h1>
+                        </div>
+                        <div class="content">
+                            <a>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <small id="ajoutbtn"> Ajouter un Noeud</small>
+                            </a>
+                            <table id="my-table">
+                                {% for node in nodes %}
+                                <tr>
+                                    <form id="deleteForm" method="post"
+                                        action="{% url 'delete_node' %}">
+
+                                        <td class="td1" name="my-node-name">{{node.noeud_name}}</td>
+                                        <input type="hidden" name="id_noeud_2"
+                                            class="id_noeud_2" value="{{node.id}}"/>
+                                        <td class="td2">
+
+
+                                            <div class="lampes">
+                                                {% for lampe in node.lampes %}
+                                                <div class="lamp">
+                                                    <span>{{lampe.name}}</span>
+                                                    <span>{{lampe.puissance}} w</span>
+                                                </div>
+                                                {% endfor %}
+
+                                            </div>
+                                        </td>
+                                        <td class="action-buttons">
+                                            {% csrf_token %}
+                                            <input type="button" class="mod
+                                                button" onclick="openForm(this)"
+                                                value="Modifier" />
+                                            <input type="submit" class="supp
+                                                button" value="Supprimer" />
+                                        </td>
+                                    </form>
+                                </tr>
+                                {% endfor %}
+
+                            </table>
+
+
+                            <div class="popup">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div class="row">
+
+                                        <div>
+                                            <label for="nom_noeud">Nom Noeud :</label>
+                                        </div>
+                                        <input type="text" name="nom_noeud"
+                                            id="nom_noeud"/>
+                                    </div>
+                                    <div class="row">
+                                        <div>
+                                            <label for="lampes">Lampes :</label>
+                                        </div>
+                                        <div id="row">
+
+                                            <input style="width: 120px;
+                                                margin-left: 60px;" type="text"
+                                                name="lampe" id="lampe"
+                                                placeholder="name"/>
+                                            <input style="width: 50px;"
+                                                type="text" name="puissance"
+                                                id="puissance"
+                                                placeholder="puissance" />
+                                            <input style="width: 40px;"
+                                                value="+" type="button" name=""
+                                                id="addbtn"/>
+
+                                        </div>
+                                        <div class="btns">
+                                            <input type="reset" id="annulerbtn"
+                                                class="button" value="Annuler"
+                                                />
+                                            <input type="submit" id="mybtn"
+                                                class="button" value="Ajouter"
+                                                />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div style="display: none;" id="popup1"
+                                class="popup">
+                                <form method="post" action="{% url 'edit' %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+
+                                        <div>
+                                            <label for="nom_noeud">Nom Noeud :</label>
+                                        </div>
+                                        <input type="text" name="nom_noeud"
+                                            id="nom_noeud_2"/>
+                                        <input type="hidden" name="id_noeud"
+                                            class="td_value" id="id_noeud">
+                                    </div>
+                                    <div class="row">
+                                        <div>
+                                            <label for="lampes">Lampes :</label>
+                                        </div>
+                                        <div id="row2">
+
+                                            <input style="width: 120px;
+                                                margin-left: 60px;" type="text"
+                                                name="lampe" id="lampe1"
+                                                placeholder="name"/>
+                                            <input style="width: 50px;"
+                                                type="text" name="puissance"
+                                                id="puissance1"
+                                                placeholder="puissance" />
+                                            <input style="width: 40px;"
+                                                value="+" type="button" name=""
+                                                id="addbtn"/>
+
+                                        </div>
+                                        <div class="btns">
+                                            <input type="reset" id="annulerbtn"
+                                                class="button" value="Annuler"
+                                                />
+                                            <input type="submit" id="editbtn"
+                                                class="editbtn" value="Modifier"
+                                                />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
             </div>
-            {% endfor %}
-            
-        </div>
-    </td>
-    <td style="width: 300px;" class="action-buttons">
-            {% csrf_token %}
-            <input type="button" class="mod button" onclick="openForm(this)" value="Modifier" />
-            <input type="submit" class="supp button" value="Supprimer" />
-        
-    </td>
-</form>
-</tr>
-{% endfor %}
-
-        </table>
-
-
-        <div style="display: none;" class="popup">
-            <form method="POST">
-                {% csrf_token %}
-                <div class="row">
-        
-                    <div>
-                    <label for="nom_noeud">Nom Noeud :</label>
-                    </div>
-                    <input type="text" name="nom_noeud" id="nom_noeud"/>
-                </div>
-                <div class="row">
-                    <div>
-                        <label for="lampes">Lampes :</label>
-                    </div >
-                    <div id="row">
-
-                        <input style="width: 120px; margin-left: 60px;" type="text" name="lampe" id="lampe" placeholder="name"/>
-                        <input style="width: 50px;" type="text" name="puissance" id="puissance" placeholder="puissance" />
-                        <input  style="width: 40px;"  value="+" type="button" name="" id="addbtn"/>
-                        
-                    </div>
-                    <div class="btns">
-                        <input type="reset" id="annulerbtn" class="button" value="Annuler" />
-                        <input type="submit" id="mybtn" class="button" value="Ajouter" />
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div style="display: none;" id="popup1" class="popup" >
-            <form method="post" action="{% url 'edit' %}">
-                {% csrf_token %}
-                <div class="row">
-        
-                    <div>
-                    <label for="nom_noeud">Nom Noeud :</label>
-                    </div>
-                    <input type="text" name="nom_noeud" id="nom_noeud_2"/>
-                </div>
-                <div class="row">
-                    <div>
-                        <label for="lampes">Lampes :</label>
-                    </div>
-                    <div id="row2">
-
-                        <input style="width: 120px; margin-left: 60px;" type="text" name="lampe" id="lampe1" placeholder="name"/>
-                        <input style="width: 50px;" type="text" name="puissance" id="puissance1" placeholder="puissance" />
-                        <input  style="width: 40px;"  value="+" type="button" name="" id="addbtn"/>
-                        
-                    </div>
-                    <div class="btns">
-                        <input type="reset" id="annulerbtn" class="button" value="Annuler" />
-                        <input type="submit" id="editbtn" class="editbtn" value="Modifier" />
-                    </div>
-                </div>
-            </form>
-        </div>
-  </div>
 
 
 
-        </div>
-
-      </div>
-  </div>
 
 
-  <style>
-
-td,tr{
-border: none;
-}
-
-
-.new-input{
-    margin-top: 10px;
-    width: 120px;
-}
-
-  </style>
-
-
-
-<script>
+            <script>
     
  function openForm(button) {
    var row = button.parentNode.parentNode; // Get the parent row
    var nom_noeud = row.cells[0].innerText; // Get the value of the first cell
+   var id_noeud = row.children[2].value; // Get the value of the first cell
+   console.log("uuuuuu", id_noeud);
    var lampes_info = row.cells[1].querySelectorAll('.lampes span'); // Get lampes info
    var puissances = [];
    var rowDiv = document.getElementById('row2');
-   console.log("row",row.cells);
+   console.log("row 0",row.cells[0]);
+   console.log("row 1",row.cells[1]);
+   console.log("row 2",row.cells[2]);
+   console.log("row 0",row.children[2]);
    console.log("row",row);
    console.log("lampes",lampes_info);
    console.log("nom_noeud",nom_noeud);
@@ -266,6 +292,7 @@ border: none;
    modal.style.display = 'block';
    document.getElementById('my-table').style.display = "none"
    document.getElementById('nom_noeud_2').value = nom_noeud;
+   document.getElementById('id_noeud').value = id_noeud;
    document.getElementById('puissance').value = puissances.join(', ');
 }
 
@@ -274,20 +301,14 @@ border: none;
     
 
    </script>
+            <!-- =========== Scripts =========  -->
+            <script src="assets/js/main.js"></script>
 
-
-
-  <!-- =========== Scripts =========  -->
-  <script src="assets/js/main.js"></script>
-
-  <!-- ====== ionicons ======= -->
-  <script type="module" src="{% static  'js/Configuration.js' %}"></script>
-
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-
-</body>
-</html>
-
-
+            <!-- ====== ionicons ======= -->
+            <script type="module" src="{% static 'js/configuration.js' %}"></script>
+            <script type="module"
+                src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule
+                src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        </body>
+    </html>

@@ -83,7 +83,6 @@
 
             
               <div class="user">
-                  <img src="assets/imgs/customer01.jpg" alt="">
               </div>
           </div>
     
@@ -185,80 +184,97 @@
   </a>
 <table  id="table">
   <tr>
-      <th>heure</th>
-      <th>commande</th>
-      <th>lampe</th>
-      <th>actions</th>
+    <th>date de debut</th>
+    <th>date de fin</th>
+    <th>lampe</th>
+    <th>actions</th>
   </tr>
+  {% for planification in planifications %}
+  
+  <form id="deteleplanificationForm" method="post" action="{% url 'delete_planification' %}">
+  {% csrf_token %}
+
   <tr>
-      <td>8:00</td>
-      <td>Marche</td>
-      <td>Lampe 1</td>
+      <td>{{planification.start_date}}</td>
+      <td>{{planification.end_date}}</td>
+      <td>{{planification.lampe}}</td>
+      <input type="hidden" name="id_plan_hidden" value="{{planification.id}}">
       <td class="action-buttons">
-          <button class="modifier-button">Modifier</button>
-          <button class="annuler-button">Annuler</button>
+          <button type="button" onclick="openEditForm('{{ planification.lampe.id}}', '{{ planification.start_date }}', '{{ planification.end_date }}', '{{ planification.lampe }}', '{{ planification.id }}')" class="modifier-button">Modifier</button>
+          <button type="submit" style="background-color: rgb(221, 62, 62);" class="annuler-button">Supprimer</button>
       </td>
   </tr>
-  <tr>
-      <td>12:30</td>
-      <td>Marche</td>
-      <td>Lampe 2</td>
-      <td class="action-buttons">
-          <button class="modifier-button">Modifier</button>
-          <button class="annuler-button">Annuler</button>
-      </td>
-  </tr>
-  <tr>
-      <td>18:45</td>
-      <td>arrêt</td>
-      <td>Lampe 3</td>
-      <td class="action-buttons">
-          <button class="modifier-button">Modifier</button>
-          <button class="annuler-button">Annuler</button>
-      </td>
-  </tr>
-  <tr>
-      <td>21:15</td>
-      <td>arrêt</td>
-      <td>Lampe 4</td>
-      <td class="action-buttons">
-          <button class="modifier-button">Modifier</button>
-          <button class="annuler-button">Annuler</button>
-      </td>
-  </tr>
+  </form>
+  {% endfor %}
+
 </table>
 
      
   
 <button style="position: relative; left: 800px; margin-bottom: 40px; display: none" id="aff_liste_btn">afficher la liste</button>
 <div style="display: none;" id="scheduler-container" class="scheduler-container" aria-label="Lamp Scheduler">
-  <div class="scheduler-row">
-    <label for="lamp-selector">Sélectionnez la lampe :</label>
-    <select id="lamp-selector">
-      <option value="lamp1">Lamp 1</option>
-      <option value="lamp2">Lamp 2</option>
-      <option value="lamp3">Lamp 3</option>
-      <option value="lamp4">Lamp 4</option>
-      <option value="lamp5">Lamp 5</option>
-      <option value="lamp6">Lamp 6</option>
-    </select>
-  </div>
-
-  <div class="scheduler-row">
-    <label for="time-on">Time On:</label>
-    <input type="datetime-local" id="time-on">
-  </div>
-  <div class="scheduler-row">
-    <label for="time-off">Time Off:</label>
-    <input type="datetime-local" id="time-off">
-  </div>
-  <div class="scheduler-row">
-    <button onclick="applySchedule()">Appliquer</button>
-    <button onclick="saveSchedule()">Sauvegarder</button>
-  </div>
+  <form id="planificationForm" method="post" action="{% url 'add_planification' %}">
+    {% csrf_token %}
+    <div class="scheduler-row">
+      <label for="lamp-selector">Sélectionnez la lampe :</label>
+      <select name="sel" id="lamp-selector">
+        {% for lampe in lampes %}
+          <option value={{lampe.id}}>{{lampe}}</option>
+        {% endfor %}
+  
+      </select>
+    </div>
+  
+    <div class="scheduler-row">
+      <label for="time-on">Time On:</label>
+      <input name="date1" type="datetime-local" id="time-on">
+    </div>
+    <div class="scheduler-row">
+      <label for="time-off">Time Off:</label>
+      <input name="date2" type="datetime-local" id="time-off">
+    </div>
+    <div class="scheduler-row">
+      <button type="reset" >Annuler</button>
+      <button type="submit">Appliquer</button>
+    </div>
+  </form>
 
 
 </div>
+
+
+<div style="display: none;" id="edit_form_div" class="scheduler-container" aria-label="Lamp Scheduler">
+  <form id="edit_form" method="post" action="{% url 'edit_planification' %}" >
+    {% csrf_token %}
+    <div class="scheduler-row">
+      <label for="lamp-selector">Sélectionnez la lampe :</label>
+      <input type="hidden" id="id_plan_hidden" name="id_plan_hidden">
+      <select name="sel" id="edit_lamp_selector">
+        {% for lampe in lampes %}
+          <option value={{lampe.id}}>{{lampe}}</option>
+        {% endfor %}
+  
+      </select>
+    </div>
+  
+    <div class="scheduler-row">
+      <label for="time-on">Time On:</label>
+      <input name="date1" type="datetime-local" id="my_date_d">
+    </div>
+    <div class="scheduler-row">
+      <label for="time-off">Time Off:</label>
+      <input name="date2" type="datetime-local" id="my_date_f">
+    </div>
+    <div class="scheduler-row">
+      <button type="reset" >Annuler</button>
+      <button type="submit">Appliquer</button>
+    </div>
+  </form>
+
+
+</div>
+
+
 </div>
 
 
@@ -285,6 +301,27 @@ addCmdBtn.addEventListener( "click", () => {
 
 </script>
         
+
+
+
+<script>
+
+function openEditForm(id,date_d,date_f,lampe, id_plan){
+
+var addCmdBtn = document.getElementById("add_cmd_btn");
+
+var table = document.getElementById("table");
+  var my_form  = document.getElementById("edit_form_div").style.display="block";
+  addCmdBtn.style.display = "none";
+  table.style.display = "none";
+  document.getElementById("edit_lamp_selector").value = id;
+  document.getElementById("id_plan_hidden").value = id_plan;
+
+
+}
+
+</script>
+
     
   <script type="module" src="{% static  'js/planification.js' %}"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

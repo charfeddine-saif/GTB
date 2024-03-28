@@ -269,6 +269,24 @@ margin-bottom: 10px;
 
 
 
+.conf {
+  text-align: center;
+  margin-bottom: 20px; 
+color: rgb(5, 0, 3); 
+font-size: 44px;
+}
+
+
+.td1{
+
+  background-color: gray; 
+  color: white; 
+  border-bottom: 10px solid #fff;
+   padding: 0 20px;
+}
+
+
+
 .lampinput{
     width: 100px !important;
     margin: 10px 0 0 125px;
@@ -283,3 +301,44 @@ margin-bottom: 10px;
     position: relative;
     right: 15px;
 }
+
+
+.td2 {
+  padding: 0 20px; 
+  border-bottom: 10px solid #fff;
+}
+
+.lamp{
+
+background-color: rgb(215, 211, 211);
+ margin: 5px 0; 
+ height: 40px;
+  line-height: 40px;
+   display: flex; 
+   justify-content: space-around;
+    color: rgb(79, 76, 76);
+}
+
+.action-buttons{
+
+ width: 300px;
+}
+
+.popup{
+  display: none;
+
+}
+
+
+td,tr{
+border: none;
+}
+
+
+.new-input{
+    margin-top: 10px;
+    width: 120px;
+}
+
+
+

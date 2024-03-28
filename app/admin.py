@@ -1,8 +1,5 @@
 from django.contrib import admin
-
-# Register your models here.
-from .models import Noeud, Lampe 
-
+from .models import Noeud, Lampe, Planification
 
 class LampeInline(admin.TabularInline):
     model = Lampe
@@ -14,3 +11,4 @@ class NoeudAdmin(admin.ModelAdmin):
 
 admin.site.register(Noeud, NoeudAdmin)
 admin.site.register(Lampe)
+admin.site.register(Planification)

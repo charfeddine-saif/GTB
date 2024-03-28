@@ -1,0 +1,247 @@
+h1 {
+  color: #2c3e50;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #2a2185;
+  color: #fff;
+}
+
+td button {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+}
+
+td button.on {
+  background-color: #2ecc71;
+}
+
+td button.off {
+  background-color: #e74c3c;
+}
+
+.button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#refreshButton,
+#logoutButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+}
+
+#refreshButton {
+  background-color: #27ae60;
+}
+
+#logoutButton {
+  background-color: #c0392b;
+  margin-left: 10px;
+}
+
+#stateContainer {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #3498db;
+}
+.container-uu {
+  margin-top: 30px;
+  padding: 0 35px;
+}
+
+.navigation ul li a .icon{
+    position: relative;
+    bottom: 15px;
+}
+.navigation ul li a .title{
+    position: relative;
+    right: 15px;
+}
+
+
+.h1_pilotage{
+ text-align: center;
+   margin-bottom: 20px;
+    color: rgb(76, 56, 68);
+     font-size: 44px;
+}
+
+
+  
+
+
+  .hi {
+      margin-right:   30px;
+  }
+  
+  .chart {
+    margin-right:   0px; 
+    display: flex; 
+       justify-content: center;
+        align-items: center;
+        display: flex;
+         justify-content: center; 
+         align-items: center;
+ 
+         display: flex;
+          justify-content: center;
+           align-items: center;
+          display: flex;
+          justify-content: center;
+           align-items: center;
+  }
+    .top-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(51, 51, 51);
+  }
+  
+  .top-bar li {
+    float: left;
+  }
+  
+  .top-bar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .top-bar li a:hover {
+    background-color: #4a1857;
+  }
+  
+  
+  
+
+.container-uu table td{
+  border: none;
+}
+.title{
+  font-size: 72px;
+  margin-left: 20px;
+}
+  
+.node{
+  display: flex;
+   justify-content: space-between;
+    height: 150px;
+     align-items: center;
+      margin-bottom: 60px;
+
+     display: flex;
+      justify-content: space-between;
+       height: 150px;
+        align-items: center;
+         margin-bottom: 60px;"
+        display: flex;
+         justify-content: space-between;
+          height: 150px;
+           align-items: center;
+            margin-bottom: 80px;
+}
+
+
+.table_pilotage{
+
+  width: 400px;
+   height: 150px;
+}
+.tr_pilotage{
+  border: none;
+}
+
+.noeud1_pilotage{
+  background-color: gray;
+   border: 0;
+    color: white; 
+}
+
+.btns{
+display: flex; 
+justify-content: space-between;
+display: flex;
+ justify-content: space-between;
+
+ display: flex;
+  justify-content: space-between;
+}
+
+
+.mychart1_pilotage{
+  width: 400px;
+   height: 250px;
+    margin: 70px 0 0 0;
+
+}
+
+.table2_pilotage{
+
+  width: 400px;
+   height: 150px;
+}
+.noeud2_pilotage{
+
+ background-color: gray;
+  border: 0; color: white;
+}
+.mychart2_pilotage {
+  width: 400px; 
+  height: 250px;
+   margin: 70px 0 0 0;
+
+}
+.table3_pilotage{
+
+ width: 400px;
+  height: 150px;
+}
+
+.noeud3_pilotage{
+ background-color: gray;
+  border: 0;
+   color: white;
+}
+
+.chart3_pilotage{
+
+  width: 400px; 
+  height: 250px;
+   margin: 70px 0 0 0;
+}
+.consommation_pilotage{
+  text-align: center;
+
+}
+.chart4_pilotage{
+ text-align: center;
+ width: 9000px;
+  height: 430px; 
+  margin: 70px 0 0 0;
+}

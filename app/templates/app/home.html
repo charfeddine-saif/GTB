@@ -111,10 +111,10 @@
                 </div>
             </div>
 
-            <!-- ======================= pilotage here ================== -->
+            <! ======================= pilotage here ================== -->
           
             <div class="content-container" id="content-container">
-              <!-- Content will be dynamically loaded here -->
+              
           </div>
 
         </div>
@@ -132,8 +132,6 @@
       function loadContent(contentName) {
           var contentContainer = document.getElementById('content-container');
           
-          // Use AJAX or fetch to load content from the server based on the contentName
-          // Example using fetch:
          fetch(`${contentName}`)
               .then(response => response.text())
               .then(data => {
@@ -159,7 +157,7 @@
       document.getElementById('pilotage').addEventListener('click', function() {
           loadContent('pilotage');
         //   document.getElementById('pilotage').style.backgroundColor = "white";
-        //   document.getElementById('pilotage').style.color = "2a2185";
+        //  document.getElementById('pilotage').style.color = "2a2185";
           
       });
 
