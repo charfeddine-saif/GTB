@@ -1,0 +1,197 @@
+
+:root {
+  --bg-color: #f8f9fa;
+  --active-color: #28a745;
+  --active-text-color: #ffffff;
+  --border-color: #dee2e6;
+  --text-color: #495057;
+  --btn-hover-color: #218838;
+}
+
+
+.scheduler-container {
+  max-width: 600px;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.scheduler-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.scheduler-row:last-child {
+  border-bottom: none;
+}
+
+.scheduler-row label {
+  margin-right: 10px;
+  color: var(--text-color);
+}
+
+.scheduler-row input[type="time"] {
+  margin-right: 10px;
+}
+
+.scheduler-row button {
+  padding: 5px 10px;
+  background-color: rgb(25, 25, 255);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scheduler-row button:hover {
+  background-color: var(--btn-hover-color);
+  color: var(--active-text-color);
+}
+
+.day-selector {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.day-selector button {
+  padding: 5px 10px;
+  margin: 2px;
+  border: 1px solid var(--border-color);
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.day-selector button.active {
+  background-color: var(--active-color);
+  color: var(--active-text-color);
+}
+
+
+
+
+
+.navigation ul li a .icon{
+    position: relative;
+    bottom: 15px;
+}
+.navigation ul li a .title{
+    position: relative;
+    right: 15px;
+}
+
+
+.navigation ul li a .icon{
+    position: relative;
+    bottom: 15px;
+}
+.navigation ul li a .title{
+    position: relative;
+    right: 15px;
+}
+
+
+  
+  .scheduler-container {
+    max-width: 900px;
+    height: 400px;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 58px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .scheduler-row {
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  select, input[type=datetime-local] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid rgb(79, 15, 215);
+    font-size: 16px;
+  }
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1628c5;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 40px;
+    max-width: 1000px;
+    height: 40px;
+  }
+  button:hover {
+    background-color: #2737c9;
+  }
+
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+  }
+  table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  th, td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #dddddd;
+      
+  }
+  th {
+      background-color: #f2f2f2;
+      
+  }
+  tr:nth-child(even) {
+      background-color: #f2f2f2;
+      
+  }
+  tr:last-child td {
+      border-bottom: none;
+  }
+  .action-buttons {
+      display: flex;
+      justify-content: space-around;
+  }
+  .modifier-button, .annuler-button {
+      background-color: #007bff;
+      color: rgb(255, 255, 255);
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: 1px solid rgb(79, 15, 215);
+   
+  }
+.h1_planification{
+
+
+  text-align: center;
+    margin-bottom: 20px; 
+    color: rgb(5, 0, 3);
+     font-size: 44px;
+}
+
+
+.annuler-button{
+  background-color: rgb(221, 62, 62);
+}
+

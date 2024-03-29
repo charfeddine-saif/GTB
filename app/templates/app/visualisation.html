@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
   <link rel="stylesheet" href="{% static  'css/planification.css '%}">
-  <link rel="stylesheet" href="{% static  'css/visualisation.css '%}">
+  <link rel="stylesheet" href="{% static  'css/visu.css '%}">
 
   <title>Gestion Technique des Batiments</title>
 </head> 
@@ -90,27 +90,19 @@
 <div class="rows">
   
   <div  class="row">
+    {% for item in data %}
     <h1>noeud 1</h1>
     <div class="t" class="graphs">
       <div class="graph">
-        <h1  style="text-align:  center;  padding-left: 65px;  margin-bottom: -30px; color:#D4D3DC;"> lampe 1 </h1>
-        <div style="width: 500px; height: 200px; margin: 30px 0;">
-          <canvas id="myChart1" ></canvas>
+        <h1 class="lamp_visua" > lampe 1 </h1>
+        <div class="lamp1" id="data-canvas" data-item="{{ item }}">
+          <canvas id="myChart4" ></canvas>
         </div> 
       </div>
-      <div class="graph">
-        <h1  style="text-align:  center;  padding-left: 65px;  margin-bottom: -30px; color:#D4D3DC;"> lampe 2 </h1>
-        <div style="width: 500px; height: 200px; margin: 30px 0;">
-          <canvas id="myChart2" ></canvas>
-        </div> 
-      </div>
-      
-      <div class="graph">
-        <h1  style="text-align:  center;  padding-left: 65px;  margin-bottom: -30px; color:#D4D3DC;"> lampe 3</h1>
-        <div style="width: 500px; height: 200px; margin: 30px 0;">
-          <canvas id="myChart3" ></canvas>
-        </div> 
-      </div>
+
+    {% endfor %}
+
+  
     </div>
   </div>
 
@@ -119,194 +111,66 @@
 
           
         
-
+<div style="width: 900px; margin: 0 auto;" class="total">
+  
          
-            <div class="top-bar">
-              <ul>
-                <li><a class="active" href="#année">par année</a></li>
-                <li><a href="#mois">par mois</a></li>
-                <li><a href="#jour">par jour</a></li>
-                <li><a href="#heure">par heure</a></li>
-              </ul>
-            </div>
-            
-  
-  <title>Ma Consommation d'électricité</title>
-  <style>
-
-
-    .date {
-      text-align: center;
-
-      
-      
-    }
-
-    .btns {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .btns div {
-      margin-right: 10px;
-      margin-top:70px;
-
-    }
-
-    .btns div:last-child {
-      margin-right: 0;
-    }
-
-    label {
-      font-weight: bold;
-    }
-
-    button {
-      margin-top:20px;
-
-      padding: 7px 30px;
-      font-size: 25px;
-      cursor: pointer;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      margin-left: 30px;
-      border-radius: 5px;
-      
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    .chart-container {
-      width: 100%;
-      height: 500px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-
-    
-
-
-    .top-bar {
-  background-color: #007bff; /* Couleur de fond */
-  padding: 10px 0; /* Remplissage haut et bas */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre */
-}
-
-.top-bar ul {
-  list-style-type: none; /* Supprimer les puces de la liste */
-  margin: 0; /* Supprimer la marge par défaut */
-  padding: 0; /* Supprimer le remplissage par défaut */
-  text-align: center; /* Centrer les éléments de la liste */
-}
-
-.top-bar ul li {
-  display: inline; /* Afficher les éléments en ligne */
-  margin: 0 10px; /* Marge horizontale entre les éléments */
-}
-
-.top-bar ul li a {
-  display: block; /* Afficher les liens en bloc */
-  padding: 10px 20px; /* Remplissage intérieur */
-  color: #fff; /* Couleur du texte */
-  text-decoration: none; /* Supprimer les soulignements des liens */
-  transition: background-color 0.3s ease; /* Animation de transition */
-}
-
-.top-bar ul li a.active,
-.top-bar ul li a:hover {
-  background-color: #0056b3; /* Couleur de fond au survol */
-  border-radius: 5px; /* Bordure arrondie */
-}
-
-
-
-
-  </style>
-  
-</head>
-
-<body>
-
-
-  
-
-  <div class="container">
-    
-    <div class="date">
-      <div class="btns">
-        <div>
-          <label for="fromDate">Du</label>
-          <input type="date" id="fromDate">
-        </div>
-        <div>
-          <button type="submit">Valider</button>
-          <button type="submit">Télécharger</button>
-        </div>
-      </div> 
-      <h1>Ma Consommation d'électricité par heure (en Kwh)</h1>
-    </div>
-    <div class="chart">
-      <div class="chart-container">
-        <canvas id="myChart4" ></canvas>
-      </div>
-    </div>
+  <div class="top-bar">
+    <ul>
+      <li><a class="active" href="#année">par année</a></li>
+      <li><a href="#mois">par mois</a></li>
+      <li><a href="#jour">par jour</a></li>
+      <li><a href="#heure">par heure</a></li>
+    </ul>
   </div>
+  
 
-</body>
-</html>
+<title>Ma Consommation d'électricité</title>
+
+
+<div class="container">
+
+<div class="date">
+<div class="btns">
+<div>
+<label for="fromDate">Du</label>
+<input type="date" id="fromDate">
+</div>
+<div>
+<button type="submit">Valider</button>
+
+</div>
+</div> 
+<h1>Ma Consommation d'électricité par heure (en Kwh)</h1>
+</div>
+<div class="chart">
+<div class="chart-container">
+<canvas id="myChart4" ></canvas>
+</div>
+</div>
+</div>
+
+</div>
 
 
       </div>
   </div>
 
 
-
-<style>
-  .top-bar ul {
-  list-style-type: none;
-  margin: 10;
-  padding: 0;
-  overflow: hidden;
-  
-}
-
-.top-bar li {
-  float: left;
-}
-
-.top-bar li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.top-bar li a:hover {
-  background-color: #111;
-}
-
-
-
-
-
-</style>
 
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+
+
+var data =[]
+var arr = JSON.parse(document.getElementById("data-canvas").getAttribute('data-item'));
+for (let index = 0; index < arr.length -1; index+=2) {
+  const element = arr[index].reduce((partialSum, a) => partialSum + a, 0) + arr[index+1].reduce((partialSum, a) => partialSum + a, 0);
+  data.push(element/4);
   
-  
+}
 var ctx = document.getElementById('myChart4').getContext('2d');
 var myChart4 = new Chart(ctx, {
     type: 'bar',
@@ -314,7 +178,7 @@ var myChart4 = new Chart(ctx, {
         labels: ["00h00", "02h00", "04h00","06:00", "08h00", "10h00","12h00", "14h00","16h00", "18h00", "20h00","22h00"],
         datasets: [{
             label:'',
-            data: [0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5, ],
+            data: data,
             backgroundColor: [
                 'rgba(54, 162, 235, 0.8)',
             ],
@@ -337,7 +201,11 @@ var myChart4 = new Chart(ctx, {
 
   <script type="module" src="{% static  'js/1.js' %}"></script>
 
-<script></script>
+<script>
+
+
+
+</script>
   <!-- =========== Scripts =========  -->
   <!-- <script src="assets/js/main.js"></script> -->
 

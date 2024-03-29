@@ -134,7 +134,7 @@ td button.off {
   }
   
   .top-bar li a:hover {
-    background-color: #4a1857;
+    background-color: #a60ccc;
   }
   
   
@@ -159,7 +159,7 @@ td button.off {
       justify-content: space-between;
        height: 150px;
         align-items: center;
-         margin-bottom: 60px;"
+         margin-bottom: 60px;
         display: flex;
          justify-content: space-between;
           height: 150px;
@@ -170,8 +170,8 @@ td button.off {
 
 .table_pilotage{
 
-  width: 400px;
-   height: 150px;
+  width: 380px;
+   height: 160px;
 }
 .tr_pilotage{
   border: none;
@@ -195,16 +195,16 @@ display: flex;
 
 
 .mychart1_pilotage{
-  width: 400px;
-   height: 250px;
+  width: 550px;
+   height: 280px;
     margin: 70px 0 0 0;
 
 }
 
 .table2_pilotage{
 
-  width: 400px;
-   height: 150px;
+  width: 380px;
+   height: 160px;
 }
 .noeud2_pilotage{
 
@@ -212,15 +212,15 @@ display: flex;
   border: 0; color: white;
 }
 .mychart2_pilotage {
-  width: 400px; 
-  height: 250px;
+  width: 550px; 
+  height: 280px;
    margin: 70px 0 0 0;
 
 }
 .table3_pilotage{
 
- width: 400px;
-  height: 150px;
+ width: 380px;
+  height: 160px;
 }
 
 .noeud3_pilotage{
@@ -231,8 +231,8 @@ display: flex;
 
 .chart3_pilotage{
 
-  width: 400px; 
-  height: 250px;
+  width: 550px; 
+  height: 280px;
    margin: 70px 0 0 0;
 }
 .consommation_pilotage{

@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
-  <link rel="stylesheet" href="{% static  'css/planification.css '%}">
+  <link rel="stylesheet" href="{% static  'css/planif.css '%}">
 
   <title>Gestion Technique des Batiments</title>
 </head>
@@ -87,95 +87,10 @@
           </div>
     
 
-<style>
- 
-  
-  .scheduler-container {
-    max-width: 900px;
-    height: 400px;
-    margin: auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 58px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .scheduler-row {
-    margin-bottom: 15px;
-  }
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  select, input[type=datetime-local] {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-  }
-  button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #1628c5;
-    color: white;
-    cursor: pointer;
-    font-size: 20px;
-    margin-right: 40px;
-    max-width: 1000px;
-    height: 40px;
-  }
-  button:hover {
-    background-color: #2737c9;
-  }
-</style>
-
-
-<style>
-  body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 0;
-  }
-  table {
-      width: 80%;
-      margin: 20px auto;
-      border-collapse: collapse;
-      background-color: #ffffff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  th, td {
-      padding: 10px;
-      text-align: center;
-      border-bottom: 1px solid #dddddd;
-  }
-  th {
-      background-color: #f2f2f2;
-  }
-  tr:nth-child(even) {
-      background-color: #f2f2f2;
-  }
-  tr:last-child td {
-      border-bottom: none;
-  }
-  .action-buttons {
-      display: flex;
-      justify-content: space-around;
-  }
-  .modifier-button, .annuler-button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-  }
-</style>
 </head>
 <body>
   
-<h1    style="text-align: center;  margin-bottom: 20px; color: rgb(5, 0, 3); font-size: 44px;">  Planification Automatique</h1>
+<h1    class="h1_planification">  Planification Automatique</h1>
 
 <div class="content">
   <a>
@@ -200,8 +115,8 @@
       <td>{{planification.lampe}}</td>
       <input type="hidden" name="id_plan_hidden" value="{{planification.id}}">
       <td class="action-buttons">
-          <button type="button" onclick="openEditForm('{{ planification.lampe.id}}', '{{ planification.start_date }}', '{{ planification.end_date }}', '{{ planification.lampe }}', '{{ planification.id }}')" class="modifier-button">Modifier</button>
-          <button type="submit" style="background-color: rgb(221, 62, 62);" class="annuler-button">Supprimer</button>
+          <button  type="button" onclick="openEditForm('{{ planification.lampe.id}}', '{{ planification.start_date }}', '{{ planification.end_date }}', '{{ planification.lampe }}', '{{ planification.id }}')" class="modifier-button">Modifier</button>
+          <button type="submit" class="annuler-button">Supprimer</button>
       </td>
   </tr>
   </form>
@@ -211,7 +126,7 @@
 
      
   
-<button style="position: relative; left: 800px; margin-bottom: 40px; display: none" id="aff_liste_btn">afficher la liste</button>
+<button class="afficher_liste" style="position: relative; left: 800px; margin-bottom: 40px; display: none" id="aff_liste_btn">afficher la liste</button>
 <div style="display: none;" id="scheduler-container" class="scheduler-container" aria-label="Lamp Scheduler">
   <form id="planificationForm" method="post" action="{% url 'add_planification' %}">
     {% csrf_token %}

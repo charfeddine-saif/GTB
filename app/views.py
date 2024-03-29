@@ -9,49 +9,47 @@ from .utils import get_lampes_by_noeud_name, get_nodes_with_lampes,get_lampes_by
 from .models import Lampe, Noeud, Planification
 from django.shortcuts import redirect,get_object_or_404
 
+def get_data():
+        
+    file = pd.ExcelFile('data.xlsx')
 
-file = pd.ExcelFile('data.xlsx')
+    # Get the names of the sheets
+    data=[]
+    sheet_names = file.sheet_names
+    puiss_1 = 15
+    puiss_2 = 12
+    sheet_names_arr = []
+    for name in sheet_names:
+        df = pd.read_excel('data.xlsx', sheet_name=name)
+        lampes = get_lampes_by_noeud_name(name)
+        print("////",name)
+        # print("lampes: ",lampes[0].name)
+        first_row_values = df.columns.tolist()[1:]
+        print("first_row_values",first_row_values)
+        # ne7sEB 9adech men  ON 
 
-# Get the names of the sheets
-data=[]
-sheet_names = file.sheet_names
-puiss_1 = 15
-puiss_2 = 12
-sheet_names_arr = []
-for name in sheet_names:
-    df = pd.read_excel('data.xlsx', sheet_name=name)
-    lampes = get_lampes_by_noeud_name(name)
-    first_row_values = df.columns.tolist()[1:]
-    print("lampes-----",lampes)
-    # ne7sEB 9adech men  ON 
+        sums= [0] * len(first_row_values)
+        avgs= [0] * len(first_row_values)
+        avg_arr =[]
+        for i, row in df.iterrows():
+            for index, val in enumerate(first_row_values):
+                if(row[val]=="ON"):
+                    sums[index]+=1
+            if (i +1) % 6 ==0:
+                for x in range(len(sums)):
+                    avgs[x]=round(sums[x]/6 * 15, 2)  
 
-    sums= [0] * len(first_row_values)
-    avgs= [0] * len(first_row_values)
-    avg_arr =[]
-    for i, row in df.iterrows():
-        for index, val in enumerate(first_row_values):
-            if(row[val]=="ON"):
-                sums[index]+=1
-        if (i +1) % 6 ==0:
-            for x in range(len(sums)-1):
-                if lampes is not None:
-                    pass
-                    # avgs[x]=round(sums[x]/6 * lampes[x].puissance, 2)
-                    print("ooo",len(lampes),x)
-                                    
-            sums= [0] * len(first_row_values)
-            avg_arr.append(avgs)
-    data.append(avg_arr)
-            
+                sums= [0] * len(first_row_values)
+                avg_arr.append(avgs)
+                avgs= [0] * len(first_row_values)
+                
+        data.append(avg_arr)
+    return data
+                
 
 
     # data.append((avg_1,avg_2))    
     
-
-print("data: ",data)
-print("data 1: ",data[0])
-print("data 2: ",data[1])
-print("data 3: ",data[2])
 
 
 # # Group by hour
@@ -133,9 +131,11 @@ def delete_node(request):
 
 
 def visualisation(request):
+    my_data = get_data()
+    print("myyyy data", my_data)
     
     
-    return render(request, 'app/visualisation.html')
+    return render(request, 'app/visualisation.html', {'data': my_data})
 
 def planification(request):
     

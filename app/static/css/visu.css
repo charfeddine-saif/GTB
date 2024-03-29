@@ -1,0 +1,200 @@
+
+.navigation ul li a .icon{
+    position: relative;
+    bottom: 15px;
+}
+.navigation ul li a .title{
+    position: relative;
+    right: 15px;
+}
+
+.container{
+    background-color: rgb(43, 122, 122);
+}
+.v{
+text-align: center; 
+ margin-bottom: 20px;
+  color: rgb(5, 0, 3); 
+  font-size: 44px;
+}
+.graphs{
+display: flex; 
+justify-content: space-around;
+ flex-wrap: wrap;
+
+
+}
+.t{
+
+
+display: flex;
+justify-content: space-around;
+      flex-wrap: wrap;
+}
+.lamp_visua{
+
+  text-align:  center;
+    padding-left: 65px;
+      margin-bottom: -30px;
+       color:#D4D3DC;
+
+}
+.lamp1{
+  width: 500px; 
+  height: 200px; 
+  margin: 30px 0;
+}
+
+.lamp2_visual{
+ text-align:  center; 
+  padding-left: 65px; 
+   margin-bottom: -30px;
+    color:#D4D3DC;
+}
+
+.lamp2{
+
+ width: 500px;
+  height: 200px;
+   margin: 30px 0;
+}
+.lampe3_visual{
+
+ text-align:  center; 
+  padding-left: 65px;
+  margin-bottom: -30px;
+ color:#D4D3DC;
+
+
+}
+
+.lamp3{
+  width: 500px;
+   height: 200px;
+    margin: 30px 0;
+
+}
+
+
+
+
+.date {
+  text-align: center;
+
+  
+  
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.btns div {
+  margin-right: 10px;
+  margin-top:70px;
+
+}
+
+.btns div:last-child {
+  margin-right: 0;
+}
+
+label {
+  font-weight: bold;
+}
+
+button {
+  margin-top:20px;
+
+  padding: 7px 30px;
+  font-size: 25px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  margin-left: 30px;
+  border-radius: 5px;
+  
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.chart-container {
+  width: 100%;
+  height: 500px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+.top-bar {
+background-color: #007bff; /* Couleur de fond */
+padding: 10px 0; /* Remplissage haut et bas */
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre */
+}
+
+.top-bar ul {
+list-style-type: none; /* Supprimer les puces de la liste */
+margin: 0; /* Supprimer la marge par défaut */
+padding: 0; /* Supprimer le remplissage par défaut */
+text-align: center; /* Centrer les éléments de la liste */
+}
+
+.top-bar ul li {
+display: inline; /* Afficher les éléments en ligne */
+margin: 0 10px; /* Marge horizontale entre les éléments */
+}
+
+.top-bar ul li a {
+display: block; /* Afficher les liens en bloc */
+padding: 10px 20px; /* Remplissage intérieur */
+color: #fff; /* Couleur du texte */
+text-decoration: none; /* Supprimer les soulignements des liens */
+transition: background-color 0.3s ease; /* Animation de transition */
+}
+
+.top-bar ul li a.active,
+.top-bar ul li a:hover {
+background-color: #0056b3; /* Couleur de fond au survol */
+border-radius: 5px; /* Bordure arrondie */
+}
+
+
+  .top-bar ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 0;
+  overflow: hidden;
+  
+}
+
+.top-bar li {
+  float: left;
+}
+
+.top-bar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.top-bar li a:hover {
+  background-color: #111;
+}
+
+
+
+
+
