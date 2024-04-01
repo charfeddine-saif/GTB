@@ -7,10 +7,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
-  <link rel="stylesheet" href="{% static  'css/planification.css '%}">
-  <link rel="stylesheet" href="{% static  'css/visu.css '%}">
+  <link rel="stylesheet" href="{% static  'css/planif.css '%}">
+  <link rel="stylesheet" href="{% static  'css/visual.css '%}">
 
   <title>Gestion Technique des Batiments</title>
 </head> 
@@ -87,7 +86,7 @@
           <h1 class="v" >  Visualisation Courbe</h1>
 
          
-<div class="rows">
+<!--<div class="rows">
   
   <div  class="row">
     {% for item in data %}
@@ -96,7 +95,7 @@
       <div class="graph">
         <h1 class="lamp_visua" > lampe 1 </h1>
         <div class="lamp1" id="data-canvas" data-item="{{ item }}">
-          <canvas id="myChart4" ></canvas>
+          <canvas id="myChart1" ></canvas>
         </div> 
       </div>
 
@@ -107,7 +106,7 @@
   </div>
 
 
-</div>
+</div>   
 
           
         
@@ -144,7 +143,7 @@
 </div>
 <div class="chart">
 <div class="chart-container">
-<canvas id="myChart4" ></canvas>
+<canvas id="myChart1" ></canvas>
 </div>
 </div>
 </div>
@@ -168,10 +167,10 @@ var data =[]
 var arr = JSON.parse(document.getElementById("data-canvas").getAttribute('data-item'));
 for (let index = 0; index < arr.length -1; index+=2) {
   const element = arr[index].reduce((partialSum, a) => partialSum + a, 0) + arr[index+1].reduce((partialSum, a) => partialSum + a, 0);
-  data.push(element/4);
+  data.push(element);
   
 }
-var ctx = document.getElementById('myChart4').getContext('2d');
+var ctx = document.getElementById('myChart1').getContext('2d');
 var myChart4 = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -197,21 +196,380 @@ var myChart4 = new Chart(ctx, {
         }
     }
 });
-</script>
+</script>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <script type="module" src="{% static  'js/1.js' %}"></script>
+    <div class="total">
+        <div style="margin-top: -80px;" class="top-bar">
+            <ul>
+                <li><a class="active" href="#année">par année</a></li>
+                <li><a href="#mois">par mois</a></li>
+                <li><a href="#jour">par jour</a></li>
+                <li><a href="#heure">par heure</a></li>
+            </ul>
+        </div>
+        <div style="margin-top: -130px;" class="container">
+            <div class="date">
+                <div class="btns">
+                    <div>
+                        <label for="fromDate">Du</label>
+                        <input type="date" id="fromDate"  class="date-input-field">
+                    </div>
+                    <div>
+                      <label for="fromDate"  class="date-input-field">Au</label>
+                      <input type="date" id="fromDate">
+                  </div>
+                    <div>
+                      
+                        <button type="submit">Valider</button>
+                    </div>
+                </div>
+                <h1>Ma Consommation d'électricité par heure (en Kwh)</h1>
+            </div>
+            <div class="chart">
+                <div class="chart-container">
+                    <canvas id="myChart1"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 500px;" class="total">
+        <div class="top-bar">
+            <ul>
+                <li><a class="active" href="#année">par année</a></li>
+                <li><a href="#mois">par mois</a></li>
+                <li><a href="#jour">par jour</a></li>
+                <li><a href="#heure">par heure</a></li>
+            </ul>
+        </div>
+        <div style="margin-top: -130px;" class="container">
+            <div class="date">
+                <div class="btns">
+                    <div>
+                        <label for="fromDate">Du</label>
+                        <input type="date" id="fromDate"  class="date-input-field">
+                    </div>
+                    <div>
+                      <label for="fromDate"  class="date-input-field">Au</label>
+                      <input type="date" id="fromDate">
+                  </div>
+                    <div>
+                      
+                        <button type="submit">Valider</button>
+                    </div>
+                </div>
+                <h1>Ma Consommation d'électricité par heure (en Kwh)</h1>
+            </div>
+            <div class="chart">
+                <div class="chart-container">
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 500px;" class="total">
+        <div class="top-bar">
+            <ul>
+                <li><a class="active" href="#année">par année</a></li>
+                <li><a href="#mois">par mois</a></li>
+                <li><a href="#jour">par jour</a></li>
+                <li><a href="#heure">par heure</a></li>
+            </ul>
+        </div>
+        <div style="margin-top: -130px;" class="container">
+            <div class="date">
+                <div class="btns">
+                    <div>
+                        <label for="fromDate">Du</label>
+                        <input type="date" id="fromDate"  class="date-input-field">
+                    </div>
+                    <div>
+                      <label for="fromDate"  class="date-input-field">Au</label>
+                      <input type="date" id="fromDate">
+                  </div>
+                    <div>
+                      
+                        <button type="submit">Valider</button>
+                    </div>
+                </div>
+                <h1>Ma Consommation d'électricité par heure (en Kwh)</h1>
+            </div>
+            <div class="chart">
+                <div class="chart-container">
+                    <canvas id="myChart3"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+
+
+    
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script>
+
+
+        var data = [];
+        var arr = JSON.parse(document.getElementById("data-canvas").getAttribute('data-item'));
+        for (let index = 0; index < arr.length - 1; index += 2) {
+            const element = arr[index].reduce((partialSum, a) => partialSum + a, 0) + arr[index + 1].reduce((partialSum, a) => partialSum + a, 0);
+            data.push(element);
+        }
+        var ctx = document.getElementById('myChart1').getContext('2d');
+        var myChart4 = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["00h00", "02h00", "04h00", "06:00", "08h00", "10h00", "12h00", "14h00", "16h00", "18h00", "20h00", "22h00"],
+                datasets: [{
+                    label: '',
+                    data: data,
+                    backgroundColor: ['rgba(54, 162, 235, 0.8)'],
+                    borderColor: ['rgba(54, 162, 235, 1)'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                      beginAtZero: true
+                    }
+                }
+            }
+        });
+
+
+
+        var ctx = document.getElementById('myChart3').getContext('2d');
+        var myChart4 = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["00h00", "02h00", "04h00", "06:00", "08h00", "10h00", "12h00", "14h00", "16h00", "18h00", "20h00", "22h00"],
+                datasets: [{
+                    label: '',
+                    data: data,
+                    backgroundColor: ['rgba(54, 162, 235, 0.8)'],
+                    borderColor: ['rgba(54, 162, 235, 1)'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                      beginAtZero: true
+                    }
+                }
+            }
+        });
+
+
+
+    </script>
+
+
+
 
 <script>
 
 
-
+  var data = [];
+  var arr = JSON.parse(document.getElementById("data-canvas").getAttribute('data-item'));
+  for (let index = 0; index < arr.length - 1; index += 2) {
+      const element = arr[index].reduce((partialSum, a) => partialSum + a, 0) + arr[index + 1].reduce((partialSum, a) => partialSum + a, 0);
+      data.push(element);
+  }
+  var ctx = document.getElementById('myChart2').getContext('2d');
+  var myChart4 = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ["00h00", "02h00", "04h00", "06:00", "08h00", "10h00", "12h00", "14h00", "16h00", "18h00", "20h00", "22h00"],
+          datasets: [{
+              label: '',
+              data: data,
+              backgroundColor: ['rgba(54, 162, 235, 0.8)'],
+              borderColor: ['rgba(54, 162, 235, 1)'],
+              borderWidth: 2
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                beginAtZero: true
+              }
+          }
+      }
+  });
 </script>
+
+
+
+
+  
   <!-- =========== Scripts =========  -->
-  <!-- <script src="assets/js/main.js"></script> -->
+  <script src="assets/js/main.js"></script>
 
   <!-- ====== ionicons ======= -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+   
+  <style>
+    /* Styles pour le conteneur principal */
+    .total {
+        width: 770px;
+        margin: 133px auto;
+    }
+
+    .top-bar  {
+        width: 770px;
+        margin: 133px auto;
+    }
+    .top-bar  {
+        width: 770px;
+        margin: 133px auto;
+    }
+
+    /* Styles pour la barre de navigation */
+    .top-bar ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+        background-color: grey;
+        padding: 10px 0;
+    }
+        
+
+    .top-bar a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .top-bar a.active {
+        color:white;
+    }
+
+    /* Styles pour la section de date */
+    .date {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btns {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    input[type="date"] {
+        padding: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    /* Styles pour le titre */
+    h1 {
+        font-size: 24px;
+        margin-bottom: 40px;
+    }
+
+    /* Styles pour le graphique */
+    .chart-container1 {
+        background-color: #f9f9f9;
+        padding: 20px;
+        width: 952px;
+        height: 480px;
+    }
+
+    .chart-container2 {
+        background-color: #f9f9f9;
+        padding: 20px;
+        width: 693px;
+        height: 346px;
+        text-align: center;
+
+        display: block;
+       box-sizing: border-box;
+    }
+
+
+    .date-input {
+margin-bottom: 10px;
+display: flex;
+align-items: center;
+}
+
+.date-input label {
+margin-right: 10px;
+}
+
+.date-input input {
+padding: 5px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+    
+</style>
 </body>
 </html>
 

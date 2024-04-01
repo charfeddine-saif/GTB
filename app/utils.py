@@ -6,10 +6,10 @@ from .models import Noeud, Lampe
 def get_lampes_by_noeud_name(noeud_name):
     try:
         # Get the Noeud object with the given name
-        noeud = Noeud.objects.get(name=noeud_name)
-        # # Retrieve all the Lampe objects associated with the Noeud
-        lampes = Lampe.objects.filter(noeud=noeud)
-        return lampes
+        # noeud = Noeud.objects.get(name=noeud_name)
+        # # # Retrieve all the Lampe objects associated with the Noeud
+        # lampes = Lampe.objects.filter(noeud=noeud)
+        return []
     except Noeud.DoesNotExist:
         # Handle the case where the Noeud does not exist
         return None
