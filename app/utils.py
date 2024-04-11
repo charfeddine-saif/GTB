@@ -1,7 +1,12 @@
 # utils.py
 from collections import defaultdict
+from .models import Noeud, Lampe, Planification
 
-from .models import Noeud, Lampe
+from django.utils import timezone
+import threading
+import time
+from datetime import datetime
+
 
 def get_lampes_by_noeud_name(noeud_name):
     try:
@@ -13,6 +18,8 @@ def get_lampes_by_noeud_name(noeud_name):
     except Noeud.DoesNotExist:
         # Handle the case where the Noeud does not exist
         return None
+
+
 
 
 
@@ -51,3 +58,23 @@ def get_nodes_with_lampes():
     return [{'noeud_name': noeud_name, 'id': info['id'], 'lampes': info['lampes']} for noeud_name, info in result.items()]
 
 
+
+
+    
+def autoUpdateStatus():
+    current_date = timezone.now() #nekhou fy data mte3 tawa
+    planifications = Planification.objects.all()# nekhou fel planification lkoul
+    for planification in planifications: # inboucli 3la les planification elkol
+        start_datetime = planification.start_date #na5dho el start date mta3a el planification
+        end_datetime = planification.end_date #na5dho el end date mta3a el planification
+        
+        if start_datetime <= current_date and end_datetime > current_date: #n9arno idha ken el start date bdet
+            planification.status = 'pending' #n7oto els status mta3 el planification lil pending
+            planification.save() 
+        if end_datetime <= current_date:
+            planification.status = 'completed' #n7oto els status mta3 el planification lil completed
+            planification.save() 
+  
+    threading.Timer(60.0, autoUpdateStatus).start()
+
+# autoUpdateStatus()

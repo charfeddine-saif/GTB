@@ -250,3 +250,8 @@ display: flex;
 body{
   background-color: red !important;
 }
+
+
+a .title{
+  margin-left: 0px !important;
+}

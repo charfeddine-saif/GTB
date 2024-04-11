@@ -213,14 +213,11 @@ var myChart4 = new Chart(ctx, {
 
 
 
+{% for item in data %}
 
 
 
-
-
-
-
-
+<h1 style="font-size: 36px;"  >Noeud 1 </h1>
 
   <script type="module" src="{% static  'js/1.js' %}"></script>
     <div class="total">
@@ -248,7 +245,7 @@ var myChart4 = new Chart(ctx, {
                         <button type="submit">Valider</button>
                     </div>
                 </div>
-                <h1>Ma Consommation d'électricité par heure (en Kwh)</h1>
+               
             </div>
             <div class="chart">
                 <div class="chart-container">
@@ -257,99 +254,15 @@ var myChart4 = new Chart(ctx, {
             </div>
         </div>
     </div>
-    <div style="height: 500px;" class="total">
-        <div class="top-bar">
-            <ul>
-                <li><a class="active" href="#année">par année</a></li>
-                <li><a href="#mois">par mois</a></li>
-                <li><a href="#jour">par jour</a></li>
-                <li><a href="#heure">par heure</a></li>
-            </ul>
-        </div>
-        <div style="margin-top: -130px;" class="container">
-            <div class="date">
-                <div class="btns">
-                    <div>
-                        <label for="fromDate">Du</label>
-                        <input type="date" id="fromDate"  class="date-input-field">
-                    </div>
-                    <div>
-                      <label for="fromDate"  class="date-input-field">Au</label>
-                      <input type="date" id="fromDate">
-                  </div>
-                    <div>
-                      
-                        <button type="submit">Valider</button>
-                    </div>
-                </div>
-                <h1>Ma Consommation d'électricité par heure (en Kwh)</h1>
-            </div>
-            <div class="chart">
-                <div class="chart-container">
-                    <canvas id="myChart2"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="height: 500px;" class="total">
-        <div class="top-bar">
-            <ul>
-                <li><a class="active" href="#année">par année</a></li>
-                <li><a href="#mois">par mois</a></li>
-                <li><a href="#jour">par jour</a></li>
-                <li><a href="#heure">par heure</a></li>
-            </ul>
-        </div>
-        <div style="margin-top: -130px;" class="container">
-            <div class="date">
-                <div class="btns">
-                    <div>
-                        <label for="fromDate">Du</label>
-                        <input type="date" id="fromDate"  class="date-input-field">
-                    </div>
-                    <div>
-                      <label for="fromDate"  class="date-input-field">Au</label>
-                      <input type="date" id="fromDate">
-                  </div>
-                    <div>
-                      
-                        <button type="submit">Valider</button>
-                    </div>
-                </div>
-                <h1>Ma Consommation d'électricité par heure (en Kwh)</h1>
-            </div>
-            <div class="chart">
-                <div class="chart-container">
-                    <canvas id="myChart3"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-
-
     
 
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
+{% endfor %}
 
 
 
 
     
-    <script>
+   <!---- <script>
 
 
         var data = [];
@@ -382,8 +295,8 @@ var myChart4 = new Chart(ctx, {
 
 
 
-        var ctx = document.getElementById('myChart3').getContext('2d');
-        var myChart4 = new Chart(ctx, {
+        var ctx = document.getElementById('myChart2').getContext('2d');
+        var myChart2 = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ["00h00", "02h00", "04h00", "06:00", "08h00", "10h00", "12h00", "14h00", "16h00", "18h00", "20h00", "22h00"],
@@ -410,7 +323,6 @@ var myChart4 = new Chart(ctx, {
 
 
 
-
 <script>
 
 
@@ -420,7 +332,7 @@ var myChart4 = new Chart(ctx, {
       const element = arr[index].reduce((partialSum, a) => partialSum + a, 0) + arr[index + 1].reduce((partialSum, a) => partialSum + a, 0);
       data.push(element);
   }
-  var ctx = document.getElementById('myChart2').getContext('2d');
+  var ctx = document.getElementById('myChart3').getContext('2d');
   var myChart4 = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -441,7 +353,19 @@ var myChart4 = new Chart(ctx, {
           }
       }
   });
-</script>
+</script>>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -458,6 +382,149 @@ var myChart4 = new Chart(ctx, {
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+
+  
+var ctx = document.getElementById('myChart1').getContext('2d');
+var myChart1 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["00h00", "02h00", "04h00","06:00", "08h00", "10h00","12h00", "14h00","16h00", "18h00", "20h00","22h00"],
+        datasets: [{
+            label:'',
+            data: [0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5, ],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.8)',
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
+
+  
+var ctx = document.getElementById('myChart2').getContext('2d');
+var myChart2 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["00h00", "02h00", "04h00","06:00", "08h00", "10h00","12h00", "14h00","16h00", "18h00", "20h00","22h00"],
+        datasets: [{
+            label:'',
+            data: [0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5, ],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.8)',
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
+
+
+  
+var ctx = document.getElementById('myChart3').getContext('2d');
+var myChart3 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["00h00", "02h00", "04h00","06:00", "08h00", "10h00","12h00", "14h00","16h00", "18h00", "20h00","22h00"],
+        datasets: [{
+            label:'',
+            data: [0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5, ],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.8)',
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
+
+
+  
+var ctx = document.getElementById('myChart4').getContext('2d');
+var myChart4 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["00h00", "02h00", "04h00","06:00", "08h00", "10h00","12h00", "14h00","16h00", "18h00", "20h00","22h00"],
+        datasets: [{
+            label:'',
+            data: [0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5, ],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.8)',
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
 
 
    
@@ -568,6 +635,20 @@ padding: 5px;
 border: 1px solid #ccc;
 border-radius: 5px;
 }
+
+.chart-container4{
+
+height:   477px;
+width: 866px;
+        padding: 20px;
+        
+
+        display: block;
+       box-sizing: border-box;
+
+
+}
+
     
 </style>
 </body>

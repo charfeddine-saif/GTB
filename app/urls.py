@@ -16,5 +16,4 @@ urlpatterns = [
     path('edit-planification/', views.edit_planification, name='edit_planification'),
     path('delete-planification/', views.delete_planification, name='delete_planification'),
 
-
 ]

@@ -130,19 +130,31 @@ def delete_node(request):
 
 
 
+
 def visualisation(request):
-    my_data = get_data()
-    print("myyyy data", my_data)
-    
-    
-    return render(request, 'app/visualisation.html', {'data': my_data})
+    planifications_completed = Planification.objects.filter(status='completed')
 
+
+    print("Planifications  complétées:", planifications_completed)
+
+
+    # my_data = get_data()  # Assuming get_data is defined elsewhere
+    # print("myyyy data", my_data)
+
+    return render(request, 'app/visualisation.html', {'data': planifications_completed})
+
+
+#def planification(request):
+    #lampes = Lampe.objects.all()
+    #planifications = Planification.objects.all()
+    #planifications_not_completed = Planification.objects.filter(status='not-completed')
+    #print("planifications", planifications_not_completed) 
+    #return render(request, 'app/planification.html', {'lampes': lampes, 'planifications':planifications})
 def planification(request):
-    
     lampes = Lampe.objects.all()
-    planifications = Planification.objects.all()
-    return render(request, 'app/planification.html', {'lampes': lampes, 'planifications':planifications})
+    planifications_not_completed = Planification.objects.filter(status='not-completed')
 
+    return render(request, 'app/planification.html', {'lampes': lampes, 'planifications': planifications_not_completed})
 
 
 
@@ -196,3 +208,68 @@ def delete_planification(request):
              print("ljlskjdsk", plan_id)
     return redirect('planification')
 
+
+
+
+
+
+
+
+
+
+def status_planification(request):
+    if request.method == 'POST':
+        current_date = timezone.now()
+        completed_planifications = Planification.objects.filter(status='completed')
+                 
+        context = {
+        'completed_planifications': completed_planifications
+        }
+    return redirect('planification',context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#def planification(request):
+   # planifications_not_completed = Planification.objects.filter(status='not-completed')
+    #print(planifications_not_completed, "planifications_not_completed")
+    
+    #return render(request, 'app/planification.html', {'planifications': planifications_not_completed})
+
+
+
+
+
+#def visualisation(request):
+   #completed_planifications = Planification.objects.filter(status='completed')
+    
+    
+    #completed_data = []
+    #for planification in completed_planifications:
+       # completed_data.append({
+            #'id': planification.id,
+            #'lampe_name': planification.lampe.name,
+            #'start_date': planification.start_date,
+            #'end_date': planification.end_date,
+            #'status': planification.status
+       # })
+    
+   # return render(request, 'app/visualisation.html', {'data': completed_data})
