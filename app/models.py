@@ -9,7 +9,7 @@ from django.dispatch import receiver
 
 class Noeud(models.Model):
     id = models.CharField(primary_key=True, max_length=22, default=shortuuid.uuid)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
@@ -40,4 +40,6 @@ class Planification(models.Model):
     def __str__(self):
         return f"{self.lampe.name} - {self.lampe.noeud.name}"
     
-
+    
+#fonction na3taha id mta3 lmape traja3li el noeud mte3ha
+# resultat = xy(id)

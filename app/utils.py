@@ -78,3 +78,10 @@ def autoUpdateStatus():
     threading.Timer(60.0, autoUpdateStatus).start()
 
 # autoUpdateStatus()
+
+
+
+def get_data_for_node_for_specific_date(node_name, period):
+    if period == "year":
+        pass
+        

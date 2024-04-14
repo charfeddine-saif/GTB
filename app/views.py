@@ -5,9 +5,10 @@
 from datetime import datetime
 from django.shortcuts import render
 import pandas as pd
-from .utils import get_lampes_by_noeud_name, get_nodes_with_lampes,get_lampes_by_noeud_id
+from .utils import get_lampes_by_noeud_name, get_nodes_with_lampes,get_lampes_by_noeud_id,get_data_for_node_for_specific_date
 from .models import Lampe, Noeud, Planification
 from django.shortcuts import redirect,get_object_or_404
+from django.http import JsonResponse
 
 def get_data():
         
@@ -70,7 +71,9 @@ def login(request):
 
 
 def pilotage(request):
-    return render(request, 'app/pilotage.html')
+    data = get_data()
+    print(data)
+    return render(request, 'app/pilotage.html', context={'data': data})
 
 
 def dashboard(request):
@@ -132,10 +135,25 @@ def delete_node(request):
 
 
 def visualisation(request):
+    all_data = []
     planifications_completed = Planification.objects.filter(status='completed')
+    noeuds = Noeud.objects.all().order_by('name')[:3]
+    periods = ["year", "month", "week", "day"]
+    for node in noeuds:
+        hist_for_node = []
+        for period in periods:
+            hist = get_data_for_node_for_specific_date(node.name, period)
+            hist_for_node.append((period, hist))
+        all_data.append((node.name, hist_for_node))
+        
+        
+    # for x in y:
+    #     x -> ism,date1,date2,puissance
 
-
-    print("Planifications  complétées:", planifications_completed)
+    print("Planifications  complétées:", noeuds)
+    
+    
+    # var data = [                [("noeud1",            [("annee",[12,15]), ("mois",[]),            ()]      )]    ,            [(),[]],          []           ]
 
 
     # my_data = get_data()  # Assuming get_data is defined elsewhere
@@ -234,19 +252,7 @@ def status_planification(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+#print(get_lamp_power())
 
 #def planification(request):
    # planifications_not_completed = Planification.objects.filter(status='not-completed')
