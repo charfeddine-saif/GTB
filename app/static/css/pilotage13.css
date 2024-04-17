@@ -172,6 +172,7 @@ td button.off {
 
   width: 380px;
    height: 160px;
+   margin-bottom:-50px;
 }
 .tr_pilotage{
   border: none;
@@ -198,6 +199,7 @@ display: flex;
   width: 550px;
    height: 280px;
     margin: 70px 0 0 0;
+   
 
 }
 
@@ -205,6 +207,7 @@ display: flex;
 
   width: 380px;
    height: 160px;
+   margin-bottom:-50px;
 }
 .noeud2_pilotage{
 
@@ -221,6 +224,7 @@ display: flex;
 
  width: 380px;
   height: 160px;
+  margin-bottom:-50px;
 }
 
 .noeud3_pilotage{
@@ -244,6 +248,7 @@ display: flex;
  width: 9000px;
   height: 430px; 
   margin: 70px 0 0 0;
+  margin-top:300px;
 }
 
 

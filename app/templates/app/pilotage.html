@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
-  <link rel="stylesheet" href="{% static  'css/pilotage.css '%}">
+  <link rel="stylesheet" href="{% static  'css/pilotage13.css '%}">
   <link rel="stylesheet" href="{% static  'css/2.css '%}">
 
   <title>Gestion Technique des Batiments</title>
@@ -29,14 +29,14 @@
               </a>
           </li>
 
-          <li>
+        <!--<li>
               <a id="dashboard" href="/dashboard">
                   <span class="icon">
                       <ion-icon name="home-outline"></ion-icon>
                   </span>
                   <span class="title">Dashboard</span>
               </a>
-          </li>
+          </li>-->
 
           <li>
               <a id="pilotage" href="/pilotage">
@@ -88,7 +88,7 @@
 
 
       <div class="container-uu" id="data-container" datalist="{{ data }}">
-        <h1 style="margin-bottom: 80px;"   class="h1_pilotage" >  Pilotage et Dashboard </h1>
+        <h1 style="margin-bottom: 100px;"   class="h1_pilotage" >  Pilotage et Dashboard </h1>
         <div id="leftNodes">
           <div style="margin-bottom: 150px;" class="node">
             <table class="table_pilotage" >
@@ -119,6 +119,8 @@
   </div> 
   
               </div>
+              <h2 style="margin-left:0px;  margin-bottom:-70px;"  class="consommation_pilotage" >Courbe de charge  en (kWh)</h2>
+
               <div class="chart">
                 <div class="mychart1_pilotage">
                   <canvas id="myChart1" ></canvas>
@@ -159,6 +161,8 @@
   </div> 
   
               </div>
+              <h2 style="margin-left:0px;  margin-bottom:-70px;"  class="consommation_pilotage" >Courbe de charge  en (kWh)</h2>
+
               <div class="chart">
                 <div class="mychart2_pilotage" >
                   <canvas id="myChart2" ></canvas>
@@ -199,6 +203,8 @@
   </div> 
   
               </div>
+              <h2 style="margin-left:0px;  margin-bottom:-70px;"  class="consommation_pilotage" >Courbe de charge  en (kWh)</h2>
+
               <div  class="chart">
                 <div  class="chart3_pilotage" >
                   <canvas id="myChart3" ></canvas>
@@ -209,10 +215,10 @@
           </div>
 
         </div>
-        <h2 class="consommation_pilotage" >La consommation Totale Journaliére(en W)</h2>
+        <h2 style="margin-left:60px;  margin-bottom:-300px;"  class="consommation_pilotage" >La consommation Totale Journaliére en (KWh)</h2>
         <div  class="chart">
           <div  class="chart4_pilotage" >
-            <canvas id="myChart4" ></canvas>
+            <canvas style="margin-left:60px;" id="myChart4" ></canvas>
           </div>
         </div>
 
@@ -269,7 +275,7 @@ var ctx = document.getElementById('myChart1').getContext('2d');
 var myChart1 = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["00h00", "01h00", "02h00","03:00", "04h00", "05h00","06h00", "14h00","16h00", "18h00", "20h00","22h00"],
+        labels: ["00h00", "01h00", "02h00","03:00", "04h00", "05h00","06h00", "07h00","08h00", "09h00", "10h00","11h00","12h00" ,"13h00","14h00", "15h00", "16h00","17h00","18h00", "19h00","20h00", "21h00", "22h00","23h00"],
         datasets: [{
             label:'',
             data: data1,
@@ -299,7 +305,7 @@ var ctx = document.getElementById('myChart2').getContext('2d');
 var myChart2 = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["00h00", "02h00", "04h00","06:00", "08h00", "10h00","12h00", "14h00","16h00", "18h00", "20h00","22h00"],
+      labels: ["00h00", "01h00", "02h00","03h00", "04h00", "05h00","06h00", "07h00","08h00", "09h00", "10h00","11h00","12h00" ,"13h00","14h00", "15h00", "16h00","17h00","18:00", "19h00","20h00", "21h00", "22h00","23h00"],
         datasets: [{
             label:'',
             data: data2,
@@ -331,8 +337,7 @@ var ctx = document.getElementById('myChart3').getContext('2d');
 var myChart3 = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["00h00", "02h00", "04h00","06:00", "08h00", "10h00","12h00", "14h00","16h00", "18h00", "20h00","22h00"],
-        datasets: [{
+      labels: ["00h00", "01h00", "02h00","03h00", "04h00", "05h00","06h00", "07h00","08h00", "09h00", "10h00","11h00","12:00" ,"13h00","14h00", "15h00", "16h00","17h00","18:00", "19h00","20h00", "21h00", "22h00","23h00"],        datasets: [{
             label:'',
             data: data3,
             backgroundColor: [
@@ -359,8 +364,7 @@ var ctx = document.getElementById('myChart4').getContext('2d');
 var myChart3 = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["00h00", "02h00", "04h00","06:00", "08h00", "10h00","12h00", "14h00","16h00", "18h00", "20h00","22h00"],
-        datasets: [{
+      labels: ["00h00", "01h00", "02h00","03:00", "04h00", "05h00","06h00", "07h00","08h00", "09h00", "10h00","11h00","12:00" ,"13h00","14h00", "15h00", "16h00","17h00","18:00", "19h00","20h00", "21h00", "22h00","23h00"],        datasets: [{
             label:'',
             data: all_data,
             backgroundColor: [
@@ -385,34 +389,6 @@ var myChart3 = new Chart(ctx, {
 
 
 
-
-  
-var ctx = document.getElementById('myChart4').getContext('2d');
-var myChart4 = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["00h00", "02h00", "04h00","06:00", "08h00", "10h00","12h00", "14h00","16h00", "18h00", "20h00","22h00"],
-        datasets: [{
-            label:'',
-            data: [0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5,0.5,0.7,1,1.5, ],
-            backgroundColor: [
-                'rgba(54, 162, 235, 0.8)',
-            ],
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
-
-            ],
-            borderWidth: 2
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
 
   </script>
 </body>

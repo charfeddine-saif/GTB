@@ -15,5 +15,6 @@ urlpatterns = [
     path('add-planification/', views.add_planification, name='add_planification'),
     path('edit-planification/', views.edit_planification, name='edit_planification'),
     path('delete-planification/', views.delete_planification, name='delete_planification'),
+    path('delete-lampe/', views.delete_lampe, name='delete_lampe'),
 
 ]

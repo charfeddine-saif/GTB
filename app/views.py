@@ -228,6 +228,17 @@ def delete_planification(request):
 
 
 
+def delete_lampe(request):
+    if request.method == 'POST':
+        id_noeud = request.POST.get('id_noeud')
+        print("uuiuiui",id_noeud)
+
+    return redirect('configurationgtb')
+
+
+
+
+
 
 
 
