@@ -5,16 +5,31 @@ from .models import Noeud, Lampe, Planification
 from django.utils import timezone
 import threading
 import time
+
+
 from datetime import datetime
+
+def get_hours_difference(start_date_str, end_date_str):
+    # Parse start_date and end_date strings into datetime objects
+    start_date = datetime.fromisoformat(start_date_str[:-6])  # Strip timezone information (+00:00) for parsing
+    end_date = datetime.fromisoformat(end_date_str[:-6])  # Strip timezone information (+00:00) for parsing
+    
+    # Calculate time difference in hours
+    time_difference = end_date - start_date
+    difference_in_hours = time_difference.total_seconds() / 3600  # Convert seconds to hours
+    
+    return difference_in_hours
+
+
 
 
 def get_lampes_by_noeud_name(noeud_name):
     try:
         # Get the Noeud object with the given name
-        # noeud = Noeud.objects.get(name=noeud_name)
-        # # # Retrieve all the Lampe objects associated with the Noeud
-        # lampes = Lampe.objects.filter(noeud=noeud)
-        return []
+        noeud = Noeud.objects.get(name=noeud_name)
+        # # Retrieve all the Lampe objects associated with the Noeud
+        lampes = Lampe.objects.filter(noeud=noeud)
+        return lampes
     except Noeud.DoesNotExist:
         # Handle the case where the Noeud does not exist
         return None
@@ -83,5 +98,43 @@ def autoUpdateStatus():
 
 def get_data_for_node_for_specific_date(node_name, period):
     if period == "year":
-        pass
+        get_data_for_node_for_specific_date_year(node_name, period)
         
+        
+
+
+def get_data_for_node_for_specific_date_year(node_name, period):
+    lampes = get_lampes_by_noeud_name(node_name)
+    data_for_year = []
+    for lampe in lampes:
+        my_lampe = Lampe.objects.get(id=lampe.id)
+        planifications = Planification.objects.filter(lampe=my_lampe)
+        years = set()
+        for plan  in planifications:
+            print("plan",plan)
+            year_start = str(plan.start_date)[:4]
+            print("year_start",year_start)
+            years.add(year_start)
+        years = ["2024","2025"]
+        years.sort()
+        data_for_year_single_lampe = []
+        for year in years:
+            cons = 0
+            for plan in planifications:
+                if str(plan.start_date)[:4]==year:
+                    cons += get_hours_difference(str(plan.start_date),str(plan.end_date)) * plan.lampe.puissance
+            data_for_year_single_lampe.append(cons)
+        data_for_year.append(data_for_year_single_lampe)
+    print("hyhyhy",data_for_year)
+    final_data = []
+    for j in range(len(data_for_year[0])):
+        x = 0
+        for i in range(len(data_for_year)):
+            x += data_for_year[i][j]
+        final_data.append(x/len(data_for_year))
+            
+    return ("annee", final_data)   
+                
+    
+print("little pig little pig let me in", get_data_for_node_for_specific_date_year("test","y"))
+

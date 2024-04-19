@@ -135,6 +135,10 @@ def delete_node(request):
 
 
 def visualisation(request):
+    #bech njibo data fil forme hedhi
+    # var data = [                [("noeud1",            [("annee",[12,15]), ("mois",[]),            ()]      )]    ,            [(),[]],          []           ]
+
+
     all_data = []
     planifications_completed = Planification.objects.filter(status='completed')
     noeuds = Noeud.objects.all().order_by('name')[:3]
@@ -152,9 +156,6 @@ def visualisation(request):
 
     print("Planifications  complétées:", noeuds)
     
-    
-    # var data = [                [("noeud1",            [("annee",[12,15]), ("mois",[]),            ()]      )]    ,            [(),[]],          []           ]
-
 
     # my_data = get_data()  # Assuming get_data is defined elsewhere
     # print("myyyy data", my_data)
