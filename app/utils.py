@@ -115,7 +115,7 @@ def get_data_for_node_for_specific_date_year(node_name, period):
             year_start = str(plan.start_date)[:4]
             print("year_start",year_start)
             years.add(year_start)
-        years = ["2024","2025"]
+        years = list(years)
         years.sort()
         data_for_year_single_lampe = []
         for year in years:
