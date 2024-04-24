@@ -231,8 +231,15 @@ def delete_planification(request):
 
 def delete_lampe(request):
     if request.method == 'POST':
-        id_noeud = request.POST.get('id_noeud')
-        print("uuiuiui",id_noeud)
+        id_lampe = request.POST.get('id_lampe')
+        id_noeud = request.POST.get('id_node_tracking')
+        lampes = get_lampes_by_noeud_id(id_noeud)
+        print("lampes", lampes)
+        print("uuiuiui",id_noeud, "---------", id_lampe)
+        for i,lampe in enumerate(lampes):
+            if i==int(id_lampe):
+               Lampe.objects.filter(id=lampe.id).delete()
+
 
     return redirect('configurationgtb')
 

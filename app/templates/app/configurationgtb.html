@@ -299,6 +299,7 @@ var k = 1;
        // document.getElementsByClassName("new-input")[i] = lampe.innerText;
        // console.log("i",lampe.innerText);
    });
+
    var modal = document.querySelector('#popup1');
    modal.style.display = 'block';
    document.getElementById('my-table').style.display = "none"
@@ -334,10 +335,15 @@ var k = 1;
 
         // Add node ID input
         const nodeIdInput = document.createElement('input');
+        const input_for_tracking_node_id = document.createElement('input');
         nodeIdInput.type = 'hidden';
-        nodeIdInput.name = 'id_noeud';
+        input_for_tracking_node_id.type = 'hidden';
+        nodeIdInput.name = 'id_lampe';
+        input_for_tracking_node_id.name = 'id_node_tracking';
         nodeIdInput.value = dataId;
+        input_for_tracking_node_id.value = id_noeud;
         form.appendChild(nodeIdInput);
+        form.appendChild(input_for_tracking_node_id);
 
         // Append form to document body and submit
         document.body.appendChild(form);

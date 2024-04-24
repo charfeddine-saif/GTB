@@ -27,6 +27,7 @@ class Lampe(models.Model):
 
 class Planification(models.Model):
     STATUS_CHOICES = (
+        
         ('pending', 'Pending'),
         ('completed', 'Completed'),
         ('not-completed', 'Not Completed'),
