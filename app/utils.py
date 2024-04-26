@@ -452,8 +452,46 @@ print("little pig little pig let me in", test("test","y"))
 
 
 
+def get_data_for_node_for_specific_date_day(node_name, period):
+    lampes = get_lampes_by_noeud_name(node_name) #te3ith noeud 1 yerje3lek les lampes lkoul eli tb3in noeud 1
+    print("=====",lampes[0],"==========")
+    data_for_day = []
+    planifications = Planification.objects.all() #nejib fel data mel bd
+    days= set() #tekhbi fyha hajet unique
+    for plan  in planifications:
+        print("plan",plan)
+        day_start = str(plan.start_date)[:10]  # 2023-02-22, 2024-02   
+        print("sur",str(plan.start_date)[:10])
+        days.add(day_start)
+    days = list(days)
+    days.sort()
+    for lampe in lampes:
+        my_lampe = Lampe.objects.get(id=lampe.id)
+        print(f"lampe id = {my_lampe}")
+        planifications = Planification.objects.filter(lampe=my_lampe) #nejib fel data mel bd
+        
+        data_for_day_single_lampe = []
+        for day in days:
+            cons = 0
+            for plan in planifications:
+                if str(plan.start_date)[:10]==day:# nehseb consommation mte3  date eli hchti bih
+                    cons += get_hours_difference(str(plan.start_date),str(plan.end_date)) * plan.lampe.puissance# terje3li nbr swie3
+            data_for_day_single_lampe.append(cons)
+        data_for_day.append(data_for_day_single_lampe)
+    print("hyhyhy",data_for_day)
+   
+    final_data = []
+    for j in range(len(data_for_day[0])):
+        x = 0
+        for i in range(len(data_for_day)):
+            x += data_for_day[i][j]
+        final_data.append(x/len(data_for_day))# nehseb consommation totale mte3  noeud  khw ()
+            
+    return ("day", final_data)
+                
 
 
+print("little pig little pig let me in", get_data_for_node_for_specific_date_day("test","y"))
 
 
 

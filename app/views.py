@@ -9,6 +9,8 @@ from .utils import get_lampes_by_noeud_name, get_nodes_with_lampes,get_lampes_by
 from .models import Lampe, Noeud, Planification
 from django.shortcuts import redirect,get_object_or_404
 from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+
 
 def get_data():
         
@@ -109,13 +111,18 @@ def edit_node(request):
         
         
         noeud = Noeud.objects.get(id=node_id)
-
-        for i in range(len(new_lampes_names)):
-            lampe = Lampe.objects.get(name=lampes[i].name, noeud=noeud)
-            lampe.name = new_lampes_names[i]
-            lampe.puissance = new_puissances[i]
-            lampe.save()
+        print("!!!!!!!!!",new_lampes_names)
+        print("!!!!!new_puissances!!!!",new_puissances)
+        for new_lampe_name, new_puissance in zip(new_lampes_names, new_puissances):
+            lamp_exists = Lampe.objects.filter(name=new_lampe_name, noeud=noeud).exists()
             
+            if lamp_exists:
+                lampe = Lampe.objects.get(name=new_lampe_name, noeud=noeud)
+                lampe.name = new_lampe_name
+                lampe.puissance = new_puissance
+                lampe.save()
+            else:
+                lampe = Lampe.objects.create(name=new_lampe_name, puissance=new_puissance, noeud=noeud)
 
         
        
