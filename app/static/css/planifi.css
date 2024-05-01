@@ -1,11 +1,11 @@
 
 :root {
   --bg-color: #f8f9fa;
-  --active-color: #28a745;
+  --active-color: #2ecc71;;
   --active-text-color: #ffffff;
   --border-color: #dee2e6;
   --text-color: #495057;
-  --btn-hover-color: #218838;
+  --btn-hover-color: #2ecc71;;
 }
 
 
@@ -126,7 +126,7 @@
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #1628c5;
+    background-color: #440ec1;
     color: white;
     cursor: pointer;
     font-size: 20px;
@@ -173,7 +173,7 @@
       justify-content: space-around;
   }
   .modifier-button, .annuler-button {
-      background-color: #007bff;
+      background-color: #2ecc71;
       color: rgb(255, 255, 255);
       border: none;
       padding: 5px 10px;

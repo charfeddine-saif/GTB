@@ -10,6 +10,7 @@ from .models import Lampe, Noeud, Planification
 from django.shortcuts import redirect,get_object_or_404
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+import json
 
 
 def get_data():
@@ -154,8 +155,9 @@ def visualisation(request):
         hist_for_node = []
         for period in periods:
             hist = get_data_for_node_for_specific_date(node.name, period)
-            hist_for_node.append((period, hist))
-        all_data.append((node.name, hist_for_node))
+            hist_for_node.append([period, hist])
+        all_data.append([node.name, hist_for_node])
+    print("finallllll ",all_data)
         
         
     # for x in y:
@@ -166,8 +168,16 @@ def visualisation(request):
 
     # my_data = get_data()  # Assuming get_data is defined elsewhere
     # print("myyyy data", my_data)
+    
+#     all_data = [
+#     ('noeud 1', [('year', [103680.13333333333, 37680.13888888889]), ('month', [101760.08055555556, 1920.052777777778, 35520.080555555556, 2160.05, 0.008333333333333333]), ('week', [87840.03055555555, 0.0, 0.0, 0.0, 0.0, 0.0]), ('day', [87840.03055555555, 13920.050000000001, 1920.052777777778, 35520.080555555556, 2160.05, 0.0, 0.008333333333333333])]),
+#     ('noeud 2', [('year', [0.0, 0.0]), ('month', [0.0, 0.0, 0.0, 0.0, 0.0]), ('week', [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]), ('day', [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])]),
+#     ('noeud 4', [('year', [0.0, 1008.5]), ('month', [0.0, 0.0, 0.0, 1008.5, 0.0]), ('week', [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]), ('day', [0.0, 0.0, 0.0, 0.0, 0.0, 1008.5, 0.0])])
+# ]
+    # formatted_data = json.dumps(all_data)
 
-    return render(request, 'app/visualisation.html', {'data': planifications_completed})
+
+    return render(request, 'app/visualisation.html', {'data': all_data})
 
 
 #def planification(request):

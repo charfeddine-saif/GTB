@@ -43,7 +43,7 @@ th {
 }
 
 .content .button.mod {
-  background-color: #bfcc2e;
+  background-color: #2ecc71;;
 }
 
 .content .button.supp {
@@ -51,7 +51,7 @@ th {
 }
 
 .content .button.ajout {
-  background-color: #27ae60;
+  background-color: #2ecc71;;
   position: absolute;
   right: 35px;
   margin-top: -50px;
@@ -76,7 +76,7 @@ th {
 }
 
 #refreshButton {
-  background-color: #27ae60;
+  background-color: #2ecc71;;
 }
 
 #logoutButton {
@@ -152,7 +152,7 @@ margin-bottom: 10px;
 .popup form .btns input:last-child{
     width: 140px;
     margin-left: 20px;
-    background-color: #27ae60;
+    background-color: #2ecc71;;
 }
 
 
