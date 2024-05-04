@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
   <link rel="stylesheet" href="{% static  'css/pilotage13.css '%}">
-  <link rel="stylesheet" href="{% static  'css/2.css '%}">
+  <link rel="stylesheet" href="{% static  'css/1.css '%}">
 
   <title>Gestion Technique des Batiments</title>
 </head>
@@ -24,8 +25,8 @@
       <ul>
           <li>
               <a href="#">
-                  <span style="font-size: 72px;margin-left: 20px;"
-                      class="title">G T B</span>
+                <img  style="font-size: 92px;margin-left: 70px;" height="100" width="200" color: #ff0000;  src="{% static 'imgs/GTB10.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                  
               </a>
           </li>
 
@@ -97,7 +98,8 @@
 
 
       <div class="container-uu" id="data-container" datalist="{{ data }}">
-        <h1 style="margin-bottom: 100px;"   class="h1_pilotage" >  Pilotage et Dashboard </h1>
+        <h1   style=" color:#2a2185;  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);  margin-bottom: 100px; font-size: 68px;"  class="h1_pilotage"> Pilotage et Dashboard</h1>
+
         <div id="leftNodes">
           <div style="margin-bottom: 150px;" class="node">
             <table class="table_pilotage" >

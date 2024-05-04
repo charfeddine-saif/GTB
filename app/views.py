@@ -145,19 +145,28 @@ def delete_node(request):
 def visualisation(request):
     #bech njibo data fil forme hedhi
     # var data = [                [("noeud1",            [("annee",[12,15]), ("mois",[]),            ()]      )]    ,            [(),[]],          []           ]
-
-
+    date1 = None
+    date2 = None
+    if request.method == 'POST':
+        date1 = request.POST.get('date1')
+        date2 = request.POST.get('date2')
+        
+        
+        
     all_data = []
     planifications_completed = Planification.objects.filter(status='completed')
     noeuds = Noeud.objects.all().order_by('name')[:3]
     periods = ["year", "month", "week", "day"]
+    labels = []
     for node in noeuds:
         hist_for_node = []
         for period in periods:
-            hist = get_data_for_node_for_specific_date(node.name, period)
+            hist, label = get_data_for_node_for_specific_date(node.name, period, date1, date2)
+            labels.append(label)
             hist_for_node.append([period, hist])
         all_data.append([node.name, hist_for_node])
     print("finallllll ",all_data)
+    print("labels ",labels)
         
         
     # for x in y:
@@ -176,8 +185,10 @@ def visualisation(request):
 # ]
     # formatted_data = json.dumps(all_data)
 
+    labels_json = json.dumps(labels)
+    data_json = json.dumps(all_data)
 
-    return render(request, 'app/visualisation.html', {'data': all_data})
+    return render(request, 'app/visualisation.html', {'data': all_data, 'labels': labels_json, 'data2': data_json})
 
 
 #def planification(request):
@@ -280,6 +291,44 @@ def status_planification(request):
         'completed_planifications': completed_planifications
         }
     return redirect('planification',context)
+
+
+
+
+
+def update_visualisation(request):
+    if request.method == 'POST':
+        date1 = request.POST.get('date1')
+        date2 = request.POST.get('date2')
+        new_all_data = []
+        planifications_completed = Planification.objects.filter(status='completed')
+        noeuds = Noeud.objects.all().order_by('name')[:3]
+        periods = ["year", "month", "week", "day"]
+        labels = []
+        for node in noeuds:
+            hist_for_node = []
+            for period in periods:
+                hist, label = get_data_for_node_for_specific_date(node.name, period, date1, date2)
+                labels.append(label)
+                hist_for_node.append([period, hist])
+            new_all_data.append([node.name, hist_for_node])
+        print("!!!!!!!!!!!!! ",new_all_data)
+        print("labels!!!!!!!!!!!! ",labels)
+            
+            
+        # for x in y:
+        #     x -> ism,date1,date2,puissance
+
+        print("Planifications  complétées:", noeuds)
+
+        new_labels_json = json.dumps(labels)
+        
+        print("date 1",  date1)
+        print("date 2",  date2)
+        
+        
+    return render(request, 'app/visualisation.html', {'data': new_all_data, 'labels': new_labels_json})
+
 
 
 

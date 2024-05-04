@@ -94,8 +94,10 @@
 
 
                     <div class="container-confg">
+                    
                         <div class="header">
-                            <h1 class="conf">Configuration G T B</h1>
+                            <h1 class="conf"  style=" color:#2a2185;;   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);   font-size: 68px;
+                            ">Configuration G T B</h1>
                         </div>
                         <div class="content">
                             <a>
@@ -106,7 +108,15 @@
                                 <small id="ajoutbtn"> Ajouter un Noeud</small>
                             </a>
                             
-                            <table id="my-table">
+                            <table id="my-table" >
+                               
+
+                                <tr>
+                                    <th style="width: 35%; padding: 20px; margin-top: 10px;">Noeuds</th>
+                                    <th style="width: 35%; padding: 20px;">Lampes et Puissances (W)</th>
+                                    <th style="width: 35%; padding: 20px;">Actions</th>
+                                </tr>
+                                
 
                                 
                                 {% for node in nodes %}

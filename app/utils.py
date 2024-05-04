@@ -118,21 +118,21 @@ def autoUpdateStatus():
 # qui calcule des données مجمعة sur la consommation d'énergie pour chaque année spécifique pour les lampes associées à un nœud donné. 
 
 
-def get_data_for_node_for_specific_date(node_name, period):
+def get_data_for_node_for_specific_date(node_name, period, d1, d2):
     if period == "year":
-        return get_data_for_node_for_specific_date_year(node_name)
+        return get_data_for_node_for_specific_date_year(node_name, d1, d2)
     elif period == "month":
-        return get_data_for_node_for_specific_date_month(node_name)
+        return get_data_for_node_for_specific_date_month(node_name, d1, d2)
     elif period == "week":
-        return get_data_for_node_for_specific_date_week(node_name)
+        return get_data_for_node_for_specific_date_week(node_name, d1, d2)
     else:
-        return get_data_for_node_for_specific_date_day(node_name)
+        return get_data_for_node_for_specific_date_day(node_name, d1, d2)
 
     
 
 
 
-def get_data_for_node_for_specific_date_year(node_name):
+def get_data_for_node_for_specific_date_year(node_name, date1, date2):
     lampes = get_lampes_by_noeud_name(node_name) #te3ith noeud 1 yerje3lek les lampes lkoul eli tb3in noeud 1
     print("=====",lampes[0],"==========")
     data_for_year = []
@@ -140,9 +140,11 @@ def get_data_for_node_for_specific_date_year(node_name):
     years = set() #tekhbi fyha hajet unique
     for plan  in planifications:
         print("plan",plan)
-        year_start = str(plan.start_date)[:4] # 2023-02, 2024-02
-        print("year_start",year_start)
-        years.add(year_start)
+        if (((date1 != None and  date2 !=None) and (date1 < str(plan.start_date)[:10] and date2 > str(plan.start_date)[:10])) or (date1 == None and  date2==None)):
+            year_start = str(plan.start_date)[:4] # 2023-02, 2024-02
+            print("plan.start_date-----",plan.start_date)
+            years.add(year_start)
+
     years = list(years)
     years.sort()
     for lampe in lampes:
@@ -167,7 +169,7 @@ def get_data_for_node_for_specific_date_year(node_name):
             x += data_for_year[i][j]
         final_data.append(x/len(data_for_year))# nehseb consommation totale mte3  noeud  khw ()
             
-    return final_data
+    return final_data,years
                 
 
 
@@ -176,16 +178,17 @@ def get_data_for_node_for_specific_date_year(node_name):
 
 
    
-def get_data_for_node_for_specific_date_month(node_name):
+def get_data_for_node_for_specific_date_month(node_name,date1, date2):
     lampes = get_lampes_by_noeud_name(node_name) #te3ith noeud 1 yerje3lek les lampes lkoul eli tb3in noeud 1
     data_for_month = []
     planifications = Planification.objects.all() #nejib fel data mel bd
     months = set() #tekhbi fyha hajet unique
     for plan  in planifications:
-        print("plan",plan)
-        month_start = str(plan.start_date)[:7] # 2023-02, 2024-02
-        print("month_start",month_start)
-        months.add(month_start)
+        if (((date1 != None and  date2!=None) and (date1 < str(plan.start_date)[:10] and date2 > str(plan.start_date)[:10])) or (date1 == None and  date2==None)):        
+            month_start = str(plan.start_date)[:7] 
+            print("month_start",month_start)
+            months.add(month_start)
+
     months = list(months)
     months.sort()
     print("0.0.0.0",months)
@@ -212,15 +215,15 @@ def get_data_for_node_for_specific_date_month(node_name):
             x += data_for_month[i][j]
         final_data.append(x/len(data_for_month))# nehseb consommation totale mte3  noeud  khw ()
             
-    return final_data
+    return final_data, months
 
 
 
+print(get_data_for_node_for_specific_date_month("noeud 1","2023-12-12", "2024-12-12"))
 
 
 
-
-def get_data_for_node_for_specific_date_day(node_name):
+def get_data_for_node_for_specific_date_day(node_name, date1, date2):
     lampes = get_lampes_by_noeud_name(node_name) #te3ith noeud 1 yerje3lek les lampes lkoul eli tb3in noeud 1
     print("=====",lampes[0],"==========")
     data_for_day = []
@@ -228,9 +231,11 @@ def get_data_for_node_for_specific_date_day(node_name):
     days= set() #tekhbi fyha hajet unique
     for plan  in planifications:
         print("plan",plan)
-        day_start = str(plan.start_date)[:10]  # 2023-02-22, 2024-02   
-        print("sur",str(plan.start_date)[:10])
-        days.add(day_start)
+        if (((date1 != None and  date2!=None) and (date1 < str(plan.start_date)[:10] and date2 > str(plan.start_date)[:10])) or (date1 == None and  date2==None)):
+            day_start = str(plan.start_date)[:10]  # 2023-02-22, 2024-02   
+            print("sur",str(plan.start_date)[:10])
+            days.add(day_start)
+
     days = list(days)
     days.sort()
     for lampe in lampes:
@@ -255,21 +260,23 @@ def get_data_for_node_for_specific_date_day(node_name):
             x += data_for_day[i][j]
         final_data.append(x/len(data_for_day))# nehseb consommation totale mte3  noeud  khw ()
             
-    return final_data
+    return final_data, days
                 
 
 
 
 
-def get_data_for_node_for_specific_date_week(node_name):
+def get_data_for_node_for_specific_date_week(node_name, date1, date2):
     lampes = get_lampes_by_noeud_name(node_name) #te3ith noeud 1 yerje3lek les lampes lkoul eli tb3in noeud 1
     print("=====",lampes[0],"==========")
     data_for_week = []
     planifications = Planification.objects.all() #nejib fel data mel bd
     weeks = set() #tekhbi fyha hajet unique
     for plan  in planifications:
-        week_start = str(plan.start_date)[:4] + str(get_week_number(str(plan.start_date)[8:10],str(plan.start_date)[5:7])) # 2023-02, 2024-02-10
-        weeks.add(week_start)
+        if(((date1 != None and  date2!=None) and (date1 < str(plan.start_date)[:10] and date2 > str(plan.start_date)[:10])) or (date1 == None and  date2==None)):
+            week_start = str(plan.start_date)[:4] + str(get_week_number(str(plan.start_date)[8:10],str(plan.start_date)[5:7])) # 2023-02, 2024-02-10
+            weeks.add(week_start)
+
     weeks = list(weeks)
     weeks.sort()
     for lampe in lampes:
@@ -292,6 +299,6 @@ def get_data_for_node_for_specific_date_week(node_name):
             x += data_for_week[i][j]
         final_data.append(x/len(data_for_week))# nehseb consommation totale mte3  noeud  khw ()
             
-    return final_data
+    return final_data,weeks
 
 

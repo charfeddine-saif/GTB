@@ -92,7 +92,7 @@
 
 
 
-          <h1 class="v" >  Visualisation Courbe</h1>
+          <h1        style=" color:#121481;   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);   font-size: 68px;"         class="v" >  visualisation des courbes </h1>
 
          
 <!--<div class="rows">
@@ -208,21 +208,31 @@ var myChart4 = new Chart(ctx, {
 </script>-->
 
 
-
-
-
-
-
-<h1>Lazimna nraj3o el years wel months wel weeks wel days m3a el all data w n3adihom lil html bech inajmo n affcihiw el labels el s7a7 </h1>
-
 <!-- HTML Template -->
 {% for node_data in data %}
+
+<form method="POST">
+{% csrf_token %}
     <h1 style="font-size: 36px;">{{ node_data.0 }}</h1>
     
 
-
+    <div class="date">
+            <div class="btns">
+            <div style="margin-top: 61px;">
+            <label for="fromDate">Du</label>
+            <input name="date1" type="date" id="date1">
+            <label for="fromDate">a</label>
+            <input name="date2" type="date" id="date2">
+            </div>
+            <div>
+            <button style="margin-top: -20px;" type="submit">Valider</button>
+            
+            </div>
+            </div> 
     <div class="total">
         <div style="margin-top: -80px;" class="top-bar">
+            
+        
             <ul>
                 <li><a class="active" href="#année" onclick="updateChart('{{ node_data.1.0.1 }}', 'year', 'myChart{{ forloop.counter }}')">par année</a></li>
                 <li><a href="#mois" onclick="updateChart('{{ node_data.1.1.1 }}', 'month', 'myChart{{ forloop.counter }}')">par mois</a></li>
@@ -239,182 +249,10 @@ var myChart4 = new Chart(ctx, {
             </div>
         </div>
     </div>
+
+</form>
+
 {% endfor %}
-
-
-
-<script>
-
-function updateChart(data, interval, chartId) {
-    // Destroy existing chart instance if it exists
-    var existingChart = Chart.getChart(chartId);
-    if (existingChart) {
-        existingChart.destroy();
-    }
-
-    // Parse the data string into a JavaScript object
-    console.log("object", data);
-    // Extract the values corresponding to the selected interval
-    let labels = [];
-    let values = JSON.parse(data);
-
-    if (interval === 'year') {
-        labels = ['2024', '2023'];
-    } else if (interval === 'month') {
-        labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-    } else if (interval === 'week') {
-        labels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
-    } else if (interval === 'day') {
-        labels = ['Hour 1', 'Hour 2', 'Hour 3', 'Hour 4', 'Hour 5', 'Hour 6', 'Hour 7', 'Hour 8', 'Hour 9', 'Hour 10', 'Hour 11', 'Hour 12', 'Hour 13', 'Hour 14', 'Hour 15', 'Hour 16', 'Hour 17', 'Hour 18', 'Hour 19', 'Hour 20', 'Hour 21', 'Hour 22', 'Hour 23', 'Hour 24'];
-    }
-    console.log("opop",labels,values);
-    // Update the chart with the new data
-    var ctx = document.getElementById(chartId).getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: interval,
-                data: values,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-}
-
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-   <!---- <script>
-
-
-        var data = [];
-        var arr = JSON.parse(document.getElementById("data-canvas").getAttribute('data-item'));
-        for (let index = 0; index < arr.length - 1; index += 2) {
-            const element = arr[index].reduce((partialSum, a) => partialSum + a, 0) + arr[index + 1].reduce((partialSum, a) => partialSum + a, 0);
-            data.push(element);
-        }
-        var ctx = document.getElementById('myChart1').getContext('2d');
-        var myChart4 = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["00h00", "02h00", "04h00", "06:00", "08h00", "10h00", "12h00", "14h00", "16h00", "18h00", "20h00", "22h00"],
-                datasets: [{
-                    label: '',
-                    data: data,
-                    backgroundColor: ['rgba(54, 162, 235, 0.8)'],
-                    borderColor: ['rgba(54, 162, 235, 1)'],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                }
-            }
-        });
-
-
-
-        var ctx = document.getElementById('myChart2').getContext('2d');
-        var myChart2 = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["00h00", "02h00", "04h00", "06:00", "08h00", "10h00", "12h00", "14h00", "16h00", "18h00", "20h00", "22h00"],
-                datasets: [{
-                    label: '',
-                    data: data,
-                    backgroundColor: ['rgba(54, 162, 235, 0.8)'],
-                    borderColor: ['rgba(54, 162, 235, 1)'],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                }
-            }
-        });
-
-
-
-    </script>
-
-
-
-<script>
-
-
-  var data = [];
-  var arr = JSON.parse(document.getElementById("data-canvas").getAttribute('data-item'));
-  for (let index = 0; index < arr.length - 1; index += 2) {
-      const element = arr[index].reduce((partialSum, a) => partialSum + a, 0) + arr[index + 1].reduce((partialSum, a) => partialSum + a, 0);
-      data.push(element);
-  }
-  var ctx = document.getElementById('myChart3').getContext('2d');
-  var myChart4 = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: ["00h00", "02h00", "04h00", "06:00", "08h00", "10h00", "12h00", "14h00", "16h00", "18h00", "20h00", "22h00"],
-          datasets: [{
-              label: '',
-              data: data,
-              backgroundColor: ['rgba(54, 162, 235, 0.8)'],
-              borderColor: ['rgba(54, 162, 235, 1)'],
-              borderWidth: 2
-          }]
-      },
-      options: {
-          scales: {
-              y: {
-                beginAtZero: true
-              }
-          }
-      }
-  });
-</script>>
-
-
-
-
 
 
 
@@ -445,6 +283,84 @@ function updateChart(data, interval, chartId) {
 
 
 
+  <script>
+
+    function updateChart(data, interval, chartId) {
+        var all_labels = JSON.parse('{{ labels | safe }}');
+        
+    console.log("-+-",all_labels);
+    
+    
+        // Destroy existing chart instance if it exists
+        var existingChart = Chart.getChart(chartId);
+        if (existingChart) {
+            existingChart.destroy();
+        }
+        weeks = all_labels[2]
+        for(i=0;i<weeks.length;i++){
+            let x = weeks[i]
+            weeks[i]  = x.substring(0, 4) + "-" + x.substring(4);
+        }
+    
+        // Parse the data string into JaScript object
+        console.log("object", data);
+        // Extract the values corresponding to the selected interval
+        let labels = [];
+        let values = JSON.parse(data);
+    
+        if (interval === 'year') {
+            labels = all_labels[0]
+        } else if (interval === 'month') {
+            labels = all_labels[1]
+        } else if (interval === 'week') {
+            labels = weeks
+        } else if (interval === 'day') {
+            labels = all_labels[3]
+        }
+        //
+    
+        console.log("opop",labels,values);
+    
+        // Update the chart with the new data
+        var ctx = document.getElementById(chartId).getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: interval,
+                    data: values,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+    
+    const data = JSON.parse('{{ data2 | safe }}');
+    console.log("222",data);
+    for(let i=0;i<data.length;i++){
+        var arr= data[i][1][0][1];
+        var k = i+1;
+        updateChart(JSON.stringify(arr), 'year', 'myChart'+k);
+    }
+    
+    
+    
+    
+    
+    </script>
+    
 
 
    
