@@ -1,11 +1,11 @@
 
 :root {
   --bg-color: #f8f9fa;
-  --active-color: #2ecc71;;
+  --active-color: #1C1678;
   --active-text-color: #ffffff;
   --border-color: #dee2e6;
   --text-color: #495057;
-  --btn-hover-color: #2ecc71;;
+  --btn-hover-color: #1C1678;
 }
 
 
@@ -42,7 +42,7 @@
 
 .scheduler-row button {
   padding: 5px 10px;
-  background-color: rgb(25, 25, 255);
+  background-color: #2ecc71;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -119,14 +119,14 @@
     width: 100%;
     padding: 10px;
     border-radius: 4px;
-    border: 1px solid rgb(79, 15, 215);
+    border: 1px solid #1C1678;
     font-size: 16px;
   }
   button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #440ec1;
+    background-color: #1C1678;
     color: white;
     cursor: pointer;
     font-size: 20px;
@@ -135,7 +135,7 @@
     height: 40px;
   }
   button:hover {
-    background-color: #2737c9;
+    background-color: #1C1678;
   }
 
   body {
@@ -192,6 +192,16 @@
 
 
 .annuler-button{
-  background-color: rgb(221, 62, 62);
+  background-color: #cd2310;
 }
 
+.img{
+
+  display: block;
+   margin-left: 16px;
+   margin-right: 25px;
+   margin-bottom: -46px;
+    font-size: 247px;
+     height:135px;
+     
+}

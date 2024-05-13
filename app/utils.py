@@ -5,29 +5,23 @@ from .models import Noeud, Lampe, Planification
 from django.utils import timezone
 import threading
 import time
-
-
 from datetime import datetime
-
+#utils fichier nehtou fyh des fonctions (ne9es 3ala rouhy el khdema , ye3ni bech tekhoun medhema el khdema )
 
 def get_week_number(day_str, month_str):
-    # Convert day and month strings to integers
     day = int(day_str)
     month = int(month_str)
 
-    # Get the current year
     current_year = datetime.now().year
     
-    # Create a datetime object for the given day and month
     date_obj = datetime(current_year, month, day)
     
-    # Get the ISO week number (week starts on Monday, and the first week of the year is the week containing January 4th)
     week_number = date_obj.isocalendar()[1]
     
     return week_number
 
 
-def get_hours_difference(start_date_str, end_date_str):
+def get_hours_difference(start_date_str, end_date_str):#te3tiha deux data terje3lk diff bintehom
     
     # Parse start_date and end_date strings into datetime objects
     start_date = datetime.fromisoformat(start_date_str[:-6])  # Strip timezone information (+00:00) for parsing
@@ -217,9 +211,6 @@ def get_data_for_node_for_specific_date_month(node_name,date1, date2):
             
     return final_data, months
 
-
-
-print(get_data_for_node_for_specific_date_month("noeud 1","2023-12-12", "2024-12-12"))
 
 
 

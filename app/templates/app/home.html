@@ -68,14 +68,25 @@
                   </a>
                 </li>   
              
+                {% if user.is_authenticated %}
                 <li>
-                    <a href="#" id="sign out">
+                    <a href="/logout" id="sign out">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
                         <span class="title">Sign Out</span>
                     </a>
                 </li>
+                {% else %}
+                <li>
+                    <a href="/login" id="sign out">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign In</span>
+                    </a>
+                </li>
+                {% endif %}
             </ul>
     </div>
  

@@ -94,6 +94,7 @@ justify-content: space-around;
 .btns div {
   margin-right: 10px;
   margin-top:70px;
+  margin-block: auto;
 
 }
 
@@ -196,6 +197,22 @@ border-radius: 5px; /* Bordure arrondie */
 }
 
 
+.img{
 
+  display: block;
+   margin-left: 16px;
+   margin-right: 25px;
+   margin-bottom: -46px;
+    font-size: 247px;
+     height:135px;
+     
+}
 
-
+.saif{
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  margin-block:auto;
+  margin-right: 10px;
+  padding: 5px;
+}

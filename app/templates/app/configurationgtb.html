@@ -9,7 +9,7 @@
         <script
             src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
         <link rel="stylesheet" href="{% static 'css/style.css '%}">
-        <link rel="stylesheet" href="{% static 'css/1.css '%}">
+        <link rel="stylesheet" href="{% static 'css/confi.css '%}">
 
         <title>Gestion Technique des Batiments</title>
     </head>
@@ -21,10 +21,11 @@
             <div class="navigation">
                 <ul>
                     <li>
-                        <a href="#">
-                            <span style="font-size: 72px;margin-left: 20px;"
-                                class="title">G T B</span>
-                        </a>
+                        <a href="#" class="img">
+              
+                            <img  src="{% static 'imgs/gtb14.jpg' %}" alt="Lampe éteinte" id="leteint3">
+            
+                          </a>
                     </li>
 <!----
                     <li>
@@ -70,14 +71,26 @@
                             <span class="title">Planification Automatique</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" id="sign out">
-                            <span class="icon">
-                                <ion-icon name="log-out-outline"></ion-icon>
-                            </span>
-                            <span class="title">Sign Out</span>
-                        </a>
-                    </li>
+                    {% if user.is_authenticated %}  <!-- utilisée dans les templates Django pour vérifier si un utilisateur est authentifié ou non-->
+                <li>
+                    <a href="/logout" id="sign out">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="/login" id="sign out">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign In</span>
+                    </a>
+                </li>
+          {% endif %}
+        
                 </ul>
                 </div>
 
@@ -119,10 +132,10 @@
                                 
 
                                 
-                                {% for node in nodes %}
+                                {% for node in nodes %}  <!--est une directive de boucle utilisée dans les templates Django pour itérer sur une liste d'objets ou une collection de données.-->
                                 <tr>
                                     <form id="deleteForm" method="post"
-                                        action="{% url 'delete_node' %}">
+                                        action="{% url 'delete_node' %}">  <!--Cette balise est utilisée pour générer des URLs basées sur les noms des URLconf définis dans votre application Django-->
 
                                         <td class="td1" name="my-node-name">{{node.noeud_name}}</td>
                                         <input type="hidden" name="id_noeud_2"

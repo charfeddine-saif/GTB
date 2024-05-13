@@ -1,5 +1,5 @@
 
-{% load static %}
+{% load static %}  <!--est une directive utilisée dans les templates Django pour charger les fichiers statiques dans les templates HTML-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
-  <link rel="stylesheet" href="{% static  'css/pilotage13.css '%}">
+  <link rel="stylesheet" href="{% static  'css/pilotage12.css '%}">
   <link rel="stylesheet" href="{% static  'css/1.css '%}">
 
   <title>Gestion Technique des Batiments</title>
@@ -24,9 +24,10 @@
     <div class="navigation">
       <ul>
           <li>
-              <a href="#">
-                <img  style="font-size: 92px;margin-left: 70px;" height="100" width="200" color: #ff0000;  src="{% static 'imgs/GTB10.jpg' %}" alt="Lampe éteinte" id="leteint3">
-                  
+              <a href="#" class="img">
+              
+                <img  src="{% static 'imgs/gtb14.jpg' %}" alt="Lampe éteinte" id="leteint3">
+
               </a>
           </li>
 
@@ -73,14 +74,25 @@
                   <span class="title">Planification Automatique</span>
               </a>
           </li>
-          <li>
-            <a href="#" id="sign out">
-                <span class="icon">
-                    <ion-icon name="log-out-outline"></ion-icon>
-                </span>
-                <span class="title">Sign Out</span>
-            </a>
-        </li>
+          {% if user.is_authenticated %}  <!-- vérifier si un utilisateur est authentifié ou non-->
+                <li>
+                    <a href="/logout" id="sign out">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="/login" id="sign out">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign In</span>
+                    </a>
+                </li>
+          {% endif %}
     </ul>
       </div>
 
@@ -97,7 +109,7 @@
       <!-- ======================= pilotage here ================== -->
 
 
-      <div class="container-uu" id="data-container" datalist="{{ data }}">
+      <div class="container-uu" id="data-container" datalist="{{ data }}"><!--utilisée dans les frameworks web comme Django , pour insérer dynamiquement des données dans des modèles HTML-->
         <h1   style=" color:#2a2185;  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);  margin-bottom: 100px; font-size: 68px;"  class="h1_pilotage"> Pilotage et Dashboard</h1>
 
         <div id="leftNodes">
@@ -262,8 +274,8 @@
 
   <script>
 
-
-var myData = JSON.parse('{{ data|escapejs }}');
+// JSON.parse(JavaScript Object Notation)  utilisé pour échanger des données entre un serveur et un client.
+var myData = JSON.parse('{{ data|escapejs }}');  //La fonction escapejs est souvent utilisée pour échapper les caractères spéciaux en JavaScript afin d'éviter les attaques XSS
 var data1 = new Array();
 var data2 = new Array();
 var data3 = new Array();
@@ -282,10 +294,11 @@ for(let i=0;i<myData[0].length;i++){
   all_data[i] = ( data1[i] + data1[i] + data1[i] ) / 3;
 }
   console.log("ll",data1);
-var ctx = document.getElementById('myChart1').getContext('2d');
+var ctx = document.getElementById('myChart1').getContext('2d');// Récupère le contexte 2D du canvas avec l'ID "myChart1". Cela permettra de dessiner le graphique.
 var myChart1 = new Chart(ctx, {
     type: 'bar',
     data: {
+      //définit les étiquettes qui seront utilisées sur l'axe horizontal (X) du graphique.  
         labels: ["00h00", "01h00", "02h00","03:00", "04h00", "05h00","06h00", "07h00","08h00", "09h00", "10h00","11h00","12h00" ,"13h00","14h00", "15h00", "16h00","17h00","18h00", "19h00","20h00", "21h00", "22h00","23h00"],
         datasets: [{
             label:'',

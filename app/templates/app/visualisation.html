@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
   <link rel="stylesheet" href="{% static  'css/planif.css '%}">
-  <link rel="stylesheet" href="{% static  'css/visual.css '%}">
+  <link rel="stylesheet" href="{% static  'css/visuall.css '%}">
 
   <title>Gestion Technique des Batiments</title>
 </head> 
@@ -21,9 +21,11 @@
     <div class="navigation">
         <ul>
             <li>
-                <a href="#">
-                    <span style="font-size: 72px;margin-left: 20px;" class="title">G T B</span>
-                </a>
+                <a href="#" class="img">
+              
+                    <img  src="{% static 'imgs/gtb14.jpg' %}" alt="Lampe éteinte" id="leteint3">
+    
+                  </a>
             </li>
             <!--
             <li>
@@ -69,14 +71,25 @@
                   <span class="title">Planification Automatique</span>
               </a>
           </li>
-          <li>
-            <a href="#" id="sign out">
-                <span class="icon">
-                    <ion-icon name="log-out-outline"></ion-icon>
-                </span>
-                <span class="title">Sign Out</span>
-            </a>
-        </li>
+          {% if user.is_authenticated %}
+                <li>
+                    <a href="/logout" id="sign out">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="/login" id="sign out">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign In</span>
+                    </a>
+                </li>
+          {% endif %}
     </ul>
         </div>
 
@@ -209,23 +222,27 @@ var myChart4 = new Chart(ctx, {
 
 
 <!-- HTML Template -->
-{% for node_data in data %}
+{% for node_data in data %}<!---khdit data bech ne3ml 3liha for o NE3ml affichage-->
 
 <form method="POST">
 {% csrf_token %}
-    <h1 style="font-size: 36px;">{{ node_data.0 }}</h1>
+    <h1 style="font-size: 36px;">      {{ node_data.0 }}</h1>
     
 
-    <div class="date">
-            <div class="btns">
-            <div style="margin-top: 61px;">
-            <label for="fromDate">Du</label>
-            <input name="date1" type="date" id="date1">
-            <label for="fromDate">a</label>
-            <input name="date2" type="date" id="date2">
+    <div  class="date">
+            <div    class="btns">
+            <div style="margin-top: 21px;  align-items: center; ">
+             <div class="saif">
+                <label style="margin-top: 5px;" for="fromDate">Du</label>
+                <input name="date1" type="date" id="date1">
+                <label  style="margin-top: 5px;" for="fromDate">a</label>
+                <input name="date2" type="date" id="date2">
+                <button style="margin-top: -9px;" type="submit">Valider</button>
             </div>
             <div>
-            <button style="margin-top: -20px;" type="submit">Valider</button>
+            
+             </div>   
+            
             
             </div>
             </div> 
@@ -330,8 +347,8 @@ var myChart4 = new Chart(ctx, {
                 datasets: [{
                     label: interval,
                     data: values,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(0, 0, 153, 0.2)',
+                    borderColor: 'rgba(0, 0, 255, 2)',
                     borderWidth: 1
                 }]
             },

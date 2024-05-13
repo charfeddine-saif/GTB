@@ -12,19 +12,22 @@ from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 import json
 
+#authantification
+from django.contrib.auth import authenticate, login as django_login, logout as django_logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+
 
 def get_data():
         
-    file = pd.ExcelFile('data.xlsx')
-
-    # Get the names of the sheets
+    file = pd.ExcelFile('data4.xlsx')
     data=[]
     sheet_names = file.sheet_names
     puiss_1 = 15
-    puiss_2 = 12
+    
     sheet_names_arr = []
     for name in sheet_names:
-        df = pd.read_excel('data.xlsx', sheet_name=name)
+        df = pd.read_excel('data4.xlsx', sheet_name=name)
         lampes = get_lampes_by_noeud_name(name)
         print("////",name)
         # print("lampes: ",lampes[0].name)
@@ -69,24 +72,58 @@ def home(request):
 
 
 def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            django_login(request, user)
+            return redirect('pilotage')
+        else:
+            messages.success(request, 'Invalid username or password')
+            return redirect('login')
+    return render(request, 'app/login.html')
+
+def logout(request):
+    django_logout(request)
+    return redirect("login")
+
+def register(request):
+    print(request.method)
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print(f"form is {form.is_valid()} {username}") 
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'USER CREATED')
+            return redirect('pilotage')
+
     return render(request, 'app/login.html')
 
 
 
 def pilotage(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+    
     data = get_data()
     print(data)
     return render(request, 'app/pilotage.html', context={'data': data})
 
 
 def dashboard(request):
-    return render(request, 'app/dashboard.html')
+    return render(request, 'app/dashboard.html')#tehel el page  dashboard.html
 
 
 def configurationgtb(request):
-    if request.method == 'POST':
-        # Assuming the form is submitted via POST
-        nom_noeud = request.POST.get('nom_noeud')
+    if not request.user.is_authenticated:
+        return redirect("login")
+    
+    if request.method == 'POST':# 3dit req post xela le 
+        
+        nom_noeud = request.POST.get('nom_noeud')# nekhou input mel nom noeud 
         lampes_names = request.POST.getlist('lampe')
         puissances = request.POST.getlist('puissance')
         
@@ -101,15 +138,18 @@ def configurationgtb(request):
     nodes = get_nodes_with_lampes()
     return render(request, 'app/configurationgtb.html', { "nodes": nodes})
 
-def edit_node(request):
+def edit_node(request):# modifier noeud 
     if request.method == 'POST':
         node_id = request.POST.get('id_noeud')
         new_lampes_names = request.POST.getlist('lampe')
         new_puissances = request.POST.getlist('puissance')
+        
+        if not node_id and not new_lampes_names and new_puissances:
+            return redirect('configurationgtb')
+        
         # lampes = get_lampes_by_noeud_name(node_name)
         lampes = get_lampes_by_noeud_id(node_id)
         print("----", node_id)
-        
         
         noeud = Noeud.objects.get(id=node_id)
         print("!!!!!!!!!",new_lampes_names)
@@ -131,7 +171,7 @@ def edit_node(request):
     return redirect('configurationgtb')
 
 
-def delete_node(request):
+def delete_node(request):# delete node 
     if request.method == 'POST':
         node_id = request.POST.get('id_noeud_2')
         print("delete ", node_id)
@@ -143,13 +183,15 @@ def delete_node(request):
 
 
 def visualisation(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
     #bech njibo data fil forme hedhi
     # var data = [                [("noeud1",            [("annee",[12,15]), ("mois",[]),            ()]      )]    ,            [(),[]],          []           ]
     date1 = None
     date2 = None
     if request.method == 'POST':
-        date1 = request.POST.get('date1')
-        date2 = request.POST.get('date2')
+        date1 = request.POST.get('date1')# date début
+        date2 = request.POST.get('date2')# date fin 
         
         
         
@@ -168,22 +210,12 @@ def visualisation(request):
     print("finallllll ",all_data)
     print("labels ",labels)
         
-        
-    # for x in y:
-    #     x -> ism,date1,date2,puissance
+    
 
     print("Planifications  complétées:", noeuds)
     
 
-    # my_data = get_data()  # Assuming get_data is defined elsewhere
-    # print("myyyy data", my_data)
     
-#     all_data = [
-#     ('noeud 1', [('year', [103680.13333333333, 37680.13888888889]), ('month', [101760.08055555556, 1920.052777777778, 35520.080555555556, 2160.05, 0.008333333333333333]), ('week', [87840.03055555555, 0.0, 0.0, 0.0, 0.0, 0.0]), ('day', [87840.03055555555, 13920.050000000001, 1920.052777777778, 35520.080555555556, 2160.05, 0.0, 0.008333333333333333])]),
-#     ('noeud 2', [('year', [0.0, 0.0]), ('month', [0.0, 0.0, 0.0, 0.0, 0.0]), ('week', [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]), ('day', [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])]),
-#     ('noeud 4', [('year', [0.0, 1008.5]), ('month', [0.0, 0.0, 0.0, 1008.5, 0.0]), ('week', [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]), ('day', [0.0, 0.0, 0.0, 0.0, 0.0, 1008.5, 0.0])])
-# ]
-    # formatted_data = json.dumps(all_data)
 
     labels_json = json.dumps(labels)
     data_json = json.dumps(all_data)
@@ -211,7 +243,7 @@ def add_planification(request):
     if request.method == 'POST':
         lampe_id = request.POST.get('sel')
         lampe = Lampe.objects.get(id=lampe_id)
-        date1 = request.POST.get('date1')
+        date1 = request.POST.get('date1')#njib el valeur eli fel input eli 3edineha fel forme  
         date2 = request.POST.get('date2')
         start_date = datetime.strptime(date1, '%Y-%m-%dT%H:%M')
         end_date = datetime.strptime(date2, '%Y-%m-%dT%H:%M')

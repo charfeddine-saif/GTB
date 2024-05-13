@@ -42,5 +42,3 @@ class Planification(models.Model):
         return f"{self.lampe.name} - {self.lampe.noeud.name}"
     
     
-#fonction na3taha id mta3 lmape traja3li el noeud mte3ha
-# resultat = xy(id)
