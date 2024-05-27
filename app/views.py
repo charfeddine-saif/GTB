@@ -3,67 +3,95 @@
 # pandas est utilisé pour manipuler les données sous forme de tableaux.
 #.utils fait référence à un fichier local contenant des fonctions d’aide.
 from datetime import datetime
-from django.shortcuts import render
-import pandas as pd
-from .utils import get_lampes_by_noeud_name, get_nodes_with_lampes,get_lampes_by_noeud_id,get_data_for_node_for_specific_date
-from .models import Lampe, Noeud, Planification
-from django.shortcuts import redirect,get_object_or_404
-from django.http import JsonResponse
-from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render #importe la fonction render du module shortcuts de la bibliothèque Django.
+import pandas as pd# importe la bibliothèque Pandas en utilisant l'alias pd
+from .utils import get_lampes_by_noeud_name, get_nodes_with_lampes,get_lampes_by_noeud_id,get_data_for_node_for_specific_date# importe les fonctions d'aide du fichier utils.
+
+
+from .models import Lampe, Noeud, Planification# importe les modèles Lampe, Noeud et Planification.
+
+
+from django.shortcuts import redirect,get_object_or_404# importe la fonction get_object_or_404 du module shortcuts de la bibliothèque Django.
+
+from django.http import JsonResponse# importe la classe JsonResponse du module http de la bibliothèque Django.
+
+
+from django.core.exceptions import ObjectDoesNotExist# importe la classe ObjectDoesNotExist du module exceptions de la bibliothèque Django.
+
+
 import json
 
 #authantification
-from django.contrib.auth import authenticate, login as django_login, logout as django_logout
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
+from django.contrib.auth import authenticate, login as django_login, logout as django_logout# importe les fonctions authenticate, login et logout du module auth de la bibliothèque Django.
+
+
+from django.contrib.auth.forms import UserCreationForm# importe la classe UserCreationForm du module forms de la bibliothèque Django.
+
+
+
+from django.contrib import messages# importe la classe messages du module contrib de la bibliothèque Django.
+
+
+
 
 
 def get_data():
         
-    file = pd.ExcelFile('data4.xlsx')
+    file = pd.ExcelFile('data4.xlsx')#ouvrir le fichier Excel à l'aide de la bibliothèque Pandas
     data=[]
-    sheet_names = file.sheet_names
+    sheet_names = file.sheet_names #stocke les noms des feuilles dans le fichier Excel
     puiss_1 = 15
     
     sheet_names_arr = []
-    for name in sheet_names:
-        df = pd.read_excel('data4.xlsx', sheet_name=name)
-        lampes = get_lampes_by_noeud_name(name)
+    for name in sheet_names:#parcourt chaque nom de feuille dans sheet_names
+        df = pd.read_excel('data4.xlsx', sheet_name=name)#lire la feuille
+
+        lampes = get_lampes_by_noeud_name(name)#est appelée pour obtenir des informations sur les lampes associées à ce nœud
         print("////",name)
-        # print("lampes: ",lampes[0].name)
-        first_row_values = df.columns.tolist()[1:]
+        
+        first_row_values = df.columns.tolist()[1:]#stocke les valeurs de la première ligne de la feuille
+
         print("first_row_values",first_row_values)
         # ne7sEB 9adech men  ON 
 
-        sums= [0] * len(first_row_values)
-        avgs= [0] * len(first_row_values)
-        avg_arr =[]
-        for i, row in df.iterrows():
-            for index, val in enumerate(first_row_values):
-                if(row[val]=="ON"):
-                    sums[index]+=1
-            if (i +1) % 6 ==0:
-                for x in range(len(sums)):
-                    avgs[x]=round(sums[x]/6 * 15, 2)  
+        sums= [0] * len(first_row_values)#créer une liste vide avec la longueur de la liste first_row_values
 
-                sums= [0] * len(first_row_values)
-                avg_arr.append(avgs)
-                avgs= [0] * len(first_row_values)
+        avgs= [0] * len(first_row_values)
+
+
+        avg_arr =[]
+        for i, row in df.iterrows():#parcourt chaque ligne dans la feuille
+
+            for index, val in enumerate(first_row_values):#parcourt chaque valeur dans la liste first_row_values
+
+                if(row[val]=="ON"):#si la valeur est ON
+
+                    sums[index]+=1#incrémente la valeur de la liste sums à l'index correspondant à la valeur val
+
+
+            if (i +1) % 6 ==0:#si la ligne est divisible par 6
+
+
+                for x in range(len(sums)):#parcourt chaque valeur dans la liste sums
+
+
+                    avgs[x]=round(sums[x]/6 * 15, 2)#incrémente la valeur de la liste avgs à l'index correspondant à la valeur val
+
+
+                sums= [0] * len(first_row_values)#bech nerje3ha lel 0 
+
+                avg_arr.append(avgs)#ajoute la liste avgs à la liste avg_arr
+
+                avgs= [0] * len(first_row_values)#réinitialise la liste avgs à 0
+
+
                 
-        data.append(avg_arr)
+        data.append(avg_arr)#ajoute une liste (avg_arr) à une autre liste (data)
     return data
                 
 
 
-    # data.append((avg_1,avg_2))    
     
-
-
-# # Group by hour
-
-# Print average power consumption for each hour
-# for hour, avg_power in average_power_per_hour.items():
-#     print(f"Hour {hour}: Average Power Consumption = {avg_power}")
 
 
 
@@ -72,45 +100,92 @@ def home(request):
 
 
 def login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+    if request.user.is_authenticated:
+    
+        return redirect("pilotage")
+    if request.method == 'POST':#si la méthode est POST
+
+        username = request.POST.get('username')#bech nekhou le nom d'utilisateur dans le formulaire
+
+        password = request.POST.get('password')#bech nekhou  le mot de passe dans le formulaire
+
+
+        user = authenticate(request, username=username, password=password)#authentifie l'utilisateur avec le nom d'utilisateur et le mot de passe
+
+
         if user is not None:
             django_login(request, user)
-            return redirect('pilotage')
+            return redirect('pilotage')#si l'utilisateur est authentifié, on redirige vers la page pilotage
+
         else:
-            messages.success(request, 'Invalid username or password')
+            messages.success(request, 'Invalid username or password')#sinon, on affiche un message d'erreur
+
+
+
             return redirect('login')
-    return render(request, 'app/login.html')
+    return render(request, 'app/login.html')#si la méthode n'est pas POST, on affiche la page de connexion
+
+
+
 
 def logout(request):
     django_logout(request)
-    return redirect("login")
+    return redirect("login")#on redirige vers la page de connexion
+
+
+
 
 def register(request):
-    print(request.method)
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        print(f"form is {form.is_valid()} {username}") 
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'USER CREATED')
-            return redirect('pilotage')
+    if request.user.is_authenticated:
+    
+        return redirect("pilotage")
+    if request.method == 'POST':#si la méthode est POST
 
-    return render(request, 'app/login.html')
+
+        form = UserCreationForm(request.POST)#on crée un formulaire avec les données du formulaire de connexion
+
+
+
+        username = request.POST.get('username')#retrouver  le nom d'utilisateur dans le formulaire
+
+
+        password = request.POST.get('password')
+
+
+
+        print(f"form is {form.is_valid()} {username}")
+        if form.is_valid():#si le formulaire est valide
+
+
+
+            form.save()#on sauvegarde les données du formulaire dans la base de données
+
+
+
+
+            messages.success(request, 'USER CREATED')
+            return redirect('pilotage')#on redirige vers la page de connexion
+
+
+
+
+
+    return render(request, 'app/login.html')#si la méthode n'est pas POST, on affiche la page de connexion
+
+
+
+
 
 
 
 def pilotage(request):
     if not request.user.is_authenticated:
+
         return redirect("login")
     
     data = get_data()
     print(data)
-    return render(request, 'app/pilotage.html', context={'data': data})
+    return render(request, 'app/pilotage.html', context={'data': data})# fel context  n3adi el data ili 7achti beha
 
 
 def dashboard(request):
@@ -121,14 +196,17 @@ def configurationgtb(request):
     if not request.user.is_authenticated:
         return redirect("login")
     
-    if request.method == 'POST':# 3dit req post xela le 
+    if request.method == 'POST':# 3dit req post wela le 
         
         nom_noeud = request.POST.get('nom_noeud')# nekhou input mel nom noeud 
-        lampes_names = request.POST.getlist('lampe')
+        lampes_names = request.POST.getlist('lampe')#nekhou input mel lampes names
+
         puissances = request.POST.getlist('puissance')
         
         if len(puissances)>0:
-            noeud = Noeud.objects.create(name=nom_noeud)
+
+            noeud = Noeud.objects.create(name=nom_noeud)#on crée un noeud avec le nom entré dans le formulaire
+
             for i in range(len(lampes_names)):
                 Lampe.objects.create(name=lampes_names[i], puissance=puissances[i], noeud=noeud)
 
@@ -139,26 +217,33 @@ def configurationgtb(request):
     return render(request, 'app/configurationgtb.html', { "nodes": nodes})
 
 def edit_node(request):# modifier noeud 
-    if request.method == 'POST':
-        node_id = request.POST.get('id_noeud')
+    if request.method == 'POST':# 3adit req post wela le
+        node_id = request.POST.get('id_noeud')#nechou id el noeud
         new_lampes_names = request.POST.getlist('lampe')
-        new_puissances = request.POST.getlist('puissance')
+        new_puissances = request.POST.getlist('puissance')#nechou puissances el lampes
+
         
         if not node_id and not new_lampes_names and new_puissances:
+
             return redirect('configurationgtb')
+
+
         
-        # lampes = get_lampes_by_noeud_name(node_name)
         lampes = get_lampes_by_noeud_id(node_id)
         print("----", node_id)
         
-        noeud = Noeud.objects.get(id=node_id)
+        noeud = Noeud.objects.get(id=node_id)# on retrouver  le noeud avec l'id entré dans le formulaire
+
         print("!!!!!!!!!",new_lampes_names)
         print("!!!!!new_puissances!!!!",new_puissances)
-        for new_lampe_name, new_puissance in zip(new_lampes_names, new_puissances):
-            lamp_exists = Lampe.objects.filter(name=new_lampe_name, noeud=noeud).exists()
+        for new_lampe_name, new_puissance in zip(new_lampes_names, new_puissances):#zip pour lier les lampes names et puissances
+
+            lamp_exists = Lampe.objects.filter(name=new_lampe_name, noeud=noeud).exists()#verifier si la lampe existe dans le noeud
+
             
             if lamp_exists:
-                lampe = Lampe.objects.get(name=new_lampe_name, noeud=noeud)
+                lampe = Lampe.objects.get(name=new_lampe_name, noeud=noeud)#si la lampe existe on la récupère
+
                 lampe.name = new_lampe_name
                 lampe.puissance = new_puissance
                 lampe.save()
@@ -173,10 +258,13 @@ def edit_node(request):# modifier noeud
 
 def delete_node(request):# delete node 
     if request.method == 'POST':
-        node_id = request.POST.get('id_noeud_2')
+        node_id = request.POST.get('id_noeud_2')#nechou id el noeud
+
         print("delete ", node_id)
         if node_id:
-            Noeud.objects.filter(id=node_id).delete()
+            Noeud.objects.filter(id=node_id).delete()#supprimer le noeud avec l'id entré dans le formulaire
+
+
     return redirect('configurationgtb')
 
 
@@ -191,22 +279,30 @@ def visualisation(request):
     date2 = None
     if request.method == 'POST':
         date1 = request.POST.get('date1')# date début
-        date2 = request.POST.get('date2')# date fin 
+        date2 = request.POST.get('date2')# date fin
+
+
         
         
         
-    all_data = []
-    planifications_completed = Planification.objects.filter(status='completed')
-    noeuds = Noeud.objects.all().order_by('name')[:3]
+    all_data = []# data for all nodes
+
+    planifications_completed = Planification.objects.filter(status='completed')# get all planifications completed
+
+    noeuds = Noeud.objects.all().order_by('name')[:3]# get all nodes
+
+
     periods = ["year", "month", "week", "day"]
     labels = []
     for node in noeuds:
         hist_for_node = []
         for period in periods:
-            hist, label = get_data_for_node_for_specific_date(node.name, period, date1, date2)
+            hist, label = get_data_for_node_for_specific_date(node.name, period, date1, date2)#récupère des données spécifiques pour un nœud donné et une période de temps spécifiée entre deux dates.
+
             labels.append(label)
-            hist_for_node.append([period, hist])
-        all_data.append([node.name, hist_for_node])
+            hist_for_node.append([period, hist])#: la période de temps et l'historique associé à cette période. Cela permet de regrouper des données associées dans une seule liste, facilitant ainsi leur manipulation ultérieure.
+
+        all_data.append([node.name, hist_for_node])# ajoute une nouvelle liste à une liste existante appelée all_data
     print("finallllll ",all_data)
     print("labels ",labels)
         
@@ -217,7 +313,7 @@ def visualisation(request):
 
     
 
-    labels_json = json.dumps(labels)
+    labels_json = json.dumps(labels)#utilise le module json en Python pour convertir une liste Python en une chaîne JSON
     data_json = json.dumps(all_data)
 
     return render(request, 'app/visualisation.html', {'data': all_data, 'labels': labels_json, 'data2': data_json})
@@ -231,47 +327,54 @@ def visualisation(request):
     #return render(request, 'app/planification.html', {'lampes': lampes, 'planifications':planifications})
 def planification(request):
     lampes = Lampe.objects.all()
-    planifications_not_completed = Planification.objects.filter(status='not-completed')
-
-    return render(request, 'app/planification.html', {'lampes': lampes, 'planifications': planifications_not_completed})
+    planifications_not_completed = Planification.objects.filter(status='not-completed')# get all planifications not completed
 
 
+    return render(request, 'app/planification.html', {'lampes': lampes, 'planifications': planifications_not_completed})# renvoie une page HTML avec les données de la base de données
 
 
 
-def add_planification(request):
+
+
+
+
+def add_planification(request):#ajoute une planification à la base de données
+
     if request.method == 'POST':
         lampe_id = request.POST.get('sel')
         lampe = Lampe.objects.get(id=lampe_id)
         date1 = request.POST.get('date1')#njib el valeur eli fel input eli 3edineha fel forme  
         date2 = request.POST.get('date2')
-        start_date = datetime.strptime(date1, '%Y-%m-%dT%H:%M')
+        start_date = datetime.strptime(date1, '%Y-%m-%dT%H:%M')#convertit la date en format datetime
+
         end_date = datetime.strptime(date2, '%Y-%m-%dT%H:%M')
         
-        planification_instance = Planification(lampe=lampe, start_date=start_date, end_date=end_date)
+        planification_instance = Planification(lampe=lampe, start_date=start_date, end_date=end_date)#crée une instance de la classe Planification avec les valeurs entrées dans le formulaire
+
         planification_instance.save()
     return redirect('planification')
 
 
 
-def edit_planification(request):
+def edit_planification(request):#modifie une planification dans la base de données
+
     if request.method == 'POST':
         plan_id = request.POST.get('id_plan_hidden')
+
         planification = get_object_or_404(Planification, id=plan_id)
         
-        # Update the planification object with new data
+        
         lampe_id = request.POST.get('sel')
         start_date = request.POST.get('date1')
         end_date = request.POST.get('date2')
         
-        # Assuming lampe_id is obtained from the form
+       
         planification.lampe_id = lampe_id
         
-        # Assuming start_date and end_date are obtained from the form
+    
         planification.start_date = start_date
         planification.end_date = end_date
         
-        # Save the updated planification object
         planification.save()
         
     return redirect('planification')
@@ -279,6 +382,8 @@ def edit_planification(request):
 
 
 def delete_planification(request):
+
+
     if request.method == 'POST':
         plan_id = request.POST.get('id_plan_hidden')
         if plan_id:
@@ -297,6 +402,7 @@ def delete_lampe(request):
         print("lampes", lampes)
         print("uuiuiui",id_noeud, "---------", id_lampe)
         for i,lampe in enumerate(lampes):
+
             if i==int(id_lampe):
                Lampe.objects.filter(id=lampe.id).delete()
 
@@ -314,13 +420,18 @@ def delete_lampe(request):
 
 
 
-def status_planification(request):
+def status_planification(request):#pour voir le status de la planification
+
+
     if request.method == 'POST':
-        current_date = timezone.now()
-        completed_planifications = Planification.objects.filter(status='completed')
+        current_date = timezone.now()#date du jour
+
+        completed_planifications = Planification.objects.filter(status='completed')#planifications terminées
+
                  
         context = {
-        'completed_planifications': completed_planifications
+        'completed_planifications': completed_planifications#envoie les planifications terminées
+
         }
     return redirect('planification',context)
 
@@ -328,13 +439,15 @@ def status_planification(request):
 
 
 
-def update_visualisation(request):
+def update_visualisation(request):#pour mettre a jour la visualisation
+
     if request.method == 'POST':
         date1 = request.POST.get('date1')
         date2 = request.POST.get('date2')
         new_all_data = []
         planifications_completed = Planification.objects.filter(status='completed')
-        noeuds = Noeud.objects.all().order_by('name')[:3]
+        noeuds = Noeud.objects.all().order_by('name')[:3]#on prend les 3 premiers noeuds
+
         periods = ["year", "month", "week", "day"]
         labels = []
         for node in noeuds:

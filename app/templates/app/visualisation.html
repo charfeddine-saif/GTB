@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
   <link rel="stylesheet" href="{% static  'css/planif.css '%}">
-  <link rel="stylesheet" href="{% static  'css/visuall.css '%}">
+  <link rel="stylesheet" href="{% static  'css/visuall12.css '%}">
 
   <title>Gestion Technique des Batiments</title>
 </head> 
@@ -107,126 +107,13 @@
 
           <h1        style=" color:#121481;   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);   font-size: 68px;"         class="v" >  visualisation des courbes </h1>
 
-         
-<!--<div class="rows">
-  
-  <div  class="row">
-    {% for item in data %}
-    <h1>noeud 1</h1>
-    <div class="t" class="graphs">
-      <div class="graph">
-        <h1 class="lamp_visua" > lampe 1 </h1>
-        <div class="lamp1" id="data-canvas" data-item="{{ item }}">
-          <canvas id="myChart1" ></canvas>
-        </div> 
-      </div>
-
-    {% endfor %}
-
-  
-    </div>
-  </div>
-
-
-</div>   
-
-          
-        
-<div style="width: 900px; margin: 0 auto;" class="total">
-  
-         
-  <div class="top-bar">
-    <ul>
-      <li><a class="active" href="#année">par année</a></li>
-      <li><a href="#mois">par mois</a></li>
-      <li><a href="#jour">par jour</a></li>
-      <li><a href="#heure">par heure</a></li>
-    </ul>
-  </div>
-  
-
-<title>Ma Consommation d'électricité</title>
-
-
-<div class="container">
-
-<div class="date">
-<div class="btns">
-<div>
-<label for="fromDate">Du</label>
-<input type="date" id="fromDate">
-</div>
-<div>
-<button type="submit">Valider</button>
-
-</div>
-</div> 
-<h1>Ma Consommation d'électricité par heure (en Kwh)</h1>
-</div>
-<div class="chart">
-<div class="chart-container">
-<canvas id="myChart1" ></canvas>
-</div>
-</div>
-</div>
-
-</div>
-
-
-      </div>
-  </div>
-
-
-
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-
-
-var data =[]
-var arr = JSON.parse(document.getElementById("data-canvas").getAttribute('data-item'));
-for (let index = 0; index < arr.length -1; index+=2) {
-  const element = arr[index].reduce((partialSum, a) => partialSum + a, 0) + arr[index+1].reduce((partialSum, a) => partialSum + a, 0);
-  data.push(element);
-  
-}
-var ctx = document.getElementById('myChart1').getContext('2d');
-var myChart4 = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["00h00", "02h00", "04h00","06:00", "08h00", "10h00","12h00", "14h00","16h00", "18h00", "20h00","22h00"],
-        datasets: [{
-            label:'',
-            data: data,
-            backgroundColor: [
-                'rgba(54, 162, 235, 0.8)',
-            ],
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
-
-            ],
-            borderWidth: 2
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-</script>-->
-
 
 <!-- HTML Template -->
 {% for node_data in data %}<!---khdit data bech ne3ml 3liha for o NE3ml affichage-->
 
 <form method="POST">
 {% csrf_token %}
-    <h1 style="font-size: 36px;">      {{ node_data.0 }}</h1>
+    <h1 style="font-size: 36px;  color: #2c3e50;  margin-top: 20px; margin-bottom: 20px;  font-family: 'Arial', sans-serif; background-color: #ecf0f1;  border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"> Historique de la courbe de charge : {{ node_data.0 }}</h1>
     
 
     <div  class="date">
@@ -235,7 +122,7 @@ var myChart4 = new Chart(ctx, {
              <div class="saif">
                 <label style="margin-top: 5px;" for="fromDate">Du</label>
                 <input name="date1" type="date" id="date1">
-                <label  style="margin-top: 5px;" for="fromDate">a</label>
+                <label  style="margin-top: 5px;" for="fromDate">à</label>
                 <input name="date2" type="date" id="date2">
                 <button style="margin-top: -9px;" type="submit">Valider</button>
             </div>
@@ -249,7 +136,7 @@ var myChart4 = new Chart(ctx, {
     <div class="total">
         <div style="margin-top: -80px;" class="top-bar">
             
-        
+        <!-- array ta5idh mino el contenu bil index. node_data.1.4 hiya nafsha node_data[1][4] -->
             <ul>
                 <li><a class="active" href="#année" onclick="updateChart('{{ node_data.1.0.1 }}', 'year', 'myChart{{ forloop.counter }}')">par année</a></li>
                 <li><a href="#mois" onclick="updateChart('{{ node_data.1.1.1 }}', 'month', 'myChart{{ forloop.counter }}')">par mois</a></li>
@@ -382,7 +269,7 @@ var myChart4 = new Chart(ctx, {
 
    
   <style>
-    /* Styles pour le conteneur principal */
+   
     .total {
         width: 770px;
         margin: 133px auto;
