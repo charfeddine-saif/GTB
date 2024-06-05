@@ -115,19 +115,22 @@
         <div id="leftNodes">
           <div style="margin-bottom: 150px;" class="node">
             <div class="div">
-              <div class="noeud1_pilotage" style="text-align: center; height: 40px; line-height: 40px;" rowspan="2">Noeud 1</div>
+              <div class="noeud1_pilotage" style="text-align: center;   margin-bottom: 10px; font-size: 38px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); background-color:#2a2185; height: 40px; line-height: 40px;" rowspan="2">Noeud 1</div>
 
-            <table class="table_pilotage" >
+            <table style="border-collapse: collapse;  border-radius: 10px;  overflow: hidden; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);" class="table_pilotage" >
               <tr class="tr_pilotage" >
-                <td>Lampe 1</td>
-                <td><button  class="on">ON</button></td>
+                <td style=" font-size: 18px;  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); font-family: 'Arial', sans-serif; padding: 10px; transition: color 0.3s ease, text-shadow 0.3s ease;  ">Lampe 1</td>
+                <td  style=" font-size: 18px;
+                cursor: pointer;
+                border-radius: 5px;
+                gap: 5px;"><button  class="on">ON</button></td>
                 <td><button class="off">OFF</button></td>
                 <td id="state1">
-                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                  <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="leteint3">
                 </td>
               </tr>
               <tr>
-                <td>Lampe 2</td>
+                <td style=" font-size: 18px;  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); font-family: 'Arial', sans-serif; padding: 10px; transition: color 0.3s ease, text-shadow 0.3s ease;  ">Lampe 2</td>
                 <td><button  class="on" style ="box-shadow: 0 0 25px rgba(5, 255, 34, 0.5);">ON</button></td>
                 <td><button  class="off">OFF</button></td>
                 <td id="state2">
@@ -156,30 +159,33 @@
 
           </div>
 
-          <div  style="margin-bottom: 150px;"   class="node">
-
-
-            <table class="table2_pilotage">
-              <tr style="border: none;">
-                <td class="noeud2_pilotage"  rowspan="2">Noeud 2</td>
-                <td>Lampe 1</td>
-                <td><button onclick="turnOn(1)" class="on">ON</button></td>
-                <td><button onclick="turnOff(1)" class="off">OFF</button></td>
-                <td id="state1">
-                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
-                </td>
-              </tr>
-              <tr>
-                <td>Lampe 2</td>
-                <td><button onclick="turnOn(2)" class="on">ON</button></td>
-                <td><button onclick="turnOff(2)" class="off">OFF</button></td>
-                <td id="state2">
-                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
-                </td>
-              </tr>
-            </table>
-
-            <div>
+          <div id="leftNodes">
+            <div style="margin-bottom: 150px;" class="node">
+              <div class="div">
+                <div class="noeud1_pilotage" style="text-align: center;   margin-bottom: 10px; font-size: 38px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); background-color:#2a2185; height: 40px; line-height: 40px;" rowspan="2">Noeud 2</div>
+  
+                <table style="border-collapse: collapse;  border-radius: 10px;  overflow: hidden; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);" class="table_pilotage" >
+                  <tr class="tr_pilotage" >
+                    <td style=" font-size: 18px;  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); font-family: 'Arial', sans-serif; padding: 10px; transition: color 0.3s ease, text-shadow 0.3s ease;  ">Lampe 1</td>
+                    <td  style=" font-size: 18px;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    gap: 5px;"><button  class="on">ON</button></td>
+                    <td><button class="off">OFF</button></td>
+                    <td id="state1">
+                      <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style=" font-size: 18px;  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); font-family: 'Arial', sans-serif; padding: 10px; transition: color 0.3s ease, text-shadow 0.3s ease;  ">Lampe 2</td>
+                    <td><button  class="on" style ="box-shadow: 0 0 25px rgba(5, 255, 34, 0.5);">ON</button></td>
+                    <td><button  class="off">OFF</button></td>
+                    <td id="state2">
+                      <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                    </td>
+                  </tr>
+                </table>
+              </div>
              
               <div class="date">
   <div class="btns">
@@ -187,6 +193,7 @@
   </div> 
   
               </div>
+              <div>
               <h2 style="margin-left:0px;  margin-bottom:-70px;"  class="consommation_pilotage" >Courbe de charge  en (kWh)</h2>
 
               <div class="chart">
@@ -197,29 +204,36 @@
             </div>
 
           </div>
+        </div>
+         
+        <div id="leftNodes">
+          <div style="margin-bottom: 150px;" class="node">
+            <div class="div">
+              <div class="noeud1_pilotage" style="text-align: center;   margin-bottom: 10px; font-size: 38px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); background-color:#2a2185; height: 40px; line-height: 40px;" rowspan="2">Noeud 3</div>
 
-          <div  style="margin-bottom: 150px;"  class="node">
-
-
-            <table class="table3_pilotage" >
-              <tr style="border: none;">
-                <td class="noeud3_pilotage"  rowspan="2">Noeud 3</td>
-                <td>Lampe 1</td>
-                <td><button onclick="turnOn(1)" class="on">ON</button></td>
-                <td><button onclick="turnOff(1)" class="off">OFF</button></td>
-                <td id="state1">
-                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
-                </td>
-              </tr>
-              <tr>
-                <td>Lampe 2</td>
-                <td><button onclick="turnOn(2)" class="on">ON</button></td>
-                <td><button onclick="turnOff(2)" class="off">OFF</button></td>
-                <td id="state2">
-                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
-                </td>
-              </tr>
-            </table>
+              <table style="border-collapse: collapse;  border-radius: 10px;  overflow: hidden; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);" class="table_pilotage" >
+                <tr class="tr_pilotage" >
+                  <td style=" font-size: 18px;  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); font-family: 'Arial', sans-serif; padding: 10px; transition: color 0.3s ease, text-shadow 0.3s ease;  ">Lampe 1</td>
+                  <td  style=" font-size: 18px;
+                  cursor: pointer;
+                  border-radius: 5px;
+                  gap: 5px;"><button  class="on">ON</button></td>
+                  <td><button class="off">OFF</button></td>
+                  <td id="state1">
+                    <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                  </td>
+                </tr>
+                <tr>
+                  <td style=" font-size: 18px;  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); font-family: 'Arial', sans-serif; padding: 10px; transition: color 0.3s ease, text-shadow 0.3s ease;  ">Lampe 2</td>
+                  <td><button  class="on" style ="box-shadow: 0 0 25px rgba(5, 255, 34, 0.5);">ON</button></td>
+                  <td><button  class="off">OFF</button></td>
+                  <td id="state2">
+                    <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                  </td>
+                </tr>
+              </table>
+            </div>
+           
 
             <div>
              
@@ -278,34 +292,18 @@
   <script>
 
 // JSON.parse(JavaScript Object Notation)  utilisé pour échanger des données entre un serveur et un client.
-var myData = JSON.parse('{{ data|escapejs }}');  //La fonction escapejs est souvent utilisée pour échapper les caractères spéciaux en JavaScript afin d'éviter les attaques XSS
-var data1 = new Array();
-var data2 = new Array();
-var data3 = new Array();
-var all_data = new Array();
-for(let i=0;i<myData[0].length;i++){
-  data1[i] = (myData[0][i][0] + myData[0][i][1])/2
-}
-for(let i=0;i<myData[1].length;i++){
-  data2[i] = (myData[1][i][0] + myData[1][i][1])/2
-}
-for(let i=0;i<myData[2].length;i++){
-  data3[i] = (myData[2][i][0] + myData[2][i][1])/2
-}
-
-for(let i=0;i<myData[0].length;i++){
-  all_data[i] = ( data1[i] + data1[i] + data1[i] ) / 3;
-}
-  console.log("ll",data1);
+var myData = JSON.parse('{{ data|escapejs }}');  
+console.log(myData)//La fonction escapejs est souvent utilisée pour échapper les caractères spéciaux en JavaScript afin d'éviter les attaques XSS
 var ctx = document.getElementById('myChart1').getContext('2d');// Récupère le contexte 2D du canvas avec l'ID "myChart1". Cela permettra de dessiner le graphique.
+const labels = ['00h00', '00h30', '01h00', '01h30', '02h00', '02h30', '03h00', '03h30', '04h00', '04h30', '05h00', '05h30', '06h00', '06h30', '07h00', '07h30', '08h00', '08h30', '09h00', '09h30', '10h00', '10h30', '11h00', '11h30', '12h00', '12h30', '13h00', '13h30', '14h00', '14h30', '15h00', '15h30', '16h00', '16h30', '17h00', '17h30', '18h00', '18h30', '19h00', '19h30', '20h00', '20h30', '21h00', '21h30', '22h00', '22h30', '23h00', '23h30']
 var myChart1 = new Chart(ctx, {
     type: 'bar',
     data: {
       //définit les étiquettes qui seront utilisées sur l'axe horizontal (X) du graphique.  
-        labels: ["00h00", "01h00", "02h00","03:00", "04h00", "05h00","06h00", "07h00","08h00", "09h00", "10h00","11h00","12h00" ,"13h00","14h00", "15h00", "16h00","17h00","18h00", "19h00","20h00", "21h00", "22h00","23h00"],
+        labels: labels,
         datasets: [{
             label:'',
-            data: data1,
+            data: myData[0],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.8)',
             ],
@@ -332,10 +330,10 @@ var ctx = document.getElementById('myChart2').getContext('2d');
 var myChart2 = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ["00h00", "01h00", "02h00","03h00", "04h00", "05h00","06h00", "07h00","08h00", "09h00", "10h00","11h00","12h00" ,"13h00","14h00", "15h00", "16h00","17h00","18:00", "19h00","20h00", "21h00", "22h00","23h00"],
+      labels: labels,
         datasets: [{
             label:'',
-            data: data2,
+            data: myData[1],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.8)',
             ],
@@ -364,9 +362,9 @@ var ctx = document.getElementById('myChart3').getContext('2d');
 var myChart3 = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ["00h00", "01h00", "02h00","03h00", "04h00", "05h00","06h00", "07h00","08h00", "09h00", "10h00","11h00","12:00" ,"13h00","14h00", "15h00", "16h00","17h00","18:00", "19h00","20h00", "21h00", "22h00","23h00"],        datasets: [{
+      labels: labels,        datasets: [{
             label:'',
-            data: data3,
+            data: myData[2],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.8)',
             ],
@@ -391,9 +389,9 @@ var ctx = document.getElementById('myChart4').getContext('2d');
 var myChart3 = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ["00h00", "01h00", "02h00","03:00", "04h00", "05h00","06h00", "07h00","08h00", "09h00", "10h00","11h00","12:00" ,"13h00","14h00", "15h00", "16h00","17h00","18:00", "19h00","20h00", "21h00", "22h00","23h00"],        datasets: [{
+      labels: labels,        datasets: [{
             label:'',
-            data: all_data,
+            data: myData[3],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.8)',
             ],

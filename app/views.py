@@ -2,7 +2,7 @@
 # django.shortcuts est utilisé pour communiquer avec le framework Django.
 # pandas est utilisé pour manipuler les données sous forme de tableaux.
 #.utils fait référence à un fichier local contenant des fonctions d’aide.
-from datetime import datetime
+from datetime import datetime,timedelta #nous importons les classes datetime et timedelta du module datetime. La classe datetime est utilisée pour manipuler les dates et les heures, tandis que timedelta est utilisée pour représenter la différence entre deux dates ou heures.
 from django.shortcuts import render #importe la fonction render du module shortcuts de la bibliothèque Django.
 import pandas as pd# importe la bibliothèque Pandas en utilisant l'alias pd
 from .utils import get_lampes_by_noeud_name, get_nodes_with_lampes,get_lampes_by_noeud_id,get_data_for_node_for_specific_date# importe les fonctions d'aide du fichier utils.
@@ -35,59 +35,83 @@ from django.contrib import messages# importe la classe messages du module contri
 
 
 
-def get_data():
+# def get_data():
         
-    file = pd.ExcelFile('data4.xlsx')#ouvrir le fichier Excel à l'aide de la bibliothèque Pandas
-    data=[]
-    sheet_names = file.sheet_names #stocke les noms des feuilles dans le fichier Excel
-    puiss_1 = 15
+#     file = pd.ExcelFile('data4.xlsx')#ouvrir le fichier Excel à l'aide de la bibliothèque Pandas
+#     data=[]
+#     sheet_names = file.sheet_names #stocke les noms des feuilles dans le fichier Excel
+#     puiss_1 = 15
     
-    sheet_names_arr = []
-    for name in sheet_names:#parcourt chaque nom de feuille dans sheet_names
-        df = pd.read_excel('data4.xlsx', sheet_name=name)#lire la feuille
+#     sheet_names_arr = []
+#     for name in sheet_names:#parcourt chaque nom de feuille dans sheet_names
+#         df = pd.read_excel('data4.xlsx', sheet_name=name)#lire la feuille
 
-        lampes = get_lampes_by_noeud_name(name)#est appelée pour obtenir des informations sur les lampes associées à ce nœud
-        print("////",name)
+#         lampes = get_lampes_by_noeud_name(name)#est appelée pour obtenir des informations sur les lampes associées à ce nœud
+#         print("////",name)
         
-        first_row_values = df.columns.tolist()[1:]#stocke les valeurs de la première ligne de la feuille
+#         first_row_values = df.columns.tolist()[1:]#stocke les valeurs de la première ligne de la feuille
 
-        print("first_row_values",first_row_values)
-        # ne7sEB 9adech men  ON 
+#         print("first_row_values",first_row_values)
+#         # ne7sEB 9adech men  ON 
 
-        sums= [0] * len(first_row_values)#créer une liste vide avec la longueur de la liste first_row_values
+#         sums= [0] * len(first_row_values)#créer une liste vide avec la longueur de la liste first_row_values
 
-        avgs= [0] * len(first_row_values)
-
-
-        avg_arr =[]
-        for i, row in df.iterrows():#parcourt chaque ligne dans la feuille
-
-            for index, val in enumerate(first_row_values):#parcourt chaque valeur dans la liste first_row_values
-
-                if(row[val]=="ON"):#si la valeur est ON
-
-                    sums[index]+=1#incrémente la valeur de la liste sums à l'index correspondant à la valeur val
+#         avgs= [0] * len(first_row_values)
 
 
-            if (i +1) % 6 ==0:#si la ligne est divisible par 6
+#         avg_arr =[]
+#         for i, row in df.iterrows():#parcourt chaque ligne dans la feuille
+
+#             for index, val in enumerate(first_row_values):#parcourt chaque valeur dans la liste first_row_values
+
+#                 if(row[val]=="ON"):#si la valeur est ON
+
+#                     sums[index]+=1#incrémente la valeur de la liste sums à l'index correspondant à la valeur val
 
 
-                for x in range(len(sums)):#parcourt chaque valeur dans la liste sums
+#             if (i +1) % 6 ==0:#si la ligne est divisible par 6
 
 
-                    avgs[x]=round(sums[x]/6 * 15, 2)#incrémente la valeur de la liste avgs à l'index correspondant à la valeur val
+#                 for x in range(len(sums)):#parcourt chaque valeur dans la liste sums
 
 
-                sums= [0] * len(first_row_values)#bech nerje3ha lel 0 
+#                     avgs[x]=round(sums[x]/6 * 15, 2)#incrémente la valeur de la liste avgs à l'index correspondant à la valeur val
 
-                avg_arr.append(avgs)#ajoute la liste avgs à la liste avg_arr
 
-                avgs= [0] * len(first_row_values)#réinitialise la liste avgs à 0
+#                 sums= [0] * len(first_row_values)#bech nerje3ha lel 0 
+
+#                 avg_arr.append(avgs)#ajoute la liste avgs à la liste avg_arr
+
+#                 avgs= [0] * len(first_row_values)#réinitialise la liste avgs à 0
 
 
                 
-        data.append(avg_arr)#ajoute une liste (avg_arr) à une autre liste (data)
-    return data
+#         data.append(avg_arr)#ajoute une liste (avg_arr) à une autre liste (data)
+#     return data
+
+def get_data():
+    """Reads data from Excel file and calculates average power consumption."""
+    plans = []
+    start_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)# est l'heure de début de la journée (00:00:00)
+    end_of_day = datetime.now().replace(hour=23, minute=59, second=59, microsecond=999)
+    for p in Planification.objects.all():#parcourt tous les objets de planification.
+        if p.start_date.strftime('%Y-%m-%dT%H:%M') <= end_of_day.strftime('%Y-%m-%dT%H:%M') and p.end_date.strftime('%Y-%m-%dT%H:%M') > start_date.strftime('%Y-%m-%dT%H:%M'):#nechouf lampe tekhdem lyum wela le 
+            plans.append(p)
+    offset = 48
+    Data = {
+        'noeud 1':[0] * offset,
+        'noeud 2':[0] * offset,
+        'noeud 3':[0] * offset,
+    }
+    current_date = start_date
+    for i in range(offset):
+        for p in plans:
+            print(p.end_date.strftime('%Y-%m-%dT%H:%M'), p.start_date.strftime('%Y-%m-%dT%H:%M'))
+            if p.end_date.strftime('%Y-%m-%dT%H:%M') > current_date.strftime('%Y-%m-%dT%H:%M') and p.start_date.strftime('%Y-%m-%dT%H:%M') <= current_date.strftime('%Y-%m-%dT%H:%M'):#nechouf ken tekhdem fel 30 min mte3 tawa
+                Data[p.lampe.noeud.name][i] += p.lampe.puissance#nezid fy somme mte3 pui mte3 30 min taw
+        current_date += timedelta(minutes=30)
+
+    return [Data['noeud 1'], Data['noeud 2'], Data['noeud 3'], [Data['noeud 1'][x] + Data['noeud 2'][x] + Data['noeud 3'][x] for x in range(offset)]]
                 
 
 
@@ -135,42 +159,32 @@ def logout(request):
 
 
 
+
 def register(request):
-    if request.user.is_authenticated:
-    
-        return redirect("pilotage")
-    if request.method == 'POST':#si la méthode est POST
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
 
+        if form.is_valid():
+            try:
+                # Attempt to save the user
+                form.save()
+                messages.success(request, 'USER CREATED form.validate_unique()')
+                return redirect('pilotage')
+            except Exception as e:
+                # Handle potential username already exists error
+                if 'username' in str(e):
+                    messages.error(request, 'Username already exists.')
+                    return render(request, 'app/login.html', {'form': form})
+                else:
+                    # Handle other errors
+                    messages.error(request, 'An error occurred while creating the user.')
+                    return render(request, 'app/login.html', {'form': form})
+        else:
+            # Handle form validation errors
+            messages.error(request, f'Please correct the errors below. {form.validate_unique()}')
+            return render(request, 'app/login.html', {'form': form})
 
-        form = UserCreationForm(request.POST)#on crée un formulaire avec les données du formulaire de connexion
-
-
-
-        username = request.POST.get('username')#retrouver  le nom d'utilisateur dans le formulaire
-
-
-        password = request.POST.get('password')
-
-
-
-        print(f"form is {form.is_valid()} {username}")
-        if form.is_valid():#si le formulaire est valide
-
-
-
-            form.save()#on sauvegarde les données du formulaire dans la base de données
-
-
-
-
-            messages.success(request, 'USER CREATED')
-            return redirect('pilotage')#on redirige vers la page de connexion
-
-
-
-
-
-    return render(request, 'app/login.html')#si la méthode n'est pas POST, on affiche la page de connexion
+    return render(request, 'app/login.html', {'form': UserCreationForm()})
 
 
 
@@ -334,25 +348,46 @@ def planification(request):
 
 
 
-
-
-
-
-def add_planification(request):#ajoute une planification à la base de données
-
+def add_planification(request):
     if request.method == 'POST':
         lampe_id = request.POST.get('sel')
         lampe = Lampe.objects.get(id=lampe_id)
-        date1 = request.POST.get('date1')#njib el valeur eli fel input eli 3edineha fel forme  
+        date1 = request.POST.get('date1')
         date2 = request.POST.get('date2')
-        start_date = datetime.strptime(date1, '%Y-%m-%dT%H:%M')#convertit la date en format datetime
 
-        end_date = datetime.strptime(date2, '%Y-%m-%dT%H:%M')
+        try:
+            start_date = datetime.strptime(date1, '%Y-%m-%dT%H:%M')
+            end_date = datetime.strptime(date2, '%Y-%m-%dT%H:%M')
+
+            if start_date < end_date:
+                planification_instance = Planification(lampe=lampe, start_date=start_date, end_date=end_date)
+                planification_instance.save()
+                return redirect('planification') 
+            else:
+                return JsonResponse({'error': 'Start date must be before end date.'}, status=400)
+        except ValueError:
+            # Handle invalid date format
+            return JsonResponse({'error': 'Invalid date format. Please use YYYY-MM-DDTHH:MM.'}, status=400)
+
+    return render(request, 'planification_form.html')
+
+
+
+# def add_planification(request):#ajoute une planification à la base de données
+
+#     if request.method == 'POST':
+#         lampe_id = request.POST.get('sel')
+#         lampe = Lampe.objects.get(id=lampe_id)
+#         date1 = request.POST.get('date1')#njib el valeur eli fel input eli 3edineha fel forme  
+#         date2 = request.POST.get('date2')
+#         start_date = datetime.strptime(date1, '%Y-%m-%dT%H:%M')#convertit la date en format datetime
+
+#         end_date = datetime.strptime(date2, '%Y-%m-%dT%H:%M')
         
-        planification_instance = Planification(lampe=lampe, start_date=start_date, end_date=end_date)#crée une instance de la classe Planification avec les valeurs entrées dans le formulaire
+#         planification_instance = Planification(lampe=lampe, start_date=start_date, end_date=end_date)#crée une instance de la classe Planification avec les valeurs entrées dans le formulaire
 
-        planification_instance.save()
-    return redirect('planification')
+#         planification_instance.save()
+#     return redirect('planification')
 
 
 

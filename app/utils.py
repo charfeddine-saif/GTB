@@ -54,9 +54,10 @@ def get_lampes_by_noeud_name(noeud_name):# le nombre de la lampe selon le noeud
 
 
     try:
-        
+                # Cherche le nœud dans la base de données par son nom
+
         noeud = Noeud.objects.get(name=noeud_name)
-       
+       # Filtre les lampes qui sont associées à ce nœud => nadhemhoum ye3ni
         lampes = Lampe.objects.filter(noeud=noeud)
         return lampes
     except Noeud.DoesNotExist:
@@ -84,22 +85,21 @@ def get_lampes_by_noeud_id(noeud_id):
 def get_nodes_with_lampes():# le nombre de noeuds avec les lampes
 
 
-    all_noeuds = Noeud.objects.all()# on retrouver  tous les noeuds
+    all_noeuds = Noeud.objects.all()# Récupère tous les nœuds de la base de données(nerje3 tous les noeuds)
 
 
-    result = defaultdict(list)# on cree un dictionnaire avec les noeuds comme clé et les lampes comme valeur
+    result = defaultdict(list)# Crée un dictionnaire avec des listes comme valeurs par défaut
 
 
-
-    
+    # Pour chaque nœud, récupère les lampes associées et formate les informations
     for noeud in all_noeuds:
         related_lampes = Lampe.objects.filter(noeud=noeud)# on chercher   les lampes qui sont reliées au noeud
 
-        # crée une liste d'objets d'informations de lampes à partir d'une liste de lampes
         # C'est un dictionnaire qui contient des informations sur chaque lampe
         lampes_info = [{'id': str(lampe.id), 'name': lampe.name, 'puissance': lampe.puissance} for lampe in related_lampes]
-        
-        result[noeud.name] = {'id': str(noeud.id), 'lampes': lampes_info}# on ajoute les lampes au dictionnaire avec les noeuds comme clé et les lampes comme valeur
+       
+        # Ajoute les informations du nœud et des lampes au dictionnaire 
+        result[noeud.name] = {'id': str(noeud.id), 'lampes': lampes_info}
 
 
 

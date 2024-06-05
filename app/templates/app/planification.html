@@ -220,6 +220,32 @@
 
 <script>
 
+const form = document.getElementById('planificationForm');
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form) 
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json();
+    }
+    window.location.href = response.url;
+  })
+  .then(data => {
+    if (data && data.error) {
+      alert(data.error);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+});
+
+
 var addCmdBtn = document.getElementById("add_cmd_btn");
 var affListeBtn = document.getElementById("aff_liste_btn");
 var scheduler_container = document.getElementById("scheduler-container");
