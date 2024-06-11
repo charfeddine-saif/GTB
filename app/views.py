@@ -30,8 +30,8 @@ from django.contrib.auth.forms import UserCreationForm# importe la classe UserCr
 
 
 from django.contrib import messages# importe la classe messages du module contrib de la bibliothèque Django.
-
-
+import minimalmodbus, time,serial
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -143,8 +143,6 @@ def login(request):
 
         else:
             messages.success(request, 'Invalid username or password')#sinon, on affiche un message d'erreur
-
-
 
             return redirect('login')
     return render(request, 'app/login.html')#si la méthode n'est pas POST, on affiche la page de connexion
@@ -544,3 +542,66 @@ def update_visualisation(request):#pour mettre a jour la visualisation
        # })
     
    # return render(request, 'app/visualisation.html', {'data': completed_data})
+   
+def initialisation_instrument(numPort, numSalve):
+    # Initialisation de l'objet Modbus instrument
+    instrument = minimalmodbus.Instrument(numPort, slaveaddress=numSalve)
+    # Configuration de la connexion RS-485
+    instrument.serial.baudrate = 96000
+    instrument.serial.bytesize = 8
+    instrument.serial.parity = serial.PARITY_NONE
+    instrument.serial.stopbits = 1
+    instrument.serial.timeout = 3
+    instrument.mode = minimalmodbus.MODE_RTU
+    return instrument
+def lecture_etat(instrument, numLampe=0):
+    try:
+        # Lire état du circuit
+        coil_state = instrument.read_bit(numLampe)
+        print(f"etat du circuit 1: {coil_state}") #si 0 circuit ouvert (lampe éteinte), si 1 circuit fermé (lampe allumée)
+        return coil_state
+    except Exception as e:
+        print(f"Erreur: {e}")
+        return -1
+    finally:
+        # Fermeture de la connexion série
+        instrument.serial.close()
+def commande(instrument, numLampe, etat=True):
+    try:
+        # Activation/ Désactivation du relais
+        instrument.write_bit(numLampe, etat)  # si True relai ON (pas de courant)
+
+    except Exception as e:
+        print(f"Erreur: {e}")
+    finally:
+        instrument.serial.close()       
+def lireEtat(request):
+    ###Test pour esclave 1
+    instrument1 = initialisation_instrument('COM2', 1)
+    #Lecture de l'état lampe 1
+    etat=lecture_etat(instrument1, 0)
+    time.sleep(3)
+    return JsonResponse({'lampe':'lampe1','etat': etat})
+@csrf_exempt  
+def lireTousEtats(request):
+    nbEsclaves=3
+    etats={}
+    for i in range(nbEsclaves):
+        instrument = initialisation_instrument('COM2', i+1)
+        etat1=lecture_etat(instrument, 0)
+        time.sleep(3)
+        etats['lampe'+str(i+1)+str(1)]=etat1
+        etat2=lecture_etat(instrument, 1)
+        time.sleep(3)
+        etats['lampe'+str(i+1)+str(2)]=etat2
+    return JsonResponse(etats)
+@csrf_exempt
+def allumer(request):
+    print("commande", request.POST.get('commande'))
+    x=request.POST.get('numLampe')
+    instrument = initialisation_instrument('COM2', int(request.POST.get('numEsclave')) )
+    commande(instrument, int(x), int(request.POST.get('commande')))
+    time.sleep(3)
+    etat=lecture_etat(instrument, int(x))
+    time.sleep(3)
+    return JsonResponse({'etat': etat})

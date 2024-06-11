@@ -19,5 +19,6 @@ urlpatterns = [
     path('delete-planification/', views.delete_planification, name='delete_planification'),
     path('delete-lampe/', views.delete_lampe, name='delete_lampe'),
     path('update-visualisation/', views.update_visualisation, name='update_visualisation'),
-
+    path('lireTousEtats', views.lireTousEtats, name="lireTousEtats"), 
+    path('allumer', views.allumer, name="allumer"), 
 ]

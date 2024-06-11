@@ -1,4 +1,3 @@
-
 {% load static %}  <!--est une directive utilisée dans les templates Django pour charger les fichiers statiques dans les templates HTML-->
 <!DOCTYPE html>
 <html lang="en">
@@ -6,17 +5,50 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
   <link rel="stylesheet" href="{% static  'css/style.css '%}">
   <link rel="stylesheet" href="{% static  'css/pilotage12.css '%}">
   <link rel="stylesheet" href="{% static  'css/1.css '%}">
 
   <title>Gestion Technique des Batiments</title>
+  <script >
+
+function turnOnOff(x,y,z){
+  console.log("off");
+	    var donnees = { numEsclave: x, numLampe: y, commande: z};
+        $.ajax({
+        url: "{% url 'allumer' %}", 
+        type: "POST",
+        data: donnees,
+        success: function(reponse) { 
+	        console.log("etaaat"+reponse.etat)
+            var lampe="lampe"+x+eval(y+1);
+            if(reponse.etat==1){document.getElementById(lampe).src="{% static 'imgs/light-on.jpg' %}";}
+	        else{document.getElementById(lampe).src="{% static 'imgs/light-off.jpg' %}";}      
+		    }
+        });
+}
+function lireEtats(){
+        $.ajax({
+        url: "{% url 'lireTousEtats' %}",
+        method: "GET",
+        success: function(data) { 
+		    for(var i = 1; i <= 3; i++) {
+			var x="lampe"+i+1;
+			var y="lampe"+i+2;
+	        if(data[x]==1){document.getElementById(x).src="{% static 'imgs/light-on.jpg' %}";}
+	        else{document.getElementById(x).src="{% static 'imgs/light-off.jpg' %}";}       
+	        if(data[y]==1){	document.getElementById(y).src="{% static 'imgs/light-on.jpg' %}";}
+	        else{document.getElementById(y).src="{% static 'imgs/light-off.jpg' %}";}
+	        }}
+        });
+}
+</script>
 </head>
 
 
-<body>
+<body onload="lireEtats()">
   
 
   <!-- =============== Navigation ================ -->
@@ -123,18 +155,18 @@
                 <td  style=" font-size: 18px;
                 cursor: pointer;
                 border-radius: 5px;
-                gap: 5px;"><button  class="on">ON</button></td>
-                <td><button class="off">OFF</button></td>
+                gap: 5px;"><button  onclick="turnOnOff(1,0,0)" class="on">ON</button></td>
+                <td><button onclick="turnOnOff(1,0,1)" class="off">OFF</button></td>
                 <td id="state1">
-                  <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                  <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="lampe11">
                 </td>
               </tr>
               <tr>
                 <td style=" font-size: 18px;  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); font-family: 'Arial', sans-serif; padding: 10px; transition: color 0.3s ease, text-shadow 0.3s ease;  ">Lampe 2</td>
-                <td><button  class="on" style ="box-shadow: 0 0 25px rgba(5, 255, 34, 0.5);">ON</button></td>
-                <td><button  class="off">OFF</button></td>
+                <td><button  onclick="turnOnOff(1,1,0)" class="on" style ="box-shadow: 0 0 25px rgba(5, 255, 34, 0.5);">ON</button></td>
+                <td><button  onclick="turnOnOff(1,1,1)" class="off">OFF</button></td>
                 <td id="state2">
-                  <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                  <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="lampe12">
                 </td>
               </tr>
             </table>
@@ -170,18 +202,18 @@
                     <td  style=" font-size: 18px;
                     cursor: pointer;
                     border-radius: 5px;
-                    gap: 5px;"><button  class="on">ON</button></td>
-                    <td><button class="off">OFF</button></td>
+                    gap: 5px;"><button  onclick="turnOnOff(2,0,0)" class="on">ON</button></td>
+                    <td><button onclick="turnOnOff(2,0,1)" class="off">OFF</button></td>
                     <td id="state1">
-                      <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                      <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="lampe21">
                     </td>
                   </tr>
                   <tr>
                     <td style=" font-size: 18px;  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); font-family: 'Arial', sans-serif; padding: 10px; transition: color 0.3s ease, text-shadow 0.3s ease;  ">Lampe 2</td>
-                    <td><button  class="on" style ="box-shadow: 0 0 25px rgba(5, 255, 34, 0.5);">ON</button></td>
-                    <td><button  class="off">OFF</button></td>
+                    <td><button  onclick="turnOnOff(2,1,0)" class="on" style ="box-shadow: 0 0 25px rgba(5, 255, 34, 0.5);">ON</button></td>
+                    <td><button  onclick="turnOnOff(2,1,1)" class="off">OFF</button></td>
                     <td id="state2">
-                      <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                      <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="lampe22">
                     </td>
                   </tr>
                 </table>
@@ -217,18 +249,18 @@
                   <td  style=" font-size: 18px;
                   cursor: pointer;
                   border-radius: 5px;
-                  gap: 5px;"><button  class="on">ON</button></td>
-                  <td><button class="off">OFF</button></td>
+                  gap: 5px;"><button  onclick="turnOnOff(3,0,0)" class="on">ON</button></td>
+                  <td><button onclick="turnOnOff(3,0,1)" class="off">OFF</button></td>
                   <td id="state1">
-                    <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                    <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="lampe31">
                   </td>
                 </tr>
                 <tr>
                   <td style=" font-size: 18px;  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); font-family: 'Arial', sans-serif; padding: 10px; transition: color 0.3s ease, text-shadow 0.3s ease;  ">Lampe 2</td>
-                  <td><button  class="on" style ="box-shadow: 0 0 25px rgba(5, 255, 34, 0.5);">ON</button></td>
-                  <td><button  class="off">OFF</button></td>
+                  <td><button onclick="turnOnOff(3,1,0)" class="on" style ="box-shadow: 0 0 25px rgba(5, 255, 34, 0.5);">ON</button></td>
+                  <td><button onclick="turnOnOff(3,1,1)" class="off">OFF</button></td>
                   <td id="state2">
-                    <img width="40" src="{% static 'imgs/light-off.jpg' %}" alt="Lampe éteinte" id="leteint3">
+                    <img width="40" src="{% static 'imgs/light-on.jpg' %}" alt="Lampe éteinte" id="lampe32">
                   </td>
                 </tr>
               </table>
@@ -419,3 +451,4 @@ var myChart3 = new Chart(ctx, {
 </body>
 
 </html>
+
